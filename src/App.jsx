@@ -1,10 +1,11 @@
+import Login from "./components/Login/Login.jsx"
+
 function App () {
   return(
   <>
-  <h1>SISPAR</h1>
-  <h2>Tesse</h2>
+  <Login />
   </>
-  )
+  );
 }
 
-export default App
+export default App;
