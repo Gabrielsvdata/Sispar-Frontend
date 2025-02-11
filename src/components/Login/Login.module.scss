@@ -1,10 +1,11 @@
 .containerImagem {
+    //border: solid;
 
-    img{
-        height: 100vh;
+    img {
+        height: 100%;
         width: 100%;
         background-repeat: no-repeat;
-        background-size: 100%; 
+        background-size: 100%;
         //border: solid;
     }
 }
@@ -14,50 +15,72 @@ main {
     flex-direction: center;
 }
 
-.containerForms{
+.containerForms {
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    h1{
+
+
+    h1 {
         //border: solid red;
         width: 40%;
         font-size: 2rem;
         text-align: center;
     }
+
+    p {
+        color: #0844c4;
+    }
+
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     width: 70%;
-    height: 20vh; 
-    input{
-        width: 20vh;
+    height: 20vh;
+
+    input {
+
+        width: 47vh;
         height: 5vh;
         border-radius: 6px;
-    } 
+        border: 1px solid #f1f4f9;
+    }
 
-    div{
-        width: 50%;
-        display: flex;
-        justify-content: space-evenly ;
+    input:hover {
+        border-color: #23282f;
+    }
 
-        .buttonEntrar{
-            background-color: pink;
-            width: 6vw;
-            height: 5vh;
-            border-radius: 6px;
+    //primeiro e segundo px: profundade, terceito px: esmaecimento, o quanto px: profundidade
+    input:focus {
+        border-color: #fff;
+        box-shadow: 00px 0px 5px 1px #000;
         }
+        
+        div {
+            width: 50%;
+            display: flex;
+            justify-content: space-evenly;
 
-        .buttonCriar{
-            background-color: violet;
-            width: 6vw;
-            height: 5vh;
-            border-radius: 6px;
+            .buttonEntrar {
+                background-color: #001A3D;
+                color: white;
+                width: 6vw;
+                height: 5vh;
+                border-radius: 6px;
+            }
+
+            .buttonCriar {
+                background-color: violet;
+                color: white;
+                width: 6vw;
+                height: 5vh;
+                border-radius: 6px;
+            }
         }
     }
-}

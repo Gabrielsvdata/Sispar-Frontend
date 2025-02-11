@@ -6,7 +6,7 @@ function Login() {
 
         <main>
             <section className={styles.containerImagem}>
-                <img src= {Capa} alt="Navio com carregado de Container" />
+                <img src={Capa} alt="Navio com carregado de Container" />
             </section>
             <section className={styles.containerForms}>
                 <img src={Logo} alt="Logo da WIlson SOns" />
