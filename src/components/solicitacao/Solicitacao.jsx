@@ -1,6 +1,8 @@
+import style from "./Solicitacao.module.scss"
+
 function Solicitacao () {
     return(
-        <h1>eu sou o reembolso</h1>
+        <h1>eu sou a Solicitacao</h1>
     )
 }
 

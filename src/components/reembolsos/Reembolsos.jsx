@@ -11,6 +11,7 @@ import SolicitarHistorico from "../../assets/Dashboard/Solicitar - Histórico.pn
 import SolicitarReembolso from "../../assets/Dashboard/Solicitar - Reembolso.png"
 
 function Reembolsos() {
+
     return (
         <div>
             <header>
@@ -20,9 +21,11 @@ function Reembolsos() {
             </header>
 
             <main className={styles.mainReembolsos}>
+
+                <div className={styles.mainTextoRem}> 
                 <h1>Sistema de Reembolsos</h1>
                 <p>Solicite novos pedidos de reembolso, vizualize solicitações em alálise e todo o histórico.</p>
-
+                </div>
 
                 <section className={styles.containerCards}>
 

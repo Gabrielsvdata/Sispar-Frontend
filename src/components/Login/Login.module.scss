@@ -55,6 +55,8 @@ form {
         height: 5vh;
         border-radius: 6px;
         border: 1px solid #f1f4f9;
+        margin-bottom: 0.5vh;
+        
     }
 
     input:hover {
@@ -74,6 +76,7 @@ form {
             
 
             .buttonEntrar {
+                border: #001A3D;
                 background-color: #001A3D;
                 color: white;
                 font-weight: bold;
@@ -85,6 +88,7 @@ form {
             }
 
             .buttonCriar {
+                border: #00BEDD;
                 background-color: #00BEDD;
                 color: white;
                 font-weight: bold;
@@ -92,6 +96,7 @@ form {
                 height: 5vh;
                 border-radius: 6px;
                 margin-top: 2rem;
+                
             }
         }
     }

@@ -7,7 +7,7 @@ function Login() {
     const navigate = useNavigate() //iniciar o hook useNavigate
 
     const irParaReembolsos = () => {
-        navigate("/reembolsos")
+        navigate("/Reembolsos")
     }
     return (
 
