@@ -8,47 +8,47 @@ import FecharHearder from "../../assets/Header/imagem-fechar-header.png"
 import styles from "./NavBar.module.scss"
 import {useNavigate} from "react-router-dom"
 
-function NavBar (){
+function NavBar() {
 
-const navigate = useNavigate()
+    const navigate = useNavigate()
 
-    return(
-      <nav className={styles.navBarEstilo}>
-        <button>
-            <img src={FecharHearder}/>
-        </button>
+    return (
+        <nav className={styles.navBarEstilo}>
+            <button onClick={() => {navigate("/")}}>
+                <img src={FecharHearder} alt="Botão abrir e fechar" />
+            </button>
 
-        <section>
-            <img src={People} alt="" />
+            <section>
+                <img src={People} alt="Foto Perfil" />
 
-<div>
-        <button onClick={() => {
-            navigate("/reembolsos");
-        }}>
-            <img src={Home} alt="Botão do Home" />
-        </button>
+                <div>
+                    <button onClick={() => {
+                        navigate("/reembolsos");
+                    }}>
+                    <img src={Home} alt="Botão do Home" />
+                    </button>
 
-        <button>
-            <img src={Reembolso} alt="" />
-        </button>
+                    <button onClick={() => { navigate("/solicitacao") }}>
+                        <img src={Reembolso} alt="Botão Reembolso" />
+                    </button>
 
-        <button>
-            <img src={Pesquisa} alt="" />
-        </button>
+                    <button onClick={() => {navigate("/reembolso")}}>
+                        <img src={Pesquisa} alt="Botão Pesquisa" />
+                    </button>
 
-        <button>
-            <img src={Historico} alt="" />
-        </button>
-</div>
-        </section>
+                    <button onClick={() => {navigate ("/solicitacao")}}>
+                        <img src={Historico} alt="Botão Histórico" />
+                    </button>
+                </div>
+            </section>
 
-      
 
-        <button className={styles.buttonSair}  onclick={()=>{navigate("/")}}>
-            <img src={Sair} alt="" />
-        </button>
-      </nav>
-    )
+
+            <button className={styles.buttonSair} onClick={() => { navigate("/") }}>
+                <img src={Sair} alt="Botão Sair" />
+            </button>
+        </nav>
+    );
 }
 
 export default NavBar;

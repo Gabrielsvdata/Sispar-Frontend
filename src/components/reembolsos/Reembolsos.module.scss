@@ -1,52 +1,75 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 header {
-    width: 8vw;
+
+    width: 100%;
     height: 5vh;
     display: flex;
     //border: solid;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
+    gap: 1rem;
+    padding-left: 2rem;
 
+    p {
+        font-size: 1rem;
+    }
 }
 
 .mainReembolsos {
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 95vh;
-
-    .mainTextoRem{
-        //border: solid;
-        margin-right: 16rem;
-        
+    width: 95vw;
+    
+    div{
+        width: 60%;
     }
 }
 
+
 .containerCards {
-   // border: solid green;
+    // border: solid green;
     display: flex;
     justify-content: space-between;
     height: 20vh;
     width: 60%;
     margin-top: 3rem;
-    
+
 }
 
 article {
     border: solid, 1px #cbd4e1;
     border-radius: 6px;
-    width: 30vh;
+    width: 30%;
+    height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
+    font-weight: bold;
+
+    img{
+        margin-bottom: 1rem;
+    }
 }
 
 .containerStatus {
     border: solid, 1px, #cbd4e1;
     border-radius: 6px;
     width: 60%;
-    height: 15vh;;
+    height: 15vh;
+    ;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -54,16 +77,16 @@ article {
 
 
     div {
-       // border: solid;
+        // border: solid;
         width: 20%;
         height: 5vh;
         display: flex;
         align-items: center;
-        justify-content: center;
-        
+        justify-content: space-evenly;
+
     }
 
-    img{
+    img {
         width: 4vh;
     }
 
@@ -75,20 +98,30 @@ article {
     padding: 1px;
 }
 
-.imgAnalises{
+.imgAnalises {
     background-color: orangered;
     border-radius: 6px;
     padding: 1px;
 }
 
-.imgAprovados{
+.imgAprovados {
     background-color: green;
     border-radius: 6px;
     padding: 1px;
 }
 
-.imgRejeitados{
+.imgRejeitados {
     background-color: #A60B2F;
     border-radius: 6px;
     padding: 1px;
+}
+
+.containerSistema {
+    width: 60%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    align-items: center;
+    
+    
 }

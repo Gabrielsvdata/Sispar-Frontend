@@ -9,13 +9,15 @@ import NumeroSolicitados from "../../assets/Dashboard/N-Solicitados.png"
 import SisAtualizado from "../../assets/Dashboard/Sistema-atualizado.png"
 import SolicitarHistorico from "../../assets/Dashboard/Solicitar - Histórico.png"
 import SolicitarReembolso from "../../assets/Dashboard/Solicitar - Reembolso.png"
+import SistemaAtualizado from "../../assets/Dashboard/Sistema-atualizado.png"
 //importando NavBar
 import NavBar from "../navbar/NavBar.jsx"
 function Reembolsos() {
 
     return (
-        <div >
+        <div className={styles.container} >
             <NavBar/>
+            <div>
             <header>
                 <img src={Home} alt="Casinha Header" />
                 <img src={Seta} alt="seta indicativa ao reembolsos" />
@@ -24,7 +26,7 @@ function Reembolsos() {
 
             <main className={styles.mainReembolsos}>
 
-                <div className={styles.mainTextoRem}> 
+                <div> 
                 <h1>Sistema de Reembolsos</h1>
                 <p>Solicite novos pedidos de reembolso, vizualize solicitações em alálise e todo o histórico.</p>
                 </div>
@@ -72,10 +74,16 @@ function Reembolsos() {
                     <p>Rejeitados</p>
                     </div>
                 </section>
+
+                <section className={styles.containerSistema}>
+                    <img src={SistemaAtualizado} alt="logo Sistema atualuzado" />
+                    <a href="">Sistema Atualizado</a>
+                </section>
             </main>
+            </div>
 
         </div>
-    )
+    );
 }
 
 export default Reembolsos;
