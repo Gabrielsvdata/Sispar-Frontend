@@ -1,0 +1,135 @@
+.layoutSolicitacao{
+    display: flex;
+}
+
+.containerPrincipalSolicitacao{
+    width: 95vw;
+}
+
+.headerSolicitacao {
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    //border: solid;
+    
+    
+}
+
+.mainSolicitacao{
+    width: 100%;
+    
+}
+
+.formsSolicitacao{
+    display: flex;
+    justify-content: space-between;
+}
+ // estilização input/label/textarea
+ 
+label{
+    font-weight: 700;
+    font-size: 1.18rem;
+    color: #23282f;
+}
+
+input,select, textarea{
+    border-radius: 6px;
+    border:solid #cbd4e1 0.8px;
+    height: 3vh;
+    width: 100%;
+}
+
+
+//estilização grupo1
+.grupo1{
+    border: solid;
+    width: 35%;
+    height: 25vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.inputNome{
+    width: 45%;
+}
+
+.inputEmpresa{
+    width: 25%;
+}
+
+.inputPrestacao{
+    width: 25%;
+}
+
+.inputMotivo{
+    width: 50%;
+}
+//Barra vertical
+
+.barraVertical {
+    background-color: #cbd4e1;
+    height: vh;
+    width: vw;
+    display: flex;
+}
+
+.grupo2{
+    border: solid;
+    width: 60%;
+    height: 25vh;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.inputData{
+    border: solid;
+    width: 20%;
+}
+
+.tipoDeDespesa{
+    border: solid;
+    width: 30;;
+}
+
+.centroDeDeCusto{
+    border: solid;
+    width: 40%;
+}
+
+.ordem, .divisão, .pep, .distancia {
+    border: solid;
+    width: 8;
+}
+
+.moeda, .valorKM, .valorFaturado, .despesa {
+    border: solid blue
+}
+
+.botoes{
+    border: solid;
+    width: 20%;
+    .botaoSalvar{
+        background-color: #001a3d;
+        color: #ffff;
+        width: 5vw;
+    }
+
+}
+
+table{
+    width: 100%;
+    border: solid;
+    border-collapse: collapse;
+}
+
+//cabeçalho
+
+th {
+    background-color: #CBD4E1;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #23282f
+}
