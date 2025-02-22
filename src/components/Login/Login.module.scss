@@ -10,9 +10,11 @@
     }
 }
 
-main {
+.mainLogin {
     display: flex;
     flex-direction: center;   
+   // background-color: pink;
+    height: 100vh;   
 }
 
 .containerForms {
@@ -41,14 +43,14 @@ main {
 
 }
 
-form {
+.formLogin {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     width: 70%;
     height: 20vh;
-
+    
     input {
 
         width: 47vh;

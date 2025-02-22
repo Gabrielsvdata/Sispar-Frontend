@@ -1,10 +1,16 @@
-import styles from "./Solicitacao.module.scss"
+import styles from "./Solicitacao.module.scss";
 import NavBar from "../Navbar/NavBar";
-import Home from "../../assets/Dashboard/home header.png"
-import Seta from "../../assets/Dashboard/Vector.png"
-import Deletar from "../../assets/solicitacao/deletar.png"
-import Lixeira from "../../assets/solicitacao/lixeira.png"
-
+import Home from "../../assets/Dashboard/home header.png";
+import Seta from "../../assets/Dashboard/Vector.png";
+import Deletar from "../../assets/solicitacao/deletar.png";
+import Lixeira from "../../assets/solicitacao/lixeira.png";
+import Calendario from "../../assets/solicitacao/calendario.png"
+import setaBaixo from "../../assets/solicitacao/seta baixa.png"
+import IconeX from "../../assets/solicitacao/x.png"
+import Motivo from "../../assets/solicitacao/motivo.png"
+import IconeMais from "../../assets/solicitacao/+.png"
+import Check from "../../assets/solicitacao/check.png"
+ 
 
 function Solicitacao() {
   return (
@@ -12,6 +18,7 @@ function Solicitacao() {
       <NavBar />
 
       <div className={styles.containerPrincipalSolicitacao}>
+
         <header className={styles.headerSolicitacao}>
           <img src={Home} alt="Botão de home" />
           <img src={Seta} alt="Seta indicativa do home" />
@@ -25,7 +32,6 @@ function Solicitacao() {
           <form className={styles.formSolicitacao}>
 
             <div className={styles.grupo1}>
-
               <div className={styles.inputNome}>
                 <label htmlFor="">Nome Completo</label>
                 <input type="text" />
@@ -55,10 +61,12 @@ function Solicitacao() {
               <div className={styles.inputData}>
                 <label htmlFor="">Data</label>
                 <input type="date" name="" id="" />
+                
+                
               </div>
 
-              <div className={styles.TipoDeDespesa}>
-                <label htmlFor="">  Tipo de Despesa </label>
+              <div className={styles.tipoDeDespesa}>
+                <label htmlFor=""> Tipo de Despesa </label>             
 
                 <select name="" id="">
                   <option value=""> Selecionar</option>
@@ -73,25 +81,25 @@ function Solicitacao() {
               </div>
 
               <div className={styles.centroDeCusto}>
-
                 <label htmlFor="">Centro de Custo</label>
                 <select name="" id="">
-                <option value="">
+                  <option value="">
                     1100109002 - FIN CONTROLES INTERNOS MTZ
                   </option>
                   <option value="">
                     1100110002 - FIN VICE-PRESIDENCIA FINANCAS MTZ
                   </option>
                   <option value="">1100110101 - FIN CONTABILIDADE MTZ</option>
-
                 </select>
+                
               </div>
+
               <div className={styles.ordem}>
                 <label htmlFor="">Ord. Int.</label>
                 <input type="number" name="" id="" />
               </div>
 
-              <div className={styles.Divisões}>
+              <div className={styles.divisoes}>
                 <label htmlFor="">Div.</label>
                 <input type="number" name="" id="" />
               </div>
@@ -104,7 +112,7 @@ function Solicitacao() {
               <div className={styles.moeda}>
                 <label htmlFor="">Moeda</label>
                 <select name="" id="">
-                <option value="">Selecionar</option>
+                  <option value="">Selecionar</option>
                   <option value="">BRL</option>
                   <option value="">ARS</option>
                   <option value="">USD</option>
@@ -112,7 +120,7 @@ function Solicitacao() {
               </div>
 
               <div className={styles.distancia}>
-                <label htmlFor=""> Distancia / KM</label>
+                <label htmlFor=""> Dist. / KM</label>
                 <input type="text" />
               </div>
 
@@ -127,67 +135,66 @@ function Solicitacao() {
               </div>
 
               <div className={styles.despesa}>
-                <label htmlFor="">valor</label>
+                <label htmlFor="">Valor</label>
                 <input type="number" name="" id="" />
               </div>
 
               <div className={styles.botoes}>
-                <button className={styles.botaoSalvar}>Salvar</button>
-                <button>Deletar</button>
+                <button className={styles.botaoSalvar}>+ Salvar</button>
+                <button className={styles.customerDelete}><img src={Deletar} alt="" /></button>
               </div>
-
-              
-
             </div>
+
+
           </form>
 
-{/*tag principal qie vai envolver a tabela */}
-{/*thread é a tag que agrupa o cabeçalho*/}
-{/*tr é a linha da tabela*/}
-{/* tbody agrupa o corpo da tabela*/}
-        <table>
-          <thead>
-            <tr>
-            <th></th>
-          <th>Colaborador(a)</th>
-          <th>Empresa</th>
-          <th>Nº Prest.</th>
-          <th>Data</th>
-          <th>Motivo</th>
-          <th>Tipo De Destepas</th>
-          <th>CTR. Custos</th>
-          <th>Ord. Int.</th>
-          <th>Div.</th>
-          <th>Pep</th>
-          <th>Moeda</th>
-          <th>Dis. KM</th>
-          <th>val faturado</th>
-          <th>Despesa</th>
-              
-            </tr>
-          </thead>
-    <tbody>
-      <tr>
-        <td> <img src={Lixeira} alt="" /></td>
-        <td>gabriel</td>
-        <td>gabriel</td>
-        <td>gabriel</td>
-        <td>gabriel</td>
-        <td>gabriel</td>
-        <td>200</td>
-        <td>500</td>
-        <td>100</td>
-        <td>200</td>
-        <td>300</td>
-        <td>300</td>
-        <td>200</td>
-        <td>500</td>
-        <td>300</td>
-        <td>500</td>
-      </tr>
-    </tbody>
-        </table>
-
+          {/*tag principal qie vai envolver a tabela */}
+          {/*thread é a tag que agrupa o cabeçalho*/}
+          {/*tr é a linha da tabela*/}
+          {/* tbody agrupa o corpo da tabela*/}
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Colaborador(a)</th>
+                <th>Empresa</th>
+                <th>Nº Prest.</th>
+                <th>Data</th>
+                <th>Motivo</th>
+                <th>Tipo De Destepas</th>
+                <th>CTR. Custos</th>
+                <th>Ord. Int.</th>
+                <th>Div.</th>
+                <th>Pep</th>
+                <th>Moeda</th>
+                <th>Dis. KM</th>
+                <th>val faturado</th>
+                <th>Despesa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {" "}
+                  <img src={Lixeira} alt="" />
+                </td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>200</td>
+                <td>500</td>
+                <td>100</td>
+                <td>200</td>
+                <td>300</td>
+                <td>300</td>
+                <td>200</td>
+                <td>500</td>
+                <td>300</td>
+              </tr>
+            </tbody>
+          </table>
         </main>
       </div>
     </div>
