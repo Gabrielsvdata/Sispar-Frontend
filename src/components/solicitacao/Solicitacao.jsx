@@ -182,7 +182,56 @@ function Solicitacao() {
                 <td>gabriel</td>
                 <td>gabriel</td>
                 <td>gabriel</td>
+                <td>
+                  {" "}
+                  <img src={Motivo} alt="" />
+                </td>
+                <td>200</td>
+                <td>500</td>
+                <td>100</td>
+                <td>200</td>
+                <td>300</td>
+                <td>300</td>
+                <td>200</td>
+                <td>500</td>
+                <td>300</td>
+              </tr>
+              <tr>
+                <td>
+                  {" "}
+                  <img src={Lixeira} alt="" />
+                </td>
                 <td>gabriel</td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>
+                  {" "}
+                  <img src={Motivo} alt="" />
+                </td>
+                <td>200</td>
+                <td>500</td>
+                <td>100</td>
+                <td>200</td>
+                <td>300</td>
+                <td>300</td>
+                <td>200</td>
+                <td>500</td>
+                <td>300</td>
+              </tr>
+              <tr>
+                <td>
+                  {" "}
+                  <img src={Lixeira} alt="" />
+                </td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>gabriel</td>
+                <td>
+                  {" "}
+                  <img src={Motivo} alt="" />
+                </td>
                 <td>200</td>
                 <td>500</td>
                 <td>100</td>

@@ -1,174 +1,186 @@
 .layoutSolicitacao {
-    display: flex;
-  }
-  
-  .containerPrincipalSolicitacao {
-    width: 95vw;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .headerSolicitacao {
-    width: 100%;
-    height: 5%;
-    display: flex;
-    justify-content: flex-start;
-    border: solid;
-  }
- 
-  .mainSolicitacao {
-    border: solid blue;
-    width: 100%;
-    height: 95vh;
-  }
-  
-  .formSolicitacao {
-    width: 100%;
-   // border: solid red;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  // estilização input/label/textarea
-  
-  label {
-    font-weight: 700;
-    font-size: 1rem;
-    color: #23282f;
-  }
-  
-  input,
-  select,
-  textarea {
-    border-radius: 6px;
-    border: solid #cbd4e1 0.8px;
-    height: 5vh;
-    width: 100%;
-  }
-  
-  //estilização grupo1
-  .grupo1 {
-    border: solid yellow;
-    width: 37%;
-    height: 25vh;
-    display: flex;
-    justify-content: space-between;
-    //align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .inputNome {
-    width: 45%;
-  }
-  
-  .inputEmpresa {
-    width: 25%;
-  }
-  
-  .inputPrestacao {
-    width: 25%;
-  }
-  
-  .inputMotivo {
-    width: 100%;
-  }
-  //Barra vertical
-  
-    .barraVertical {
-   // border: solid red;
-    background-color: #cbd4e1;
-    height: 25vh;
-    width: 0.1vw;
-    display: flex;
-  }
-  
+  display: flex;
+}
 
-  // estilização do grupo 2
+.containerPrincipalSolicitacao {
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+}
 
-  .grupo2 {
-    
-    border: solid red;
-    width: 60%;
-    height: 25vh;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .inputData {
-    //border: solid;
-    width: 20%;
-    
-  }
+.headerSolicitacao {
+  width: 100%;
+  height: 5%;
+  display: flex;
+  justify-content: flex-start;
+  // border: solid;
+}
 
-.imgData{
+.mainSolicitacao {
+  ///border: solid blue;
+  width: 100%;
+  height: 95vh;
+}
+
+.formSolicitacao {
+  width: 100%;
+  // border: solid red;
+  display: flex;
+  justify-content: space-between;
+}
+
+// estilização input/label/textarea
+
+label {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #23282f;
+}
+
+input,
+select,
+textarea {
+  border-radius: 6px;
+  border: solid #cbd4e1 0.8px;
+  height: 5vh;
+  width: 100%;
+}
+
+//estilização grupo1
+.grupo1 {
+  // border: solid yellow;
+  width: 37%;
+  height: 25vh;
+  display: flex;
+  justify-content: space-between;
+  //align-items: center;
+  flex-wrap: wrap;
+}
+
+.inputNome {
+  width: 45%;
+}
+
+.inputEmpresa {
+  width: 25%;
+}
+
+.inputPrestacao {
+  width: 25%;
+}
+
+.inputMotivo {
+  width: 100%;
+}
+
+//Barra vertical
+
+.barraVertical {
+  // border: solid red;
+  background-color: #cbd4e1;
+  height: 25vh;
+  width: 0.1vw;
+  display: flex;
+}
+
+
+// estilização do grupo 2
+
+.grupo2 {
+
+  // border: solid red;
+  width: 60%;
+  height: 25vh;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+
+.inputData {
+  //border: solid;
+  width: 20%;
+
+}
+
+.imgData {
   width: 28%;
   border: solid;
   align-items: end;
 }
-  .tipoDeDespesa {
-    //border: solid;
-    width: 31%;
-  }
-  
-  .centroDeCusto {
-   // border: solid;
-    width: 46%;
-  }
-  .imgCentralCusto{
-    border: solid;
-  }
-  
-  .ordem,
-  .divisoes,
-  .pep,
-  .distancia {
-    //border: solid;
-    width: 10%;
-  }
 
-  
-  .moeda,
-  .valorKM,
-  .valorFaturado,
-  .despesa {
-   // border: solid blue;
-    width: 12%;
-  }
-  
-  .botoes {
-   // border: solid;
-    width: 12%;
-    display: flex;
-    justify-content: space-evenly;
-    gap: 5px;
-    .botaoSalvar {
-      background-color: #001a3d;
-      color: #ffff;
-    }
-    .customerDelete{
-      width: 30%;
-    }
-  }
-  
-  table {
-    width: 100%;
-    font-size: 1rem;
-   // border: solid;
-    border-collapse: collapse;
-  }
-  
-  //cabeçalho
-  
-  th {
-    background-color: #cbd4e1;
-    font-weight: 400;
-    color: #23282f;
-    text-align: center;
-  }
-  
-  table,th,td{
-    border: solid #000000 2px;
-    text-align: center;
+.tipoDeDespesa {
+  //border: solid;
+  width: 31%;
+}
+
+.centroDeCusto {
+  // border: solid;
+  width: 46%;
+}
+
+.ordem,
+.divisoes,
+.pep,
+.distancia {
+  //border: solid;
+  width: 9%;
+}
+
+
+.moeda,
+.valorKM,
+.valorFaturado,
+.despesa {
+  //border: solid blue;
+  width: 12%;
+}
+
+.botoes {
+  // border: solid;
+  width: 12%;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin-top: 19px;
+
+  .botaoSalvar {
+    background-color: #001a3d;
+    color: #ffff;
 
   }
+
+  .customerDelete {
+    width: 32%;
+    background-color: #00BEDD;
+  }
+}
+
+table {
+
+  width: 100%;
+  font-size: 1rem;
+  border-collapse: collapse;
+}
+
+//cabeçalho
+thead{
+  height: 25%;
+}
+
+th {
+  background-color: #cbd4e1;
+  font-weight: 400;
+  color: #23282f;
+  text-align: center;
+
+}
+
+table,
+th,
+td {
+  height: 25%;
+  border: solid #000000 2px;
+  text-align: center;
+
+}
