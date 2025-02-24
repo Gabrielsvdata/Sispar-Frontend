@@ -244,6 +244,19 @@ function Solicitacao() {
               </tr>
             </tbody>
           </table>
+            <footer className={styles.containerFooter}>
+            <div className={styles.inputFaturado}>
+                <label htmlFor="">Total Faturado</label>
+                <input type="text" />
+            </div>
+
+            <div className={styles.footerDespesa}>
+                <label htmlFor="">Total Despesa</label>
+                <input type="text" />
+              </div>
+
+            </footer>
+          
         </main>
       </div>
     </div>
