@@ -152,6 +152,7 @@ function Solicitacao() {
           {/*thread é a tag que agrupa o cabeçalho*/}
           {/*tr é a linha da tabela*/}
           {/* tbody agrupa o corpo da tabela*/}
+          <div className={styles.containerTable}>   
           <table>
             <thead>
               <tr>
@@ -244,20 +245,19 @@ function Solicitacao() {
               </tr>
             </tbody>
           </table>
-            <footer className={styles.containerFooter}>
+          </div>
+        </main>
+        <footer className={styles.containerFooter}>
             <div className={styles.inputFaturado}>
                 <label htmlFor="">Total Faturado</label>
                 <input type="text" />
             </div>
-
             <div className={styles.footerDespesa}>
                 <label htmlFor="">Total Despesa</label>
                 <input type="text" />
               </div>
 
             </footer>
-          
-        </main>
       </div>
     </div>
   );
