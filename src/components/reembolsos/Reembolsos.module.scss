@@ -23,7 +23,7 @@ header {
 }
 
 .mainReembolsos {
-
+    //border: solid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,6 +44,16 @@ header {
     height: 20vh;
     width: 60%;
     margin-top: 3rem;
+
+    article:hover {
+        border-color: #23282f;
+    }
+
+    //primeiro e segundo px: profundade, terceito px: esmaecimento, o quanto px: profundidade
+    article:focus {
+        border-color: #fff;
+        box-shadow: 00px 0px 5px 1px #cbd4E1;
+        }
 
 }
 

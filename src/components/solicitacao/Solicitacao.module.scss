@@ -13,7 +13,7 @@
   height: 5%;
   display: flex;
   justify-content: flex-start;
-  // border: solid;
+  //border: solid;
 }
 
 .mainSolicitacao {
@@ -28,6 +28,16 @@
   display: flex;
   justify-content: space-between;
 }
+
+ /*  input:hover {
+        border-color: #23282f;
+    }
+
+    //primeiro e segundo px: profundade, terceito px: esmaecimento, o quanto px: profundidade
+    input:focus {
+        border-color: #fff;
+        box-shadow: 00px 0px 5px 1px #cbd4E1;
+        }*/
 
 // estilização input/label/textarea
 
@@ -44,13 +54,25 @@ textarea {
   border: solid #cbd4e1 0.8px;
   height: 5vh;
   width: 100%;
+
+  &:hover {
+    border-color: #23282f;
+}
+
+//primeiro e segundo px: profundade, terceito px: esmaecimento, o quanto px: profundidade
+  &:focus {
+    border-color: #fff;
+    box-shadow: 00px 0px 5px 1px #cbd4E1;
+    }
+
+
 }
 
 //estilização grupo1
 .grupo1 {
-  // border: solid yellow;
+  //border: solid yellow;
   width: 37%;
-  height: 25vh;
+  height: 20vh;
   display: flex;
   justify-content: space-between;
   //align-items: center;
@@ -73,12 +95,14 @@ textarea {
   width: 100%;
 }
 
+
+
 //Barra vertical
 
 .barraVertical {
   // border: solid red;
   background-color: #cbd4e1;
-  height: 25vh;
+  height: 20vh;
   width: 0.1vw;
   display: flex;
 }
@@ -88,9 +112,9 @@ textarea {
 
 .grupo2 {
 
-  // border: solid red;
+  //border: solid red;
   width: 60%;
-  height: 25vh;
+  height: 20vh;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -100,24 +124,56 @@ textarea {
 .inputData {
   //border: solid;
   width: 20%;
-
 }
-
 
 .imgData {
-  width: 28%;
-  border: solid;
-  align-items: end;
+  background-color: #001a3d; 
+  position: absolute;
+  margin-top: -1px;
+  right: 45%;   
+  top: 7.90%; 
+  transform: translateY(-8%); 
+  padding: 0.72rem; 
+  border-top-right-radius: 6px; 
+  border-bottom-right-radius: 6px; 
 }
+
 
 .tipoDeDespesa {
   //border: solid;
   width: 31%;
+  position: relative; /* Adiciona esta linha */
 }
+
+.imgDespesa {
+  background-color: #001a3d; 
+  position: absolute;
+  margin-top: -1px;
+  right: 0;   
+  top: 50%; 
+  transform: translateY(-50%); 
+  padding: 0.72rem; 
+  border-top-right-radius: 6px; 
+  border-bottom-right-radius: 6px; 
+}
+
+
 
 .centroDeCusto {
   // border: solid;
   width: 44%;
+}
+
+.imgCustos {
+  background-color: #001a3d; 
+  position: absolute;
+  margin-top: -1px;
+  right: 0;   
+  top: 50%; 
+  transform: translateY(-21rem); 
+  padding: 0.72rem; 
+  border-top-right-radius: 6px; 
+  border-bottom-right-radius: 6px; 
 }
 
 .ordem,
@@ -125,7 +181,7 @@ textarea {
 .pep,
 .distancia {
   //border: solid;
-  width: 9%;
+  width: 9%;  
 }
 
 
@@ -192,13 +248,40 @@ td {
 
 .containerFooter{
   width: 100%;
- // border: solid;
+  height: 7.5vh;
+  align-items: center;
+  //border: solid;
   display: flex;
-  justify-content: space-evenly;
-
-  .inputFaturado{
-    border: solidd;
-  }
+  justify-content:  flex-end;
+  gap: 1rem;
+  margin-top: -3rem;
+  
+}
+.inputFooterFaturado,
+.inputFooterDespesa{
+  //border: solid;
+  width: 7.5vw;
+  height: 6.85vh;
 }
 
+.buttonCheck,
+.buttonX{
+  //border: solid;
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  width: 13.28vw;
+  height: 5.0vh;
+  margin-top: 1.5rem;
+}
+
+.buttonCheck{
+  color: #FFFF;
+  background-color: #001a3d;
+}
+
+.buttonX{
+  color: #FFFF;
+  background-color: #a60b2f;
+}
 

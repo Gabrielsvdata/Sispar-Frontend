@@ -27,7 +27,7 @@ function Login() {
 
                     <a href="">Esqueci minha senha</a>
 
-                    <div className={styles.boxButton}> 
+                    <div> 
                         <button onClick={irParaReembolsos} className={styles.buttonEntrar}>Entrar</button>
                         <button className={styles.buttonCriar}>Criar conta</button>
                     </div>

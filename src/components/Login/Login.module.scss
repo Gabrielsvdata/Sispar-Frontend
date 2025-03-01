@@ -52,13 +52,18 @@
     height: 20vh;
     
     input {
-
-        width: 47vh;
-        height: 5vh;
+        width: 80%;
         border-radius: 6px;
         border: 1px solid #f1f4f9;
         margin-bottom: 0.5vh;
-        
+    }
+    input::placeholder{
+    color: rgba(0, 0, 0, 0.5); // Cor padrão (preto com 50% de opacidade)
+    transition: color 0.3s ease-in-out; // Efeito suave na transição
+    }
+
+    input:hover::placeholder{
+        color: #fff; //QUando passar o mouse, ele apaga
     }
 
     input:hover {

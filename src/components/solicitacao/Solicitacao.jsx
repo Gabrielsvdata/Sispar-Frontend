@@ -56,17 +56,18 @@ function Solicitacao() {
             </div>
 
             <div className={styles.barraVertical}></div>
-
             <div className={styles.grupo2}>
               <div className={styles.inputData}>
                 <label htmlFor="">Data</label>
+                <img className={styles.imgData}src={Calendario} alt="" />
                 <input type="date" name="" id="" />
                 
                 
               </div>
 
               <div className={styles.tipoDeDespesa}>
-                <label htmlFor=""> Tipo de Despesa </label>             
+                <label htmlFor=""> Tipo de Despesa </label>   
+                <img className={styles.imgDespesa} src={setaBaixo} alt="" />          
 
                 <select name="" id="">
                   <option value=""> Selecionar</option>
@@ -82,9 +83,10 @@ function Solicitacao() {
 
               <div className={styles.centroDeCusto}>
                 <label htmlFor="">Centro de Custo</label>
+                <img className={styles.imgCustos}src={setaBaixo} alt="" />
                 <select name="" id="">
                   <option value="">
-                    1100109002 - FIN CONTROLES INTERNOS MTZ
+                    1100109002 - FIM CONTROLES INTERNOS MTZ
                   </option>
                   <option value="">
                     1100110002 - FIN VICE-PRESIDENCIA FINANCAS MTZ
@@ -248,14 +250,28 @@ function Solicitacao() {
           </div>
         </main>
         <footer className={styles.containerFooter}>
-            <div className={styles.inputFaturado}>
+            <div className={styles.inputFooterFaturado}>
                 <label htmlFor="">Total Faturado</label>
                 <input type="text" />
             </div>
-            <div className={styles.footerDespesa}>
+            <div className={styles.inputFooterDespesa}>
                 <label htmlFor="">Total Despesa</label>
                 <input type="text" />
-              </div>
+            </div>
+
+            <div>
+              <button className={styles.buttonCheck}> 
+                <img src={Check} alt="" />
+                <p>Enviar para Análise</p>
+              </button>
+            </div>
+
+            <div>
+              <button className={styles.buttonX}>
+                <img src={IconeX} alt="" />
+                <p>Cancelar Solicitação</p>
+              </button>
+            </div>
 
             </footer>
       </div>
