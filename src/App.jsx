@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login.jsx";
-import Reembolsos from "./components/Reembolsos/Reembolsos";
+import Reembolsos from "./components/Reembolsos/Reembolsos.jsx";
 import Solicitacao from "./components/Solicitacao/Solicitacao.jsx";
 import "./global.scss";
 function App() {
