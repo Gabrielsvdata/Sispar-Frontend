@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/Login/Login.jsx"
-import Reembolsos from "./components/reembolsos/reembolsos.jsx"
-import Solicitacao from "./components/solicitacao/Solicitacao.jsx"
+import Login from "./components/login/login.jsx"
+import Reembolsos from "./components/reembolsos/Reembolsos.jsx"
+import Solicitacao from "./components/solicitacao/solicitacao.jsx"
 import "./global.scss"
 function App() {
   return (
