@@ -11,7 +11,7 @@ import SolicitarHistorico from "../../assets/Dashboard/SolicitarHistórico.png"
 import SolicitarReembolso from "../../assets/Dashboard/SolicitarReembolso.png"
 import SistemaAtualizado from "../../assets/Dashboard/Sistema-atualizado.png"
 //importando NavBar
-import NavBar from "../Navbar/NavBar.jsx"
+import NavBar from "../navbar/NavBar.jsx"
 function Reembolsos() {
 
     return (
