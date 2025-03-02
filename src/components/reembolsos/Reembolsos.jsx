@@ -7,11 +7,11 @@ import NumeroAprovados from "../../assets/Dashboard/N-Aprovados.png"
 import NumeroRejeitados from "../../assets/Dashboard/N-Rejeitados.png"
 import NumeroSolicitados from "../../assets/Dashboard/N-Solicitados.png"
 import SisAtualizado from "../../assets/Dashboard/Sistema-atualizado.png"
-import SolicitarHistorico from "../../assets/Dashboard/Solicitar - Histórico.png"
-import SolicitarReembolso from "../../assets/Dashboard/Solicitar - Reembolso.png"
+import SolicitarHistorico from "../../assets/Dashboard/SolicitarHistórico.png"
+import SolicitarReembolso from "../../assets/Dashboard/SolicitarReembolso.png"
 import SistemaAtualizado from "../../assets/Dashboard/Sistema-atualizado.png"
 //importando NavBar
-import NavBar from "../navbar/navbar.jsx"
+import NavBar from "../Navbar/NavBar.jsx"
 function Reembolsos() {
 
     return (
