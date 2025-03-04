@@ -50,4 +50,5 @@ Conversores de Unidades:
 <a href="https://khaledkzy.github.io/pixel-vh-vw-converter/?authuser=0/">Conversor de Pixel para VH / VW</a>
 
 ## Deploy no Vercel
-<a href="https://vercel.com/gabriels-projects-07a8013f/projeto-sispar/">  
+<a href="https://vercel.com/gabriels-projects-07a8013f/projeto-sispar/">Acompanhe o meu progresso direto do Vercel</a>
+
