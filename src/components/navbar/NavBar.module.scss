@@ -1,13 +1,16 @@
 .navBarEstilo {
     
-    
+    position: absolute;
     height: 100vh;
     display: flex;
-    width: 5vw;
+    
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     padding: 1rem 0 1rem 1rem;
+
+    transition: opacity 0.8s ease-in-out;
+    transition: width 0.2s ease-in-out;
 
     section {
         width: 100%;
@@ -23,14 +26,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
         }
     }
 }
 
 button {
     background-color: #0844c4;
-    width: 70%;
     height: 5vh;
     border-radius: 6px;
     border: none;
@@ -38,4 +40,23 @@ button {
 
 .buttonSair{
     background-color: #63758d;
+}
+
+.fechado{
+    width: 5%;
+    background-color: red;
+    button {
+        width: 70%;
+    }
+}
+
+.aberto{
+    background-color: blue;
+    width: 10%;
+    box-shadow: 0px 0px 30px 5px black;
+
+    button{
+        width: 35%;
+    }
+    
 }

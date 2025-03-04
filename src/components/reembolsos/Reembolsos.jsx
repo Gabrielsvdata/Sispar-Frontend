@@ -16,23 +16,21 @@ function Reembolsos() {
 
     return (
         <div className={styles.container} >
-            <NavBar/>
-            <div>
-            <header> 
-                <div onClick={() => {
-                        navigate("/reembolsos");
-                    }}>
-                <img src={Home} alt="Casinha Header" />
-                </div>
-                <img src={Seta} alt="seta indicativa ao reembolsos" />
-                <p>Reembolsos</p>
-            </header>
+            <NavBar />
 
-            <main className={styles.mainReembolsos}>
+            {/* <div> */}
 
-                <div> 
-                <h1>Sistema de Reembolsos</h1>
-                <p>Solicite novos pedidos de reembolso, vizualize solicitações em alálise e todo o histórico.</p>
+                <header>
+                    <img src={Home} alt="Casinha Header" />
+                    <img src={Seta} alt="seta indicativa ao reembolsos" />
+                    <p>Reembolsos</p>
+                </header>
+
+                <main className={styles.mainReembolsos}>
+
+                <div>
+                    <h1>Sistema de Reembolsos</h1>
+                    <p>Solicite novos pedidos de reembolso, vizualize solicitações em alálise e todo o histórico.</p>
                 </div>
 
                 <section className={styles.containerCards}>
@@ -55,27 +53,27 @@ function Reembolsos() {
 
                 <section className={styles.containerStatus}>
                     <div>
-                    <img className={styles.imgSolicitados} src={NumeroSolicitados} alt="" />
-                    <h4>182</h4>
-                    <p>Solicitados</p>
+                        <img className={styles.imgSolicitados} src={NumeroSolicitados} alt="" />
+                        <h4>182</h4>
+                        <p>Solicitados</p>
                     </div>
 
                     <div>
-                    <img className={styles.imgAnalises} src={NumeroAnálise} alt="" />
-                    <h4>74</h4>
-                    <p>Em análise</p>
+                        <img className={styles.imgAnalises} src={NumeroAnálise} alt="" />
+                        <h4>74</h4>
+                        <p>Em análise</p>
                     </div>
 
                     <div>
-                    <img className={styles.imgAprovados} src={NumeroAprovados} alt="" />
-                    <h4>195</h4>
-                    <p>Aprovados</p>
+                        <img className={styles.imgAprovados} src={NumeroAprovados} alt="" />
+                        <h4>195</h4>
+                        <p>Aprovados</p>
                     </div>
 
                     <div>
-                    <img className={styles.imgRejeitados} src={NumeroRejeitados} alt="" />
-                    <h4>41</h4>
-                    <p>Rejeitados</p>
+                        <img className={styles.imgRejeitados} src={NumeroRejeitados} alt="" />
+                        <h4>41</h4>
+                        <p>Rejeitados</p>
                     </div>
                 </section>
 
@@ -84,9 +82,9 @@ function Reembolsos() {
                     <a href="">Sistema Atualizado</a>
                 </section>
             </main>
-            </div>
-
         </div>
+
+        // </div>
     );
 }
 

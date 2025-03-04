@@ -1,21 +1,22 @@
 .container {
-    width: 100%;
-    height: 100%;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+   // border: solid blue;
 }
 
 header {
 
-    width: 100%;
+    width: 5%;
     height: 5vh;
     display: flex;
     //border: solid;
     justify-content: flex-start;
     align-items: center;
-    gap: 1rem;
-    padding-left: 2rem;
+    gap: 2rem;
 
     p {
         font-size: 1rem;
@@ -23,13 +24,13 @@ header {
 }
 
 .mainReembolsos {
-    //border: solid;
+    border: solid;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 95vh;
-    width: 95vw;
+    height: 90%;
+    width: 100%;
     
     div{
         width: 60%;

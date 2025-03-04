@@ -7,15 +7,26 @@ import People from "../../assets/Header/image.png"
 import FecharHearder from "../../assets/Header/imagem-fechar-header.png"
 import styles from "./NavBar.module.scss"
 import {useNavigate} from "react-router-dom"
+import { useState } from "react"
 
 
 function NavBar() {
 
     const navigate = useNavigate()
+    const [status, setStatus] = useState("fechado")
+    
+function click() {
+    if (status === "fechado"){
+        setStatus("aberto")
+    } 
+    else {
+        setStatus("fechado")
+    }
+}
 
     return (
-        <nav className={styles.navBarEstilo}>
-            <button onClick={() => {navigate("/")}}>
+        <nav className={`${styles.navBarEstilo} ${styles[status]}`}>
+            <button onClick={() => click()}>
                 <img src={FecharHearder} alt="Botão abrir e fechar" />
             </button>
 
