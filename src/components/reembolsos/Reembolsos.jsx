@@ -18,8 +18,12 @@ function Reembolsos() {
         <div className={styles.container} >
             <NavBar/>
             <div>
-            <header>
+            <header> 
+                <div onClick={() => {
+                        navigate("/reembolsos");
+                    }}>
                 <img src={Home} alt="Casinha Header" />
+                </div>
                 <img src={Seta} alt="seta indicativa ao reembolsos" />
                 <p>Reembolsos</p>
             </header>

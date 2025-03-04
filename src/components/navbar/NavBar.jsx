@@ -8,6 +8,7 @@ import FecharHearder from "../../assets/Header/imagem-fechar-header.png"
 import styles from "./NavBar.module.scss"
 import {useNavigate} from "react-router-dom"
 
+
 function NavBar() {
 
     const navigate = useNavigate()
@@ -32,7 +33,7 @@ function NavBar() {
                         <img src={Reembolso} alt="Botão Reembolso" />
                     </button>
 
-                    <button onClick={() => {navigate("/reembolso")}}>
+                    <button onClick={() => {navigate("/reembolsos")}}>
                         <img src={Pesquisa} alt="Botão Pesquisa" />
                     </button>
 
