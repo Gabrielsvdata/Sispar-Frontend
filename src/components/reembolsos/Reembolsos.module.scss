@@ -8,12 +8,13 @@
    // border: solid blue;
 }
 
-header {
-
-    width: 5%;
-    height: 5vh;
+.headerReembolso {
+    position: relative;
+    top: -17%;
+    width: 90%;
+  //  height: vh;
     display: flex;
-    //border: solid;
+  // border: solid;
     justify-content: flex-start;
     align-items: center;
     gap: 2rem;
@@ -29,7 +30,7 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 90%;
+    height: 100%;
     width: 100%;
     
     div{

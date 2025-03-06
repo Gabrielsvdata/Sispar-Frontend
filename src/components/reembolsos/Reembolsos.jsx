@@ -18,15 +18,14 @@ function Reembolsos() {
         <div className={styles.container} >
             <NavBar />
 
-            {/* <div> */}
+            <main className={styles.mainReembolsos}>
 
-                <header>
+                <header className={styles.headerReembolso}>
                     <img src={Home} alt="Casinha Header" />
                     <img src={Seta} alt="seta indicativa ao reembolsos" />
                     <p>Reembolsos</p>
                 </header>
 
-                <main className={styles.mainReembolsos}>
 
                 <div>
                     <h1>Sistema de Reembolsos</h1>
@@ -84,7 +83,7 @@ function Reembolsos() {
             </main>
         </div>
 
-        // </div>
+         
     );
 }
 

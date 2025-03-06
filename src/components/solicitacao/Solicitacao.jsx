@@ -16,9 +16,9 @@ function Solicitacao() {
   return (
     <div className={styles.layoutSolicitacao}>
       <NavBar />
-
+      
       <div className={styles.containerPrincipalSolicitacao}>
-
+      <main className={styles.mainSolicitacao}>
         <header className={styles.headerSolicitacao}>
           <img src={Home} alt="Botão de home" />
           <img src={Seta} alt="Seta indicativa do home" />
@@ -26,8 +26,6 @@ function Solicitacao() {
           <img src={Seta} alt="" />
           <p>Solicitação de Reembolso</p>
         </header>
-
-        <main className={styles.mainSolicitacao}>
 
           <form className={styles.formSolicitacao}>
 
