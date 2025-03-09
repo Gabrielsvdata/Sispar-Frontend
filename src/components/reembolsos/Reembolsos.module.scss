@@ -25,7 +25,7 @@
 }
 
 .mainReembolsos {
-    border: solid;
+    // border: solid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,7 +62,7 @@
 article {
     border: solid, 1px #cbd4e1;
     border-radius: 6px;
-    width: 30%;
+    width: 25%;
     height: 20vh;
     display: flex;
     flex-direction: column;
@@ -70,6 +70,15 @@ article {
     align-items: center;
     margin-top: 1rem;
     font-weight: bold;
+
+    &:hover {
+        &:hover {
+            background-color: #F1F4F9;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+            border: 1px solid #F1F4F9; /* Cor da borda igual à inicial */
+            transition: all 0.3s ease-in-out; /* Transição suave */
+          }
+      }
 
     img{
         margin-bottom: 1rem;
