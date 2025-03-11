@@ -10,10 +10,13 @@ import SisAtualizado from "../../assets/Dashboard/Sistema-atualizado.png"
 import SolicitarHistorico from "../../assets/Dashboard/SolicitarHistórico.png"
 import SolicitarReembolso from "../../assets/Dashboard/SolicitarReembolso.png"
 import SistemaAtualizado from "../../assets/Dashboard/Sistema-atualizado.png"
+import { useNavigate } from "react-router-dom"
 //importando NavBar
 import NavBar from "../navbar/NavBar.jsx"
 function Reembolsos() {
 
+    const navigate = useNavigate()
+    
     return (
         <div className={styles.container} >
             <NavBar />
@@ -34,7 +37,7 @@ function Reembolsos() {
 
                 <section className={styles.containerCards}>
 
-                    <article className={styles.card}>
+                    <article className={styles.card} onClick={() => navigate("/solicitacao")} >
                         <img src={SolicitarReembolso} alt="" />
                         <p>Solicitar Reembolso</p>
                     </article>

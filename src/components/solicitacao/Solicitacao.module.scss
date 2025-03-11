@@ -24,7 +24,7 @@
 }
 
 .mainSolicitacao {
-  border: solid blue;
+ // border: solid blue;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -255,7 +255,11 @@ td {
   height: 5vh;
   border: solid 1px #cbd4e1;
   text-align: center;
-
+}
+table tr:hover {
+  background-color: #f1f4f9; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
 }
 
 .containerFooter{

@@ -6,7 +6,7 @@ import Sair from "../../assets/Header/Botão - Sair.png"
 import People from "../../assets/Header/image.png"
 import FecharHearder from "../../assets/Header/imagem-fechar-header.png"
 import styles from "./NavBar.module.scss"
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 
@@ -14,15 +14,15 @@ function NavBar() {
 
     const navigate = useNavigate()
     const [status, setStatus] = useState("fechado")
-    
-function click() {
-    if (status === "fechado"){
-        setStatus("aberto")
-    } 
-    else {
-        setStatus("fechado")
+
+    function click() {
+        if (status === "fechado") {
+            setStatus("aberto")
+        }
+        else {
+            setStatus("fechado")
+        }
     }
-}
 
     return (
         <nav className={`${styles.navBarEstilo} ${styles[status]}`}>
@@ -33,24 +33,37 @@ function click() {
             <section>
                 <img src={People} alt="Foto Perfil" />
 
-                <div>
+                <div className={styles.containerNavbar}> 
+
+                    <div className={styles.buttonNav}>
                     <button onClick={() => {
                         navigate("/reembolsos");
                     }}>
-                    <img src={Home} alt="Botão do Home" />
+                        <img src={Home} alt="Botão do Home" />
                     </button>
+                    <p>Inicio</p>
+                    </div>
 
+                    <div className={styles.buttonNav}>
                     <button onClick={() => { navigate("/solicitacao") }}>
                         <img src={Reembolso} alt="Botão Reembolso" />
                     </button>
+                    <p>Reembolsos</p>
+                    </div>
 
-                    <button onClick={() => {navigate("/reembolsos")}}>
+                    <div className={styles.buttonNav}>
+                    <button onClick={() => { navigate("/reembolsos") }}>
                         <img src={Pesquisa} alt="Botão Pesquisa" />
                     </button>
+                    <p>Pesquisa</p>
+                    </div>
 
-                    <button onClick={() => {navigate ("/solicitacao")}}>
+                    <div className={styles.buttonNav}>
+                    <button onClick={() => { navigate("/solicitacao") }}>
                         <img src={Historico} alt="Botão Histórico" />
                     </button>
+                    <p>Histórico</p>
+                    </div>
                 </div>
             </section>
 
