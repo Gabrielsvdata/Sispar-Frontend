@@ -30,7 +30,7 @@ function Reembolsos() {
                 </header>
 
 
-                <div>
+                <div className={styles.sisRem}>
                     <h1>Sistema de Reembolsos</h1>
                     <p>Solicite novos pedidos de reembolso, vizualize solicitações em alálise e todo o histórico.</p>
                 </div>
