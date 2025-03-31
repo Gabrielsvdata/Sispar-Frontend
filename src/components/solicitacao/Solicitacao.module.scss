@@ -34,7 +34,7 @@
 
 .formSolicitacao {
   width: 100%;
-  border: solid red;
+  //border: solid red;
   display: flex;
   justify-content: space-between;
   padding-top:1%;
@@ -134,58 +134,58 @@ textarea {
 
 .inputData {
   //border: solid;
+  position: relative;
   width: 20%;
 }
 
 .imgData {
   background-color: #001a3d; 
   position: absolute;
-  margin-top: -1px;
-  right: 45%;   
-  top: 7.90%; 
-  transform: translateY(-8%); 
-  padding: 0.72rem; 
-  border-top-right-radius: 6px; 
-  border-bottom-right-radius: 6px; 
+  right: 0px; 
+  top: 54%;
+  transform: translateY(-50%); 
+  padding: 8px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  pointer-events: none; 
 }
 
 
 .tipoDeDespesa {
   //border: solid;
   width: 31%;
-  position: relative; /* Adiciona esta linha */
+  position: relative; 
 }
 
 .imgDespesa {
   background-color: #001a3d; 
   position: absolute;
-  margin-top: -1px;
-  right: 0;   
-  top: 50%; 
-  transform: translateY(-50%); 
-  padding: 0.72rem; 
+  right: 0px;   
+  top: 30%; 
+  padding: 8px;
   border-top-right-radius: 6px; 
-  border-bottom-right-radius: 6px; 
+  border-bottom-right-radius: 6px;
+  pointer-events: none;  
 }
 
 
 
 
 .centroDeCusto {
-  // border: solid;
-  width: 44%;
+  position:relative;
+  width: 43%;
 }
 
 .imgCustos {
-  background-color: #001a3d; 
   position: absolute;
-  margin-top: -1px;
-  right: 0;   
-  top: 50%; 
-  transform: translateY(-21rem); 
-  padding: 0.72rem; 
-  border-top-right-radius: 6px; 
-  border-bottom-right-radius: 6px; 
+  right: 0px;
+  top: 49%;
+  transform: translateY(-40%);
+  padding: 0.52rem;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background-color: #001a3d;
+  pointer-events: none;
 }
 
 .ordem,
@@ -207,10 +207,9 @@ textarea {
 
 .botoes {
   //border: solid;
-  width: 12%;
+  width: 15%;
   display: flex;
-  justify-content: space-between;
-  gap: 5px;
+  justify-content: space-around;
   margin-top: 19px;
 
   .botaoSalvar {
