@@ -1,3 +1,4 @@
+
 .navBarEstilo {
     position: absolute;
     z-index: 999;
@@ -25,6 +26,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: flex-start;
+            gap: 0.3rem;
         }
     }
 }
@@ -88,6 +90,8 @@ button {
     }
 }
 
+
+
 .aberto {
 
     .navbarPeople {
@@ -129,5 +133,5 @@ button {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: .3rem;
+    gap: 1rem;
 }
