@@ -7,9 +7,8 @@
     align-items: flex-start;
     justify-content: space-between;
     padding: 1rem 0 1rem 1rem;
-
-    transition: opacity 0.8s ease-in-out, width 0.2s ease-in-out;
-    /* Combinação de transições */
+    transition: opacity 0.8s ease-in-out, width 0.5s ease-in-out;
+    
 
     section {
         width: 100%;
@@ -95,6 +94,7 @@ button {
        
         p,
         h2 {
+            text-align: center;
             display: block;
             /* Torna visível novamente */
             opacity: 1;

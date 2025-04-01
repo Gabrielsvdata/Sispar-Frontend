@@ -50,7 +50,7 @@ function NavBar() {
                     </div>
 
                     <div className={styles.buttonNav}>
-                    <button onClick={() => { navigate("/solicitacao") }}>
+                    <button onClick={() => { navigate("/reembolsos") }}aria-label="Ir para a página de Reembolsos">
                         <img src={Reembolso} alt="Botão Reembolso" />
                     </button>
                     <p>Reembolsos</p>
