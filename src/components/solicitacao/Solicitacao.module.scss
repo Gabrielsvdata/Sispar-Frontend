@@ -207,19 +207,19 @@ textarea {
 
 .botoes {
   //border: solid;
-  width: 15%;
   display: flex;
   justify-content: space-around;
   margin-top: 19px;
 
   .botaoSalvar {
+    width: 50%;
     background-color: #001a3d;
     color: #ffff;
 
   }
 
   .customerDelete {
-    width: 32%;
+    width: 40%;
     background-color: #00BEDD;
   }
 }
