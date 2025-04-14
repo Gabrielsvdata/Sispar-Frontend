@@ -1,4 +1,5 @@
 import styles from "./Solicitacao.module.scss";
+import { useState } from "react"; 
 import NavBar from "../navbar/NavBar";
 import Home from "../../assets/Dashboard/home header.png";
 import Seta from "../../assets/Dashboard/Vector.png";
@@ -10,9 +11,51 @@ import IconeX from "../../assets/solicitacao/x.png"
 import Motivo from "../../assets/solicitacao/motivo.png"
 import IconeMais from "../../assets/solicitacao/+.png"
 import Check from "../../assets/solicitacao/check.png"
- 
 
 function Solicitacao() {
+
+  const [colaborador, setColaborador] = useState(""); // Estado para o campo colaborador
+  const [empresa, setEmpresa] = useState(""); // Estado para o campo empresa
+  const [nPrestacao, setnPrestacao] = useState(""); // Estado para o campo número de prestação
+  const [descricao, setDescricao] = useState(""); // Estado para o campo  descrição
+  const [data, setData] = useState(""); // Estado para o campo data
+  const [motivo, setMotivo] = useState(""); // Estado para o campo motivo  //ESSE ESTADO É PARA QUEM TÁ FAZENDO AVANÇADO UTILIZANDO MODAL
+  const [tipoReembolso, setTipoReembolso] = useState(""); // Estado para o campo tipo de reembolso
+  const [centroCusto, setCentroCusto] = useState(""); // Estado para o campo centro de custo
+  const [ordemInterna, setorOrdemInterna] = useState(""); // Estado para o campo ordem interna
+  const [divisao, setDivisao] = useState(""); // Estado para o campo divisão
+  const [pep, setPep] = useState(""); // Estado para o campo pep
+  const [moeda, setMoeda] = useState(""); // Estado para o campo moeda
+  const [distanciaKm, setDistanciaKm] = useState(""); // Estado para o campo distância km
+  const [valorKm, setValorKm] = useState(""); // Estado para o campo valor km
+  const [valorFaturado, setValorFaturado] = useState(""); // Estado para o campo valor faturado
+  const [despesa, setDespesa] = useState(""); // Estado para o campo despesa
+
+  const[dadosReembolso, setDadosReembolso] = useState([]);
+
+  //FUNÇÃO PARA CAPTURAR OS VALORES DOS ESTADOS 
+
+  const handleSubmit = () => {
+    const objetoReembolso = {
+      colaborador,
+      empresa,
+      nPrestacao,
+      descricao,
+      data,
+      tipoReembolso,
+      ordemInterna,
+      centroCusto,
+      divisao,
+      pep,
+      moeda,
+      distanciaKm,
+      valorKm,
+      valorFaturado,
+      despesa
+    };
+    setDadosReembolso( dadosReembolso.concat(objetoReembolso))
+  };
+
   return (
     <div className={styles.layoutSolicitacao}>
       <NavBar />
@@ -27,22 +70,22 @@ function Solicitacao() {
           <p>Solicitação de Reembolso</p>
         </header>
 
-          <form className={styles.formSolicitacao}>
+          <form  onSubmit={(e) => e.preventDefault() } className={styles.formSolicitacao}>
 
             <div className={styles.grupo1}>
               <div className={styles.inputNome}>
                 <label htmlFor="">Nome Completo</label>
-                <input type="text" />
+                <input type="text" name="colaborador" value={colaborador} onChange={(e) => setColaborador(e.target.value)}/>
               </div>
 
               <div className={styles.inputEmpresa}>
                 <label htmlFor="">Empresa</label>
-                <input type="text" />
+                <input type="text" name="empresa" value={empresa} onChange={(e) => setEmpresa(e.target.value) }/>
               </div>
 
               <div className={styles.inputPrestacao}>
                 <label htmlFor="">Nº Prest. Contas</label>
-                <input type="text" />
+                <input type="text" name="numPrestação" value={nPrestacao} onChange={(e) => setnPrestacao(e.target.value)} />
               </div>
 
               <div className={styles.inputMotivo}>
@@ -55,12 +98,11 @@ function Solicitacao() {
 
             <div className={styles.barraVertical}></div>
             <div className={styles.grupo2}>
+
               <div className={styles.inputData}>
                 <label htmlFor="">Data</label>
                 <img className={styles.imgData}src={Calendario} alt="" />
-                <input type="date" name="" id="" />
-                
-                
+                <input type="date" name="" id="" value={data} onChange={(e) => setData(e.target.value)}/>
               </div>
 
               <div className={styles.tipoDeDespesa}>
@@ -96,17 +138,17 @@ function Solicitacao() {
 
               <div className={styles.ordem}>
                 <label htmlFor="">Ord. Int.</label>
-                <input type="number" name="" id="" />
+                <input type="number" name="" id="" value={ordemInterna} onChange={(e) => setorOrdemInterna(e.target.value)}/>
               </div>
 
               <div className={styles.divisoes}>
                 <label htmlFor="">Div.</label>
-                <input type="number" name="" id="" />
+                <input type="number" name="" id="" value={divisao} onChange={(e) => setDivisao(e.target.value)}/>
               </div>
 
               <div className={styles.pep}>
                 <label htmlFor="">PEP.</label>
-                <input type="number" name="" id="" />
+                <input type="number" name="" id="" value={pep} onChange={(e) => setPep(e.target.value)}/>
               </div>
 
               <div className={styles.moeda}>
@@ -121,26 +163,26 @@ function Solicitacao() {
 
               <div className={styles.distancia}>
                 <label htmlFor=""> Dist. / KM</label>
-                <input type="text" />
+                <input type="text" value={distanciaKm} onChange={(e) => setDistanciaKm(e.target.value)} />
               </div>
 
               <div className={styles.valorKM}>
                 <label htmlFor="">Valor / KM</label>
-                <input type="number" name="" id="" />
+                <input type="number" name="" id="" value={valorKm} onChange={(e) => setValorKm(e.target.value)}/>
               </div>
 
               <div className={styles.valorFaturado}>
                 <label htmlFor="">Val. Faturado</label>
-                <input type="number" name="" id="" />
+                <input type="number" name="" id="" value={valorFaturado} onChange={(e) => setValorFaturado(e.target.value)} />
               </div>
 
               <div className={styles.despesa}>
                 <label htmlFor="">Valor</label>
-                <input type="number" name="" id="" />
+                <input type="number" name="" id="" value={despesa} onChange={(e) => setDespesa(e.target.value)}/>
               </div>
 
               <div className={styles.botoes}>
-                <button className={styles.botaoSalvar}>+ Salvar</button>
+                <button className={styles.botaoSalvar} onClick={handleSubmit}>+ Salvar</button>
                 <button className={styles.customerDelete}><img src={Deletar} alt="" /></button>
               </div>
             </div>
@@ -174,6 +216,26 @@ function Solicitacao() {
               </tr>
             </thead>
             <tbody>
+              {dadosReembolso.map((item, index) => (
+                <tr key={index}>
+              <td> </td>
+              <td> {item.colaborador} </td>
+              <td> {item.empresa} </td>
+              <td>{item.nPrestacao}</td>
+              <td>{item.data}</td>
+              <td> </td>
+              <td>{item.tipoReembolso}</td>
+              <td>{item.centroCusto}</td>
+              <td>{item.ordemInterna}</td>
+              <td>{item.divisao}</td>
+              <td>{item.pep}</td>
+              <td>{item.moeda}</td>
+              <td>{item.distanciaKm}</td>
+              <td>{item.valorKm}</td>
+              <td>{item.valorFaturado}</td>
+              <td>{item.despesa}</td>
+              </tr>
+              )) }
               <tr>
                 <td>
                   {" "}
