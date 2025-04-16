@@ -1,5 +1,7 @@
 import styles from "./Solicitacao.module.scss";
-import { useState } from "react"; 
+import { useEffect, useState } from "react"; 
+import Api from "../../Services/Api";
+
 import NavBar from "../navbar/NavBar";
 import Home from "../../assets/Dashboard/home header.png";
 import Seta from "../../assets/Dashboard/Vector.png";
@@ -36,6 +38,7 @@ function Solicitacao() {
   //FUNÇÃO PARA CAPTURAR OS VALORES DOS ESTADOS 
 
   const handleSubmit = () => {
+    
     const objetoReembolso = {
       colaborador,
       empresa,
@@ -53,8 +56,59 @@ function Solicitacao() {
       valorFaturado,
       despesa
     };
-    setDadosReembolso( dadosReembolso.concat(objetoReembolso))
+    setDadosReembolso( dadosReembolso.concat(objetoReembolso));
+    limparCampos();
   };
+ //limpar campos dos inputs 
+  const limparCampos = () => {
+    setColaborador(""),
+    setEmpresa(""),
+    setnPrestacao(""),
+    setDescricao(""),
+    setData(""),
+    setMotivo(""),
+    setTipoReembolso(""),
+    setCentroCusto(""),
+    setorOrdemInterna(""),
+    setDivisao(""),
+    setPep(""),
+    setMoeda(""),
+    setDistanciaKm(""),
+    setValorKm(""),
+    setValorFaturado(""),
+    setDespesa("");
+  };
+
+  // FUNÇÃO PARA ENIVAR DADOS PARA API
+  const [ foiEnviado, setFoiEnviado ] = useState (false); // Serve para saber se o formulário foi envIADO
+
+  // FUNCAÇÃO ASYNC(assincrona) permite que o codigo espere algo(resposta do servidor) sem travar o programa
+  const enviarParaAnalise = async () => {
+    try{
+      //colocamos o que queremos tentar fazer
+
+      // primeiro argumento é o caminhod a rota "/refunds/new" é uma rota do backend
+      // segundo argumento é o que sera enviado: dadosReembolso
+
+      const response = await Api.post("refunds/new", dadosReembolso);
+      console.log("Resposta da API", response) //MOstra no console a resposta da
+      alert("reembolso solicitado com sucesso")
+      setFoiEnviado(true); //ativando o estado "foiEnviado" para true 
+    } catch(error){
+    //caso de erro na hora de enviar, ele mostra o erro no console.log
+    console.log("Erro ao enviar", error) // MOstra erro se algo der errado
+    }
+  };
+
+  //Hook USEEFFECT, serve para reagir a mudança nos estados
+
+  useEffect(() => {
+    if(foiEnviado){
+      setDadosReembolso([]); //Limpa os dados do formulário, ou seja, zera o estado
+        setFoiEnviado(false);
+    }
+
+  }, [foiEnviado]);
 
   return (
     <div className={styles.layoutSolicitacao}>
@@ -183,7 +237,7 @@ function Solicitacao() {
 
               <div className={styles.botoes}>
                 <button className={styles.botaoSalvar} onClick={handleSubmit}>+ Salvar</button>
-                <button className={styles.customerDelete}><img src={Deletar} alt="" /></button>
+                <button className={styles.customerDelete} onClick={limparCampos}><img src={Deletar} alt="" /></button>
               </div>
             </div>
 
