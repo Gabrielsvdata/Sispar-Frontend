@@ -80,23 +80,22 @@ function Solicitacao() {
   };
 
   // FUNÇÃO PARA ENIVAR DADOS PARA API
-  const [ foiEnviado, setFoiEnviado ] = useState (false); // Serve para saber se o formulário foi envIADO
+  const [foiEnviado, setFoiEnviado] = useState (false); // Serve para saber se o formulário foi envIADO
 
   // FUNCAÇÃO ASYNC(assincrona) permite que o codigo espere algo(resposta do servidor) sem travar o programa
   const enviarParaAnalise = async () => {
     try{
       //colocamos o que queremos tentar fazer
-
       // primeiro argumento é o caminhod a rota "/refunds/new" é uma rota do backend
       // segundo argumento é o que sera enviado: dadosReembolso
 
       const response = await Api.post("refunds/new", dadosReembolso);
-      console.log("Resposta da API", response) //MOstra no console a resposta da
-      alert("reembolso solicitado com sucesso")
+      console.log("Resposta da API", response);  //MOstra no console a resposta da
+      alert("reembolso solicitado com sucesso");
       setFoiEnviado(true); //ativando o estado "foiEnviado" para true 
     } catch(error){
     //caso de erro na hora de enviar, ele mostra o erro no console.log
-    console.log("Erro ao enviar", error) // MOstra erro se algo der errado
+    console.log("Erro ao enviar", error); // MOstra erro se algo der errado
     }
   };
 
@@ -178,7 +177,8 @@ function Solicitacao() {
               <div className={styles.centroDeCusto}>
                 <label htmlFor="">Centro de Custo</label>
                 <img className={styles.imgCustos}src={setaBaixo} alt="" />
-                <select name="" id="">
+                <select name="centroCusto" value={centroCusto}
+                onChange={(e) => setCentroCusto(e.target.value)}>
                   <option value="">
                     1100109002 - FIM CONTROLES INTERNOS MTZ
                   </option>
@@ -207,7 +207,7 @@ function Solicitacao() {
 
               <div className={styles.moeda}>
                 <label htmlFor="">Moeda</label>
-                <select name="" id="">
+                <select name="moeda" value={moeda} onChange={(e) => setMoeda(e.target.value)}>
                   <option value="">Selecionar</option>
                   <option value="">BRL</option>
                   <option value="">ARS</option>
@@ -269,15 +269,22 @@ function Solicitacao() {
                 <th>Despesa</th>
               </tr>
             </thead>
+
             <tbody>
               {dadosReembolso.map((item, index) => (
                 <tr key={index}>
-              <td> </td>
+              <td> 
+                {" "}
+                <img src={Lixeira} alt="" />{" "}
+              </td>
               <td> {item.colaborador} </td>
               <td> {item.empresa} </td>
               <td>{item.nPrestacao}</td>
               <td>{item.data}</td>
-              <td> </td>
+              <td>
+                {" "}
+                <img src={Motivo} alt="" />{" "}
+              </td>
               <td>{item.tipoReembolso}</td>
               <td>{item.centroCusto}</td>
               <td>{item.ordemInterna}</td>
@@ -374,9 +381,9 @@ function Solicitacao() {
             </div>
 
             <div>
-              <button className={styles.buttonCheck}> 
+              <button className={styles.buttonCheck} onClick={enviarParaAnalise}> 
                 <img src={Check} alt="" />
-                <p>Enviar para Análise</p>
+                Enviar Para Analise
               </button>
             </div>
 

@@ -1,4 +1,5 @@
 import{useNavigate} from "react-router-dom"
+import api from "../../Services/Api.jsx"
 import Capa from "../../assets/Tela Login/imagem tela de login.png"
 import Logo from "../../assets/Tela Login/logo-ws.png"
 import styles from "./Login.module.scss"
@@ -9,6 +10,31 @@ function Login() {
     const irParaReembolsos = () => {
         navigate("/Reembolsos")
     }
+
+    // Iniciando estados
+
+    const [email, setEmail] = useState("")
+    const [senha, setSenha] = useState("")
+
+    const fazerLogin = async (e) => {
+        e.preventDefault()
+
+        try{
+
+            const repostas = await api.post("colaborador/login", {
+                "email":email, 
+                "senha":senha
+            } )
+            console.log(resposta.data)
+            alert("Login realizado com sucesso")
+            irParaReembolsos() // <-- redireciona pra aula de reembolso
+
+        }catch(error){
+            console.log("Erro ao fazer Login", error)
+            alert("ERRO NO LOGIN")
+        }
+    }
+    
     return (
 
         <main className={styles.mainLogin}>
@@ -22,8 +48,8 @@ function Login() {
 
                 <form className={styles.formLogin} action="">
 
-                    <input type="email" name="email" id="email" placeholder="Email" />
-                    <input type="password" name="password" id="senha" placeholder="Senha" />
+                    <input type="email" name="email" id="email" placeholder="Email"value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="password" name="password" id="senha" placeholder="Senha" value = {senha} onChange={ (e) => setSenha(e.target.value)} />
 
                     <a href="">Esqueci minha senha</a>
 
