@@ -1,3 +1,4 @@
+import{useState} from "react"
 import{useNavigate} from "react-router-dom"
 import api from "../../Services/Api.jsx"
 import Capa from "../../assets/Tela Login/imagem tela de login.png"
@@ -20,12 +21,11 @@ function Login() {
         e.preventDefault()
 
         try{
-
-            const repostas = await api.post("colaborador/login", {
+            const respostas = await api.post("/colaborador/login", {
                 "email":email, 
                 "senha":senha
-            } )
-            console.log(resposta.data)
+            });
+            console.log(respostas.data);
             alert("Login realizado com sucesso")
             irParaReembolsos() // <-- redireciona pra aula de reembolso
 
@@ -51,11 +51,11 @@ function Login() {
                     <input type="email" name="email" id="email" placeholder="Email"value={email} onChange={(e) => setEmail(e.target.value)}/>
                     <input type="password" name="password" id="senha" placeholder="Senha" value = {senha} onChange={ (e) => setSenha(e.target.value)} />
 
-                    <a href="">Esqueci minha senha</a>
+                    <a  onClick={() => navigate("/recuperar-senha")} href="">Esqueci minha senha</a>
 
                     <div> 
-                        <button onClick={irParaReembolsos} className={styles.buttonEntrar}>Entrar</button>
-                        <button className={styles.buttonCriar}>Criar conta</button>
+                        <button onClick={fazerLogin} className={styles.buttonEntrar}>Entrar</button>
+                        <button  onClick={() => navigate("/cadastro")}className={styles.buttonCriar}>Criar conta</button>
                     </div>
 
                 </form>
