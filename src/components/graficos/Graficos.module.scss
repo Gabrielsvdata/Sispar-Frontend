@@ -1,0 +1,40 @@
+/* src/components/graficos/Graficos.module.scss */
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.mainGrafico {
+  flex: 1;
+  padding: 2rem 6%;
+  overflow: auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;     /* empilha botão e título */
+  align-items: center;        /* centraliza horizontalmente */
+  justify-content: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    margin: 0;
+    text-align: center;       /* centraliza o texto do título */
+    font-size: 1.5rem;
+  }
+}
+
+.backButton {
+  align-self: flex-start;     /* mantém o botão “Voltar” à esquerda */
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #001a3d;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

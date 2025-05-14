@@ -1,0 +1,148 @@
+/* src/pages/VerificarAnalise.module.scss */
+
+.layoutAnalise {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #f5f6fa; // ou a cor de fundo padrão do seu app
+}
+
+.mainAnalise {
+  flex: 1;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.headerAnalise {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+
+  img {
+    cursor: pointer;
+  }
+
+  p {
+    margin: 0;
+    font-weight: 500;
+  }
+}
+
+.searchBar {
+  margin-bottom: 1.5rem;
+
+  input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: #007bff; // cor de foco
+    }
+  }
+}
+
+.tabela {
+  width: 100%;
+  overflow-x: auto;
+
+  /* centraliza a barra de rolagem e suaviza a experiência */
+  -webkit-overflow-scrolling: touch;
+  
+  table {
+    width: 100%;
+    max-width: 100%;      /* nunca ultrapassa 100% do container */
+    border-collapse: collapse;
+    table-layout: fixed;
+    table-layout: auto;   /* ajusta colunas de acordo com o conteúdo */
+  }
+
+  /* padding reduzido para diminuir a altura da linha */
+  th, td {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #e1e4e8;
+    text-align: left;
+    font-size: 0.85rem;
+    white-space: nowrap;  /* evita quebra de linha dentro das células */
+  }
+
+  th {
+    background: #fafbfc;
+    color: #24292e;
+    font-weight: 600;
+  }
+
+  tbody tr:nth-child(even) td {
+    background: #f6f8fa;
+  }
+
+  tbody tr:hover td {
+    background: #eaecef;
+  }
+
+  td img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.btnAprovar {
+  background-color: green !important;
+}
+
+.btnRejeitar {
+  background-color: red !important;
+}
+
+/* se precisar de responsividade */
+@media (max-width: 768px) {
+  .mainAnalise {
+    padding: 1rem;
+  }
+
+  .headerAnalise {
+    font-size: 0.9rem;
+  }
+
+  .tabela table {
+    font-size: 0.8rem;
+  }
+}
+
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+
+  button {
+    margin: 0 0.25rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #e1e4e8;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: #f6f8fa;
+    }
+
+    &.active {
+      background: #0366d6;
+      color: #fff;
+      border-color: #0366d6;
+    }
+  }
+}

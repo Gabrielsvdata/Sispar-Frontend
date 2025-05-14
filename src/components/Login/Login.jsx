@@ -17,6 +17,8 @@ function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
 
+    
+
     const fazerLogin = async (e) => {
         e.preventDefault()
 
@@ -25,10 +27,21 @@ function Login() {
                 "email":email, 
                 "senha":senha
             });
-            console.log(respostas.data);
+
+            
+            console.log("login response:", respostas.data);
+            
+            const {usuario} = respostas.data;
+            localStorage.setItem('usuarioId', String(usuario.id));
+            localStorage.setItem('usuarioNome', usuario.nome);
+            localStorage.setItem('usuarioCargo', usuario.cargo);
             alert("Login realizado com sucesso")
             irParaReembolsos() // <-- redireciona pra aula de reembolso
 
+              // dispara evento para a NavBar atualizar instantaneamente
+            window.dispatchEvent(new Event("userChanged"))
+
+            
         }catch(error){
             console.log("Erro ao fazer Login", error)
             alert("ERRO NO LOGIN")
