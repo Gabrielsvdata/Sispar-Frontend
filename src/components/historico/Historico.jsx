@@ -10,43 +10,49 @@ import Seta from "../../assets/Dashboard/Vector.png";
 import styles from "./Historico.module.scss";
 
 export default function Historico() {
-  const [statusTab, setStatusTab] = useState("Aprovado");
+  const [statusTab, setStatusTab] = useState("");
   const [reembolsos, setReembolsos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [numPrestacaoSearch, setNumPrestacaoSearch] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const navigate = useNavigate();
 
+  // sempre que statusTab mudar, busca de novo
   useEffect(() => {
-    carregarHistorico();
-  }, /*[statusTab]*/);
-
-  async function carregarHistorico() {
-    try {
-      const params = new URLSearchParams({ status: statusTab });
-      const { data } = await Api.get(`/reembolsos?${params}`);
-      setReembolsos(data);
-      setCurrentPage(1);
-    } catch (err) {
-      console.error(err);
-      alert("Erro ao carregar histórico.");
+    async function fetchData() {
+      try {
+        const params = statusTab ? `?status=${encodeURIComponent(statusTab)}` : "";
+        const { data } = await Api.get(`/reembolsos${params}`);
+        setReembolsos(data);
+        setCurrentPage(1);
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao carregar histórico.");
+      }
     }
-  }
+    fetchData();
+  }, [statusTab]);
 
+  // aplica filtros de status, nº prestação, colaborador e datas no front
   const filtrados = reembolsos.filter(r => {
+    const matchesStatus = statusTab ? r.status === statusTab : true;
+    const matchesPrestacao = numPrestacaoSearch
+      ? String(r.num_prestacao).includes(numPrestacaoSearch)
+      : true;
     const matchesName = r.colaborador
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const dateOnly = r.data.split("T")[0];
     const afterFrom = dateFrom ? dateOnly >= dateFrom : true;
     const beforeTo  = dateTo   ? dateOnly <= dateTo   : true;
-    return matchesName && afterFrom && beforeTo;
+    return matchesStatus && matchesPrestacao && matchesName && afterFrom && beforeTo;
   });
 
-  const totalPages = Math.ceil(filtrados.length / itemsPerPage);
-  const startIdx = (currentPage - 1) * itemsPerPage;
+  const totalPages   = Math.ceil(filtrados.length / itemsPerPage);
+  const startIdx     = (currentPage - 1) * itemsPerPage;
   const currentItems = filtrados.slice(startIdx, startIdx + itemsPerPage);
 
   return (
@@ -75,9 +81,21 @@ export default function Historico() {
           >
             Rejeitados
           </button>
+          <button
+            className={statusTab === "" ? styles.active : ""}
+            onClick={() => setStatusTab("")}
+          >
+            Todos
+          </button>
         </section>
 
         <section className={styles.filters}>
+          <input
+            type="text"
+            placeholder="Nº Prestação…"
+            value={numPrestacaoSearch}
+            onChange={e => setNumPrestacaoSearch(e.target.value)}
+          />
           <input
             type="text"
             placeholder="Pesquisar colaborador…"
@@ -141,7 +159,7 @@ export default function Historico() {
                   <td>{r.num_prestacao}</td>
                   <td>{r.colaborador}</td>
                   <td>{r.empresa}</td>
-                  <td>{r.data.split("T")[0]}</td>
+                  <td>{new Date(r.data).toLocaleDateString('pt-BR')}</td>
                   <td>{r.descricao}</td>
                   <td>{r.tipo_reembolso}</td>
                   <td>{r.centro_custo}</td>

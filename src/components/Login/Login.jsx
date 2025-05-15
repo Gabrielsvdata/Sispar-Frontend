@@ -36,6 +36,7 @@ function Login() {
             localStorage.setItem('usuarioNome', usuario.nome);
             localStorage.setItem('usuarioCargo', usuario.cargo);
             alert("Login realizado com sucesso")
+            
             irParaReembolsos() // <-- redireciona pra aula de reembolso
 
               // dispara evento para a NavBar atualizar instantaneamente

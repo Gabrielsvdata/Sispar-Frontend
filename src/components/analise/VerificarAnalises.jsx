@@ -3,27 +3,28 @@ import { useNavigate } from "react-router-dom";
 import Api from "../../Services/Api";
 import NavBar from "../navbar/NavBar";
 
-import Home from "../../assets/Dashboard/home header.png";
-import Seta from "../../assets/Dashboard/Vector.png";
+import Home      from "../../assets/Dashboard/home header.png";
+import Seta      from "../../assets/Dashboard/Vector.png";
 import CheckIcon from "../../assets/solicitacao/check.png";
 import XIcon     from "../../assets/solicitacao/x.png";
 
 import styles from "./VerificarAnalise.module.scss";
 
 export default function VerificarAnalise() {
-  const [pendentes, setPendentes] = useState([]);        // renomeado de reembolsos pra refletir só "Em análise"
+  const [pendentes, setPendentes]   = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    carregarPendentes();                               // carrega só os pendentes
+    carregarPendentes();
   }, []);
 
   async function carregarPendentes() {
     try {
-      // agora já chama o endpoint filtrado pelo status
-      const { data } = await Api.get("/reembolsos?status=Em análise");
-      setPendentes(data);
+      // busca todas, depois filtra apenas as que estão "Em análise"
+      const { data } = await Api.get("/reembolsos");
+      const somenteAnalise = data.filter(r => r.status === "Em análise");
+      setPendentes(somenteAnalise);
     } catch (err) {
       console.error(err);
       alert("Erro ao carregar solicitações.");
@@ -33,7 +34,7 @@ export default function VerificarAnalise() {
   async function aprovar(num) {
     try {
       await Api.patch(`/reembolsos/${num}/aprovar`);
-      await carregarPendentes();                        // recarrega a lista toda
+      await carregarPendentes();
     } catch {
       alert("Erro ao aprovar.");
     }
@@ -42,18 +43,17 @@ export default function VerificarAnalise() {
   async function rejeitar(num) {
     try {
       await Api.patch(`/reembolsos/${num}/rejeitar`);
-      await carregarPendentes();                        // recarrega a lista toda
+      await carregarPendentes();
     } catch {
       alert("Erro ao rejeitar.");
     }
   }
 
-  // aplica filtro de busca sobre os pendentes
   const mostrados = pendentes.filter(r =>
     r.colaborador.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-return (
+  return (
     <div className={styles.layoutAnalise}>
       <NavBar />
 
@@ -79,23 +79,12 @@ return (
           <table>
             <thead>
               <tr>
-                <th>Nº Prest</th>
-                <th>Colaborador</th>
-                <th>Empresa</th>
-                <th>Data</th>
-                <th>Descrição</th>
-                <th>Tipo Despesa</th>
-                <th>Centro Custo</th>
-                <th>Ord. Int.</th>
-                <th>Div.</th>
-                <th>PEP</th>
-                <th>Moeda</th>
-                <th>Dist. KM</th>
-                <th>Valor KM</th>
-                <th>Val. Faturado</th>
-                <th>Despesa</th>
-                <th>Aprovar</th>
-                <th>Rejeitar</th>
+                <th>Nº Prest</th><th>Colaborador</th><th>Empresa</th>
+                <th>Data</th><th>Descrição</th><th>Tipo Despesa</th>
+                <th>Centro Custo</th><th>Ord. Int.</th><th>Div.</th>
+                <th>PEP</th><th>Moeda</th><th>Dist. KM</th>
+                <th>Valor KM</th><th>Val. Faturado</th><th>Despesa</th>
+                <th>Aprovar</th><th>Rejeitar</th>
               </tr>
             </thead>
             <tbody>
@@ -104,10 +93,7 @@ return (
                   <td>{r.num_prestacao}</td>
                   <td>{r.colaborador}</td>
                   <td>{r.empresa}</td>
-                  <td>
-                    {new Date(r.data)
-                      .toLocaleDateString("pt-BR")} {/* somente DD/MM/AAAA */}
-                  </td>
+                  <td>{new Date(r.data).toLocaleDateString("pt-BR")}</td>
                   <td>{r.descricao}</td>
                   <td>{r.tipo_reembolso}</td>
                   <td>{r.centro_custo}</td>
@@ -123,6 +109,7 @@ return (
                     <img
                       src={CheckIcon}
                       alt="aprovar"
+                      style={{ cursor: "pointer" }}
                       onClick={() => aprovar(r.num_prestacao)}
                     />
                   </td>
@@ -130,6 +117,7 @@ return (
                     <img
                       src={XIcon}
                       alt="rejeitar"
+                      style={{ cursor: "pointer" }}
                       onClick={() => rejeitar(r.num_prestacao)}
                     />
                   </td>
