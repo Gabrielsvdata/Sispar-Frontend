@@ -64,32 +64,32 @@ function Solicitacao() {
 
   try {
     const colaboradorId = Number(localStorage.getItem("usuarioId"));
-    const payload = {
-      colaborador,
-      empresa,
-      descricao,
-      data,
-      tipo_reembolso: tipoReembolso,
-      centro_custo: centroCusto,
-      ordem_interna: ordemInterna,
-      divisao,
-      pep,
-      moeda,
-      distancia_km: distanciaKm,
-      valor_km: Number(valorKm),
-      valor_faturado: Number(valorFaturado),
-      despesa: Number(despesa) || 0,
-      id_colaborador: colaboradorId
-    };
+    const item = {
+    colaborador,
+    empresa,
+    descricao,
+    data,
+    tipo_reembolso: tipoReembolso,
+    centro_custo: centroCusto,
+    ordem_interna: ordemInterna,
+    divisao,
+    pep,
+    moeda,
+    distancia_km: distanciaKm,
+    valor_km: Number(valorKm),
+    valor_faturado: Number(valorFaturado),
+    despesa: Number(despesa) || 0,
+    id_colaborador: colaboradorId,
+  };
 
     // 1) crio no servidor e recebo o objeto completo
-    const { data: { reembolso } } = await Api.post("/reembolsos/new", payload);
+  //  const { data: { reembolso } } = await Api.post("/reembolsos/new", payload);
 
     // 2) atualizo o input de Nº Prestação com o gerado agora
     //setCreatedNumPrestacao(reembolso.num_prestacao);
 
     // 3) adiciono esse reembolso (com num_prestacao) na lista
-    setDadosReembolso(prev => [...prev, reembolso]);
+    setDadosReembolso(prev => [...prev, item]);
 
     limparCampos();
   } catch (error) {
@@ -98,20 +98,26 @@ function Solicitacao() {
   }
 };
 
-const enviarParaAnalise = () => {
+const enviarParaAnalise = async () => {
   if (dadosReembolso.length === 0) {
     alert("Não há itens para enviar.");
     return;
   }
+  if (!window.confirm("Deseja enviar todas para análise?")) return;
 
-  const confirma = window.confirm("Deseja enviar para Análise?");
-  if (!confirma) {
-    return;
+  try {
+    const responses = await Promise.all(
+      dadosReembolso.map(item => Api.post("/reembolsos/new", item))
+    );
+    const criados = responses.map(r => r.data.reembolso);
+
+    setDadosReembolso([]);
+    navigate("/analise", { state: { itens: criados } });
+  } catch (err) {
+    const msg = err.response?.data?.erro || err.message;
+    alert(`Erro ao enviar para análise: ${msg}`);
   }
-
-  navigate("/analise", { state: { itens: dadosReembolso } });
 };
-
 const removerReembolso = idx => {
   setDadosReembolso(prev => prev.filter((_, i) => i !== idx));
 };
