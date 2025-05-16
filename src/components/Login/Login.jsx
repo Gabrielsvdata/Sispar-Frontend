@@ -30,14 +30,14 @@ function Login() {
 
             
             console.log("login response:", respostas.data);
-            
+            irParaReembolsos() // <-- redireciona pra aula de reembolso
             const {usuario} = respostas.data;
             localStorage.setItem('usuarioId', String(usuario.id));
             localStorage.setItem('usuarioNome', usuario.nome);
             localStorage.setItem('usuarioCargo', usuario.cargo);
             alert("Login realizado com sucesso")
             
-            irParaReembolsos() // <-- redireciona pra aula de reembolso
+            
 
               // dispara evento para a NavBar atualizar instantaneamente
             window.dispatchEvent(new Event("userChanged"))
@@ -45,7 +45,7 @@ function Login() {
             
         }catch(error){
             console.log("Erro ao fazer Login", error)
-            alert("ERRO NO LOGIN")
+            // alert("ERRO NO LOGIN")
         }
     }
     
