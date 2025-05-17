@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import Api from "../../Services/Api.jsx"
 import Home from "../../assets/Header/botão - Home.png"
 import Historico from "../../assets/Header/Botão - Histórico.png"
 import Pesquisa from "../../assets/Header/Botão - Pesquisa.png"
@@ -6,56 +9,50 @@ import Sair from "../../assets/Header/Botão - Sair.png"
 import People from "../../assets/Header/MePeople.jpeg"
 import FecharHearder from "../../assets/Header/imagem-fechar-header.png"
 import styles from "./NavBar.module.scss"
-import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react"
-
 
 function NavBar() {
   const navigate = useNavigate()
   const [status, setStatus] = useState("fechado")
 
-  const [nome, setNome]       = useState("")
-  const [cargo, setCargo]     = useState("")
-  const [cracha, setCracha]   = useState("")
+  const [nome, setNome] = useState("")
+  const [cargo, setCargo] = useState("")
+  const [cracha, setCracha] = useState("")
+  const [avatar, setAvatar] = useState(null)
 
-   const [avatar, setAvatar] = useState(null)
-// função para (re)carregar dados do localStorage
-  const updateUser = () => {
-    const n = localStorage.getItem("usuarioNome")
-    const c = localStorage.getItem("usuarioCargo")
-    const i = localStorage.getItem("usuarioId")
-    console.log("NavBar read:", { n, c, i })  // para debug
-    if (n && c && i) {
-      setNome(n)
-      setCargo(c)
-      setCracha(i)
+  // Função para (re)carregar dados diretamente do backend
+  const updateUser = async () => {
+    try {
+      const { data } = await Api.get("/colaborador/me")
+      setNome(data.nome)
+      setCargo(data.cargo)
+      setCracha(data.id)
+    } catch (e) {
+      console.error("Erro ao carregar usuário:", e)
     }
   }
 
   useEffect(() => {
-    // lê na montagem
+    // Lê na montagem e em eventos de mudança de usuário
     updateUser()
-    // escuta mudanças de usuário
     window.addEventListener("userChanged", updateUser)
     return () => window.removeEventListener("userChanged", updateUser)
   }, [])
 
-  function click() {
-    setStatus(status === "fechado" ? "aberto" : "fechado")
-  }
-
   useEffect(() => {
-    // carrega o avatar salvo, ou usa o default
+    // Carrega o avatar salvo no localStorage, ou usa o default
     const saved = localStorage.getItem("usuarioAvatar")
     setAvatar(saved || People)
   }, [])
+
+  function click() {
+    setStatus(prev => (prev === "fechado" ? "aberto" : "fechado"))
+  }
 
   const handleAvatarChange = e => {
     const file = e.target.files[0]
     if (!file) return
     const reader = new FileReader()
     reader.onload = () => {
-      // reader.result é a string base64
       localStorage.setItem("usuarioAvatar", reader.result)
       setAvatar(reader.result)
     }
@@ -70,7 +67,7 @@ function NavBar() {
 
       <section>
         <div className={styles.navbarPeople}>
-           {/* label + input escondido para clicar na foto */}
+          {/* Label + input escondido para clicar na foto */}
           <label htmlFor="avatarInput">
             <img src={avatar} alt="Foto de perfil" className={styles.avatar}/>
           </label>
@@ -90,9 +87,7 @@ function NavBar() {
           {/* Início */}
           <div className={styles.buttonNav}>
             <button
-              onClick={() => {
-                navigate("/reembolsos")
-              }}
+              onClick={() => navigate("/reembolsos")}
               aria-label="Ir para Início"
             >
               <img src={Home} alt="Home" />
@@ -103,9 +98,7 @@ function NavBar() {
           {/* Solicitação de Reembolso */}
           <div className={styles.buttonNav}>
             <button
-              onClick={() => {
-                navigate("/solicitacao")
-              }}
+              onClick={() => navigate("/solicitacao")}
               aria-label="Ir para Solicitação de reembolso"
             >
               <img src={Reembolso} alt="Solicitar Reembolso" />
@@ -116,9 +109,7 @@ function NavBar() {
           {/* Verificar Análises */}
           <div className={styles.buttonNav}>
             <button
-              onClick={() => {
-                navigate("/analise")
-              }}
+              onClick={() => navigate("/analise")}
               aria-label="Ir para Verificar análises"
             >
               <img src={Pesquisa} alt="Verificar Análises" />
@@ -129,9 +120,7 @@ function NavBar() {
           {/* Histórico */}
           <div className={styles.buttonNav}>
             <button
-              onClick={() => {
-                navigate("/historico")
-              }}
+              onClick={() => navigate("/historico")}
               aria-label="Ir para Histórico"
             >
               <img src={Historico} alt="Histórico" />
@@ -143,9 +132,7 @@ function NavBar() {
 
       <button
         className={styles.buttonSair}
-        onClick={() => {
-          navigate("/")
-        }}
+        onClick={() => navigate("/")}
         aria-label="Sair"
       >
         <img src={Sair} alt="Sair" />
@@ -154,4 +141,4 @@ function NavBar() {
   )
 }
 
-export default NavBar
+export default NavBar;

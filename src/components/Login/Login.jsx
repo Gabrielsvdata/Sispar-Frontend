@@ -1,81 +1,88 @@
-import{useState} from "react"
-import{useNavigate} from "react-router-dom"
-import api from "../../Services/Api.jsx"
-import Capa from "../../assets/Tela Login/imagem tela de login.png"
-import Logo from "../../assets/Tela Login/logo-ws.png"
-import styles from "./Login.module.scss"
-function Login() {
+// src/components/Login/Login.jsx
 
-    const navigate = useNavigate() //iniciar o hook useNavigate
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../Services/Api.jsx";
+import Capa from "../../assets/Tela Login/imagem tela de login.png";
+import Logo from "../../assets/Tela Login/logo-ws.png";
+import styles from "./Login.module.scss";
+import { AuthContext } from "../../contexts/AuthContext.jsx";
 
-    const irParaReembolsos = () => {
-        navigate("/Reembolsos")
+export default function Login() {
+  const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
+
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const { data } = await api.post("/colaborador/login", { email, senha });
+      setUser(data);
+      navigate("/reembolsos");
+    } catch (err) {
+      alert(err.response?.data?.mensagem || "Erro ao efetuar login");
     }
+  }
 
-    // Iniciando estados
+  return (
+    <main className={styles.mainLogin}>
+      <section className={styles.containerImagem}>
+        <img src={Capa} alt="Navio carregado de containers" />
+      </section>
 
-    const [email, setEmail] = useState("")
-    const [senha, setSenha] = useState("")
+      <section className={styles.containerForms}>
+        <img src={Logo} alt="Logo da Wilson Sons" />
+        <h1>Boas-vindas ao Novo Portal SISPAR</h1>
+        <p>Sistema de Emissão de Boletos e Parcelamentos</p>
 
-    
+        <form onSubmit={handleSubmit} className={styles.formLogin}>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
 
-    const fazerLogin = async (e) => {
-        e.preventDefault()
+          <input
+            type="password"
+            name="senha"
+            id="senha"
+            placeholder="Senha"
+            value={senha}
+            onChange={e => setSenha(e.target.value)}
+            required
+          />
 
-        try{
-            const respostas = await api.post("/colaborador/login", {
-                "email":email, 
-                "senha":senha
-            });
+          <a
+            href="#"
+            className={styles.linkRecuperar}
+            onClick={e => {
+              e.preventDefault();
+              navigate("/recuperar-senha");
+            }}
+          >
+            Esqueci minha senha
+          </a>
 
-            
-            console.log("login response:", respostas.data);
-            irParaReembolsos() // <-- redireciona pra aula de reembolso
-            const {usuario} = respostas.data;
-            localStorage.setItem('usuarioId', String(usuario.id));
-            localStorage.setItem('usuarioNome', usuario.nome);
-            localStorage.setItem('usuarioCargo', usuario.cargo);
-            alert("Login realizado com sucesso")
-            
-            
-
-              // dispara evento para a NavBar atualizar instantaneamente
-            window.dispatchEvent(new Event("userChanged"))
-
-            
-        }catch(error){
-            console.log("Erro ao fazer Login", error)
-            // alert("ERRO NO LOGIN")
-        }
-    }
-    
-    return (
-
-        <main className={styles.mainLogin}>
-            <section className={styles.containerImagem}>
-                <img src={Capa} alt="Navio com carregado de Container" />
-            </section>
-            <section className={styles.containerForms}>
-                <img src={Logo} alt="Logo da Wilson SOns" />
-                <h1>Boas vindas ao Novo Portal SISPAR</h1>
-                <p>Sistemas de Emissão de Boletos e Parcelamentos</p>
-
-                <form className={styles.formLogin} action="">
-
-                    <input type="email" name="email" id="email" placeholder="Email"value={email} onChange={(e) => setEmail(e.target.value)}/>
-                    <input type="password" name="password" id="senha" placeholder="Senha" value = {senha} onChange={ (e) => setSenha(e.target.value)} />
-
-                    <a  onClick={() => navigate("/recuperar-senha")} href="">Esqueci minha senha</a>
-
-                    <div> 
-                        <button onClick={fazerLogin} className={styles.buttonEntrar}>Entrar</button>
-                        <button  onClick={() => navigate("/cadastro")}className={styles.buttonCriar}>Criar conta</button>
-                    </div>
-
-                </form>
-            </section>
-        </main>
-
-    )
+          <div className={styles.buttons}>
+            <button type="submit" className={styles.buttonEntrar}>
+              Entrar
+            </button>
+            <button
+              type="button"
+              className={styles.buttonCriar}
+              onClick={() => navigate("/cadastro")}
+            >
+              Criar conta
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+  );
 }
-export default Login;

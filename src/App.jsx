@@ -9,11 +9,14 @@ import Solicitacao from "./components/solicitacao/Solicitacao.jsx";
 import VerificarAnalise from "./components/analise/VerificarAnalises.jsx";
 import Historico from "./components/historico/Historico.jsx";
 import Graficos from "./components/graficos/Graficos.jsx";  // ← import do novo componente
+// 1) Importa o Provider do contexto
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 
 import "./global.scss";
 
 function App() {
   return (
+    <AuthProvider>
     <HashRouter>
       <Routes>
         <Route path="/" element={<Login/>} />
@@ -26,6 +29,7 @@ function App() {
 +       <Route path="/graficos" element={<Graficos />} />  {/* ← rota para o gráfico */}
       </Routes>
     </HashRouter>
+    </AuthProvider>
   );
 }
 
