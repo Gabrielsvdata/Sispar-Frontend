@@ -67,7 +67,7 @@
     }
 
     input:hover {
-        border-color: #23282f;
+        border-color: #23282f; 
     }
 
     //primeiro e segundo px: profundade, terceito px: esmaecimento, o quanto px: profundidade
@@ -91,6 +91,7 @@
                 height: 5vh;
                 border-radius: 6px;
                 margin-top: 2rem;
+                cursor: pointer;
                 
             }
 
@@ -103,6 +104,7 @@
                 height: 5vh;
                 border-radius: 6px;
                 margin-top: 2rem;
+                cursor: pointer;
                 
             }
         }
