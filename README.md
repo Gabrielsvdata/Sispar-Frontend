@@ -1,55 +1,77 @@
 ## Desafio FINAL - Construção de Interface para o Projeto "SISPAR"
-PROFESSORES: SAMUEL SILVÉRIO E KARYNNE MOREIRA
-Data de início: 06/02/2025
-Data de conclusão: 14/05/2025
+**PROFESSORES:** Samuel Silvério e Karynne Moreira  
+**Data de início:** 06/02/2025 | **Data de conclusão:** 14/05/2025
 
+---
 
 ## Objetivo
-Neste desafio, começaremos pelo Front-end (toda a parte visual) e concluiremos no Back-End (responsável pelo recebimento, processamento e armazenamento dos dados) e a implementação fiel do design fornecido no Figma.
+Neste desafio, iniciaremos pelo Front-end (toda a parte visual) e concluiremos no Back-end (recebimento, processamento e armazenamento dos dados), garantindo a implementação fiel ao design fornecido no Figma.
 
+---
+
+## Tecnologias
+
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=FFD62E)
+![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=flat&logo=sass&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat&logo=reactrouter&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=flat&logo=flask&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-FF0000?style=flat&logo=sqlalchemy&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=flat&logo=sqlite&logoColor=white)
+![Flask CORS](https://img.shields.io/badge/Flask_CORS-4D7A9C?style=flat&logo=flask&logoColor=white)
+![Flasgger](https://img.shields.io/badge/Flasgger-236192?style=flat&logo=swagger&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)
+![Render](https://img.shields.io/badge/Render-2EC866?style=flat&logo=render&logoColor=white)
+
+---
 
 ## Requisitos Técnicos
 
-## 1. Tela de Login
+### 1. Tela de Login  
+✅ **Funcionalidades:**  
+🔹 Ao clicar em “ENTRAR”, redirecionar para **Reembolsos**.  
+🔹 Rota configurada para `/reembolsos`.
 
-✅Funcionalidades:
-🔹 Ao clicar no botão "ENTRAR" , o usuário deve ser redirecionado para a Tela de reembolsos.
-🔹 O botão deve conter a rota que direciona corretamente para a tela reembolsos. 
+### 2. Tela de Reembolsos  
+✅ **Funcionalidades:**  
+🔹 Conteúdo estático (lista pré-carregada).  
+🔹 Card “Solicitar Reembolso” leva à **Solicitação de Reembolsos**.
 
-## 2. Tela de Reembolsos
+### 3. Tela de Solicitação de Reembolsos  
+✅ **Funcionalidades:**  
+🔹 Inputs funcionais para nome, valor, data etc.  
+🔹 Armazenar entradas em array-estado (simulação de “task list”).  
+🔹 Botão “ENVIAR” dispara POST à API.
 
-✅ Funcionalidades:
- 🔹 A tela será parcialmente estática, sem interações ou atualizações dinâmicas.
- 🔹 O card "Solicitar Reembolso" deve redirecionar para a tela de Solicitação de Reembolsos.
+### 4. NavBar (Navegação)  
+✅ **Funcionalidades:**  
+🔹 Ícones linkam para cada tela (Home, Solicitação, Histórico, Gráficos).  
+🔹 Menu hambúrguer abre/fecha a sidebar.  
+🔹 Logout redireciona para **Login**.
 
-## 3. Tela de Solicitação de Reembolsos
+### 5. Back-end (API Flask)  
+✅ **Endpoints mínimos:**  
+🔹 **POST** `/colaborador/login` – autenticação JWT.  
+🔹 **GET/POST/PUT/DELETE** `/colaboradores` – CRUD de colaboradores.  
+🔹 **GET/POST/PUT** `/reembolsos` – criar, listar, aprovar/rejeitar.  
+🔹 **GET** `/reembolsos/historico?colaborador_id=…` – histórico filtrado.  
+🔹 Documentação automática em `/apidocs/` via Flasgger.
 
-✅ Funcionalidades: 
-🔹 Os campos de input devem funcionar corretamente para receber e armazenar os dados inseridos pelo usuário. 
-🔹 Implementar um armazenamento temporário para os dados (pode ser um array ou um objeto, simulando uma "task list").
+---
 
-## 4. NavBar (Navegação)
-
-✅ Funcionalidades:
- 🔹 Ícones de navegação: Cada ícone deve levar o usuário para a respectiva tela. 
-🔹 Menu Hambúrguer: Deve permitir abrir e fechar a barra de navegação. 
-🔹 Home: Redireciona para a Tela de Reembolsos. 
-🔹 Solicitação: Redireciona para a Tela de Solicitação de Reembolsos. 
-🔹 Logout: Faz o logout, levando o usuário de volta à Tela de Início.
-
- 
 ## Materiais de Apoio
-Protótipo no Figma:
-O design da interface está disponível no Figma e pode ser utilizado como guia para a implementação:
+- **Protótipo no Figma:**  
+  https://www.figma.com/design/HiQqNZdfEVGoBaxq1xZ4IK/PortoLogistica  
+- **Conversores de Unidades:**  
+  - Pixel → rem: https://nekocalc.com/px-to-rem-converter  
+  - Pixel → vh/vw: https://khaledkzy.github.io/pixel-vh-vw-converter  
 
-<a href="https://www.figma.com/design/HiQqNZdfEVGoBaxq1xZ4IK/PortoLogistica?node-id=0-1&node-type=canvas&t=EBrJTvSNNssHRodT-0&authuser=0/">FIGMA - SISPAR</a>
+---
 
-Conversores de Unidades:
+## Deploy
 
-<a href="https://nekocalc.com/px-to-rem-converter?authuser=0/">Conversor de Pixel para Rem</a>
-
-<a href="https://khaledkzy.github.io/pixel-vh-vw-converter/?authuser=0/">Conversor de Pixel para VH / VW</a>
-
-## Deploy no Vercel
-<a href="https://vercel.com/gabriels-projects-07a8013f/projeto-sispar/">Acompanhe o meu progresso direto do Vercel</a>
-
+- **Front-end (Vercel):** [Projeto SISPAR no Vercel](https://vercel.com/gabriels-projects-07a8013f/projeto-sispar)  
+- **Back-end (Render):** [API SISPAR no Render](https://cria-o-api.onrender.com)
