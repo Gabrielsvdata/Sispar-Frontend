@@ -145,3 +145,156 @@ article {
     
     
 }
+
+/* === MINHAS MEDIA QUERIES PARA RESPONSIVIDADE === */
+
+/* Para telas de Tablet (ex: iPads em modo retrato, ou telas um pouco menores que desktop) */
+@media (max-width: 992px) {
+  .mainReembolsos {
+    padding: 1.5rem; // Menos padding nas laterais em tablets.
+  }
+
+  .sisRem { // A seção "Sistema de Reembolsos"
+    width: 90%; // Pode ocupar um pouco mais da largura.
+    h1 { font-size: 1.6rem; }
+    p { font-size: 0.95rem; }
+  }
+
+  .containerCards {
+    // Os cards já usam flex-wrap e flex-basis, então eles devem se ajustar.
+    // Talvez 2 cards por linha fiquem bons aqui. O flex-basis de 260px deve ajudar.
+    justify-content: space-around; // Mudo para space-around para melhor distribuição.
+  }
+  
+  article { // Os cards
+    flex-basis: 280px; // Aumento um pouco o basis se quiser garantir 2 por linha se couber
+    max-width: calc(50% - 1rem); // Tento forçar 2 por linha (50% menos metade do gap)
+  }
+
+
+  .containerStatus {
+    // Os itens de status também usam flex-wrap e flex-basis.
+    // Provavelmente 2 a 4 itens por linha, dependendo da tela do tablet.
+    div {
+      flex-basis: 180px; // Ajusto o basis para os itens de status.
+      max-width: calc(50% - 0.5rem); // Tento forçar 2 por linha
+    }
+  }
+}
+
+/* Para telas de Celular (ex: iPhones, Androids em modo retrato) */
+@media (max-width: 600px) {
+  .mainReembolsos {
+    padding: 1rem; // Menos padding ainda nas laterais para celulares.
+  }
+
+  .headerReembolso {
+    flex-direction: column; // Coloco os itens do header um embaixo do outro.
+    align-items: flex-start; // Alinho à esquerda.
+    gap: 0.3rem; // Menos espaço.
+    margin-bottom: 1.5rem;
+  }
+
+  .sisRem {
+    width: 95%; // Quase toda a largura.
+    h1 { font-size: 1.4rem; }
+    p { font-size: 0.9rem; }
+  }
+
+  .containerCards {
+    flex-direction: column; // Forço os cards a ficarem um por linha.
+    align-items: center; // Centralizo eles.
+    gap: 1rem; // Espaço entre os cards.
+    article { // Cada card
+      width: 95%; // Ocupa quase toda a largura.
+      max-width: none; // Tiro o max-width para ele poder usar a largura de 95%.
+      min-height: auto; // Deixo o conteúdo definir a altura.
+      padding: 1rem;
+    }
+  }
+
+  .containerStatus {
+    flex-direction: column; // Itens de status um por linha também.
+    align-items: center; // Centralizo.
+    gap: 1rem;
+    div { // Cada item de status
+      width: 90%; // Ocupa boa parte da largura.
+      max-width: none;
+      padding: 0.8rem;
+      h4 {font-size: 1.4rem;}
+      p {font-size: 0.8rem;}
+    }
+    img { // Ícones dos status
+        width: 2rem; 
+        height: 2rem;
+    }
+  }
+
+  .containerSistema {
+    justify-content: center; // Centralizo o link "Sistema Atualizado".
+    font-size: 0.8rem;
+  }
+}
+
+/* Telas de Celular - (ex: até 600px) */
+@media (max-width: 600px) {
+  .mainReembolsos {
+    padding: 1rem; // Menos padding nas laterais para celular
+    justify-content: flex-start; // Alinho o conteúdo no topo no mobile
+    .sisRem, .containerCards, .containerStatus, .containerSistema {
+      width: 95%; /* Containers internos ocupam quase toda a tela */
+    }
+  }
+
+  .headerReembolso {
+    display: flex; /* Isso já faz os itens tentarem ficar em linha */
+    flex-direction: row; /* Garante explicitamente que a direção é horizontal */
+    align-items: center; /* Alinha verticalmente os itens no centro (a casinha, a seta e o texto) */
+    gap: 0.5rem; /* Um pequeno espaço entre cada item (ajuste se precisar de mais ou menos) */
+    
+    position: static; /* Ótimo que você já removeu o posicionamento problemático aqui! */
+    width: 100%;      /* O header ocupa toda a largura disponível */
+    margin-bottom: 1.5rem; /* Seu espaçamento inferior */
+    padding: 0 0.5rem; /* Adiciono um pequeno padding lateral para não colar nas bordas da tela */
+
+    /* Ajustes nos filhos diretos, se necessário */
+    img {
+      height: 1.1rem; /* Ajuste o tamanho dos ícones para mobile, se precisar */
+      width: auto;
+    }
+    p {
+      font-size: 0.95rem; /* Ajuste o tamanho da fonte do texto "Reembolsos" para mobile */
+      margin: 0; /* Tiro margens padrão do parágrafo para melhor controle com gap */
+    }
+  }
+  
+
+  .containerCards {
+    flex-direction: column; /* Cards um embaixo do outro */
+    align-items: center; /* Centralizo os cards */
+    height: auto;
+    gap: 1rem; // Espaço entre os cards
+    article {
+      width: 100%; /* Cada card ocupa toda a largura disponível */
+      height: auto;
+      min-height: 15vh; // Altura mínima
+      margin-top: 0; // Tiro o margin-top individual, o gap do container resolve
+    }
+  }
+
+  .containerStatus {
+    flex-direction: column; /* Itens de status um embaixo do outro */
+    align-items: center;
+    height: auto;
+    gap: 1rem;
+    div { // Cada item de status
+      width: 100%; /* Ocupa toda a largura */
+      height: auto;
+      min-height: 5vh;
+    }
+  }
+
+  .containerSistema {
+    justify-content: center; // Centralizo o link "Sistema Atualizado"
+  }
+}

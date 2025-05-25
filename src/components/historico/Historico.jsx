@@ -61,7 +61,7 @@ export default function Historico() {
 
       <main className={styles.mainHistorico}>
         <header className={styles.headerHistorico}>
-          <img src={Home} alt="home" onClick={() => navigate("/")} />
+          <img src={Home} alt="home" onClick={() => navigate("/reembolsos")} />
           <img src={Seta} alt="seta" />
           <p>Reembolsos</p>
           <img src={Seta} alt="seta" />

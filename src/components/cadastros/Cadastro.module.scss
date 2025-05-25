@@ -1,187 +1,169 @@
+/* Meu arquivo de estilos para a Tela de Cadastro - Cadastro.module.scss */
+
 .mainCadastro {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
+  display: flex;
+  /* No desktop, quero a imagem e o formulário lado a lado. */
+  flex-direction: row;
+  height: 100vh; /* Ocupa a tela toda na altura. */
+}
+
+.containerImagem {
+  width: 50%; /* Metade da tela para a imagem no desktop. */
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Para a imagem se ajustar bem, cobrindo o espaço. */
   }
-  
-  .containerImagem {
-    width: 50%;
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
+}
+
+.containerForms {
+  width: 50%; /* A outra metade para a seção do formulário no desktop. */
+  display: flex;
+  flex-direction: column; /* Itens internos (logo, título, form) em coluna. */
+  align-items: center; /* Centralizo horizontalmente. */
+  justify-content: center; /* Centralizo verticalmente. */
+  padding: 2rem; /* Um respiro para o conteúdo não colar nas bordas. */
+  overflow-y: auto; /* Se o conteúdo ficar maior que a tela (especialmente no mobile), permite rolar. */
+
+
+  img { /* Meu logo */
+    margin-bottom: 1rem;
+    max-width: 180px; /* Um tamanho máximo pro logo não ficar gigante. */
+    width: 100%;
+    height: auto; /* Mantém a proporção. */
   }
-  
-  .containerForms {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  
-    img {
-      margin-bottom: 1rem;
-    }
-  
-    h1 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-  
-    p {
-      margin-bottom: 2rem;
-      font-weight: bold;
-      color: #0844c4;
-    }
+
+  h1 {
+    font-size: 1.8rem; /* Ajustei um pouco o tamanho do título. */
+    text-align: center;
+    margin-bottom: 0.5rem; /* Menos espaço abaixo do H1. */
+    color: #333;
   }
-  
-  .formCadastro {
+
+  p { /* Texto de instrução abaixo do H1. */
+    margin-bottom: 1.5rem; /* Menos espaço abaixo do P. */
+    font-weight: bold;
+    color: #0844c4;
+    text-align: center;
+    font-size: 0.9rem; /* Um pouco menor. */
+  }
+}
+
+.formCadastro {
+  display: flex;
+  flex-direction: column; /* Os inputs e o div dos botões ficarão em coluna. */
+  align-items: center; /* Tudo centralizado no formulário. */
+  width: 100%; /* O formulário usa toda a largura disponível em .containerForms. */
+  max-width: 400px; /* Limito a largura máxima do formulário para telas grandes. */
+  gap: 0.8rem; /* Espaço vertical entre cada input. */
+
+  input {
+    width: 100%; /* Cada input ocupa toda a largura do .formCadastro. */
+    border-radius: 6px;
+    border: 1px solid #ccc; /* Borda um pouco mais suave. */
+    padding: 0.75rem; /* Padding interno para conforto na digitação. */
+    font-size: 0.95rem; /* Tamanho da fonte dentro do input. */
+  }
+
+  input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease-in-out;
+  }
+
+  input:hover::placeholder {
+    /* color: #fff; // Se o fundo do input for claro, placeholder branco some. */
+    color: rgba(0, 0, 0, 0.4); /* Deixei um pouco mais claro no hover. */
+  }
+
+  input:hover {
+    border-color: #0844c4; /* Cor da borda no hover, usando uma cor do tema. */
+  }
+
+  input:focus {
+    border-color: #001A3D; /* Cor da borda no foco, outra cor do tema. */
+    box-shadow: 0px 0px 5px 1px #cbd4e1; /* Sombra suave no foco. */
+  }
+
+  /* Div que agrupa os botões de Cadastrar e Voltar */
+  div {
+    width: 100%; /* O container dos botões usa toda a largura do formulário. */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70%;
-    gap: 1vh;
-  
-    input {
-      width: 80%;
-      border-radius: 6px;
-      border: 1px solid #f1f4f9;
-      padding: 0.5rem;
-    }
-  
-    input::placeholder {
-      color: rgba(0, 0, 0, 0.5);
-      transition: color 0.3s ease-in-out;
-    }
-  
-    input:hover::placeholder {
-      color: #fff;
-    }
-    .mainCadastro {
-        display: flex;
-        flex-direction: row;
-        height: 100vh;
-      }
-      
-      .containerImagem {
-        width: 50%;
-      
-        img {
-          height: 100%;
-          width: 100%;
-          background-repeat: no-repeat;
-          background-size: 100%;
-          object-fit: cover;
-        }
-      }
-      
-      .containerForms {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      
-        img {
-          margin-bottom: 1rem;
-        }
-      
-        h1 {
-          font-size: 2rem;
-          text-align: center;
-          margin-bottom: 8px;
-        }
-      
-        p {
-          margin-bottom: 2rem;
-          font-weight: bold;
-          color: #0844c4;
-        }
-      }
-      
-      .formCadastro {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        width: 70%;
-        height: auto;
-      
-        input {
-          width: 80%;
-          border-radius: 6px;
-          border: 1px solid #f1f4f9;
-          margin-bottom: 0.5vh;
-          padding: 0.5rem;
-          font-size: 1rem;
-        }
-      
-        input::placeholder {
-          color: rgba(0, 0, 0, 0.5);
-          transition: color 0.3s ease-in-out;
-        }
-      
-        input:hover::placeholder {
-          color: #fff;
-        }
-      
-        input:hover {
-          border-color: #23282f;
-        }
-      
-        input:focus {
-          border-color: #fff;
-          box-shadow: 0 0 5px 1px #cbd4e1;
-        }
-      
-        div {
-          width: 50%;
-          display: flex;
-          justify-content: space-evenly;
-          margin-top: 1rem;
-      
-          .buttonCadastrar {
-            background-color: #001a3d;
-            color: white;
-            font-weight: bold;
-            width: 6vw;
-            height: 5vh;
-            border-radius: 6px;
-            cursor: pointer;
-          }
-      
-          .buttonVoltar {
-            background-color: #00bedd;
-            color: white;
-            font-weight: bold;
-            width: 6vw;
-            height: 5vh;
-            border-radius: 6px;
-            cursor: pointer;
-          }
-        }
-      }
-      
-    input:hover {
-      border-color: #23282f;
-    }
-  
-    input:focus {
-      border-color: #fff;
-      box-shadow: 0px 0px 5px 1px #cbd4e1;
-    }
-  
-    .buttonCadastrar {
-      background-color: #001a3d;
+    flex-direction: column; /* Por padrão, botões um sobre o outro, bom para mobile. */
+    align-items: center; /* Centraliza os botões se tiverem max-width. */
+    gap: 0.8rem; /* Espaço entre os botões (Cadastrar e Voltar). */
+    margin-top: 1rem; /* Um espaço acima do primeiro botão. */
+
+    /* Estilos comuns para os botões */
+    /* Abandonei vw/vh para os botões, usando padding e font-size para consistência. */
+    .buttonCadastrar, .buttonVoltar {
       color: white;
       font-weight: bold;
-      width: 6vw;
-      height: 5vh;
+      padding: 0.75rem 1rem; /* Padding para definir o tamanho interno. */
+      font-size: 0.95rem; /* Tamanho da fonte nos botões. */
       border-radius: 6px;
-      margin-top: 1rem;
+      border: none; /* Tiro a borda padrão. */
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%; /* Botões ocupam toda a largura do seu container (o div). */
+      max-width: 220px; /* Mas com um limite pra não ficarem gigantes em telas largas. */
+    }
+
+    .buttonCadastrar {
+      background-color: #001a3d; /* Cor de fundo do botão Cadastrar. */
+      &:hover {
+        background-color: #003366; /* Efeito hover. */
+      }
+    }
+
+    .buttonVoltar {
+      background-color: #777; // Mudei a cor do Voltar para diferenciar mais do Cadastrar
+      &:hover {
+        background-color: #555; /* Efeito hover. */
+      }
     }
   }
-  
+}
+
+/* Media Queries: Minhas regras para telas menores! */
+@media (max-width: 768px) { /* Para tablets em modo retrato e celulares */
+  .mainCadastro {
+    flex-direction: column; /* Imagem em cima, formulário embaixo. */
+    height: auto; /* Altura se ajusta ao conteúdo. */
+    min-height: 100vh; /* Mas garante que ocupe pelo menos a tela toda. */
+  }
+
+  .containerImagem {
+    width: 100%; /* Imagem ocupa toda a largura. */
+    height: 30vh; /* Uma altura fixa para a imagem no mobile. */
+    /* Se eu não quisesse a imagem no mobile, poderia usar: display: none; */
+  }
+
+  .containerForms {
+    width: 100%; /* Seção do formulário ocupa toda a largura. */
+    height: auto; /* Altura se ajusta ao conteúdo. */
+    min-height: 70vh; /* Se a imagem estiver visível, ocupa o resto. */
+    justify-content: flex-start; /* Alinho o conteúdo (logo, etc.) ao topo. */
+    padding: 1.5rem; /* Padding um pouco menor para telas pequenas. */
+  }
+
+  .containerForms h1 {
+    font-size: 1.6rem; /* Título um pouco menor no mobile. */
+  }
+
+  .containerForms p {
+    font-size: 0.85rem; /* Texto de instrução um pouco menor. */
+    margin-bottom: 1.2rem;
+  }
+
+  .formCadastro {
+    width: 90%; /* O formulário em si fica com 90% da largura do .containerForms. */
+    gap: 0.7rem; /* Espaço entre os inputs um pouco menor. */
+
+    input {
+      padding: 0.7rem;
+      font-size: 0.9rem;
+    }
+    
+  }
+}

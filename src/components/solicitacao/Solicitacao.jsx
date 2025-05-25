@@ -173,7 +173,7 @@ const totalDespesa = dadosReembolso
       <div className={styles.containerPrincipalSolicitacao}>
       <main className={styles.mainSolicitacao}>
         <header className={styles.headerSolicitacao}>
-          <img src={Home} alt="Botão de home" />
+          <img src={Home} alt="home" onClick={() => navigate("/reembolsos")}/>
           <img src={Seta} alt="Seta indicativa do home" />
           <p>Reembolsos</p>
           <img src={Seta} alt="" />

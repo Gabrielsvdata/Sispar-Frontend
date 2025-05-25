@@ -25,7 +25,7 @@
   gap: 1rem;
 
   img { cursor: pointer; }
-  p  { font-weight: 700; }
+  p  {color: black;}
 }
 
 /* corpo principal */
@@ -195,4 +195,132 @@ table tr:hover {
   background: #001a3d;
   color: #fff;
   cursor: pointer;
+}
+
+/* === MINHAS ADIÇÕES PARA RESPONSIVIDADE === */
+
+@media (max-width: 992px) { /* Para tablets e telas médias */
+  .mainHistorico {
+    padding: 1rem; /* Menos padding nas laterais */
+    /* A margem da NavBar já é dinâmica via var(--navbar-width) */
+  }
+
+  .headerHistorico {
+    /* Os itens já usam flex-wrap, então devem se ajustar. Posso diminuir o gap. */
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    p { font-size: 0.95rem; }
+  }
+
+  .tabs {
+    gap: 0.5rem; /* Menos espaço entre as abas */
+    margin-bottom: 1rem;
+    button {
+      padding: 0.5rem 0.8rem;
+      min-width: 90px; /* Aba um pouco menor */
+      font-size: 0.85rem;
+    }
+  }
+
+  .filters {
+    align-items: stretch; /* Para os inputs e datefilters terem a mesma altura se virarem coluna */
+    flex-direction: column; /* Filtros um embaixo do outro */
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    input[type="text"], .dateFilters {
+      width: 100%; /* Ocupam toda a largura */
+      flex-basis: auto; /* Reseto o basis */
+    }
+    .dateFilters {
+      flex-direction: column; /* Datas uma embaixo da outra */
+      align-items: stretch;
+      label { justify-content: space-between; } /* Label de um lado, input do outro */
+      input[type="date"] { width: auto; flex-grow:1; } /* Input de data cresce */
+    }
+  }
+
+  .actions {
+    justify-content: center; /* Centralizo o botão Gráficos */
+    // padding-right: 0; // Tiro o padding-right se centralizado
+    .buttonGrafico {
+      width: 50%; // Botão Gráficos fica maior
+      max-width: 200px; // Mas com um limite
+    }
+  }
+
+  .tabela {
+    // table { min-width: 750px; /* Reduzo o min-width se escondo colunas */ }
+    th, td {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.75rem;
+    }
+    /* Exemplo: Escondo colunas menos importantes no tablet */
+    th:nth-child(3), td:nth-child(3), /* Empresa */
+    th:nth-child(7), td:nth-child(7), /* Centro Custo */
+    th:nth-child(8), td:nth-child(8), /* Ord. Int. */
+    th:nth-child(10), td:nth-child(10) /* PEP */ {
+      display: none;
+    }
+  }
+}
+
+
+@media (max-width: 600px) { /* Para celulares */
+  .mainHistorico {
+    padding: 0.8rem; /* Menos padding ainda */
+  }
+
+  .headerHistorico {
+    flex-direction: row;     /* força horizontal */
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0;
+    p { font-size: 0.9rem; white-space: nowrap; }
+    img { height: 1rem; }
+  }
+
+  .tabs {
+    flex-direction: column; /* Abas uma embaixo da outra */
+    align-items: stretch; /* Para os botões ocuparem a largura */
+    button, button.active {
+      min-width: 0; /* Tiro o min-width para ocuparem 100% */
+      width: 100%;
+    }
+  }
+
+  .filters {
+    // Já está em coluna, posso só ajustar o gap ou tamanhos de fonte
+    gap: 0.6rem;
+    input[type="text"], .dateFilters input[type="date"] { font-size: 0.85rem; padding: 0.5rem; }
+    .dateFilters label { font-size: 0.85rem;}
+  }
+  
+  .actions .buttonGrafico {
+      width: 100%; // Botão Gráficos ocupa toda a largura
+      max-width: 280px;
+  }
+
+  .tabela {
+    // table { min-width: auto; /* Se escondi muitas colunas, pode ser auto */ }
+    th, td {
+      padding: 0.3rem 0.4rem;
+      font-size: 0.65rem; /* Fontes bem pequenas para a tabela */
+    }
+    /* Escondo AINDA MAIS colunas no celular */
+    th:nth-child(5), td:nth-child(5), /* Descrição */
+    th:nth-child(6), td:nth-child(6), /* Tipo Despesa */
+    th:nth-child(9), td:nth-child(9), /* Div. */
+    th:nth-child(11), td:nth-child(11), /* Moeda */
+    th:nth-child(12), td:nth-child(12), /* Dist. KM */
+    th:nth-child(13), td:nth-child(13)  /* Valor KM */ {
+      display: none;
+    }
+  }
+
+  .pagination {
+    gap: 0.3rem; // Menos espaço entre botões de página
+    button { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+  }
 }

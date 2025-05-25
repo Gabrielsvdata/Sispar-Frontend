@@ -146,3 +146,91 @@
     }
   }
 }
+
+/* === MINHAS ADIÇÕES PARA RESPONSIVIDADE === */
+
+@media (max-width: 992px) { /* Para tablets e telas médias */
+  .mainAnalise {
+    padding: 1rem; /* Menos padding nas laterais */
+    width: calc(100% - var(--navbar-width, 0px)); /* Garanto que a largura se ajuste à navbar */
+    margin-left: var(--navbar-width, 0px);
+  }
+
+  .headerAnalise {
+    font-size: 0.95rem; /* Um pouco menor */
+    gap: 0.4rem;
+  }
+
+  .searchBar input {
+    max-width: 100%; /* Barra de busca ocupa toda a largura disponível */
+  }
+
+  .tabela {
+    th, td {
+      padding: 0.5rem 0.7rem; /* Padding um pouco menor nas células */
+      font-size: 0.78rem; /* Fonte um pouco menor */
+    }
+    /* Se eu quiser esconder algumas colunas menos importantes no tablet: */
+    /* Exemplo: Escondendo 'Empresa' e 'PEP' */
+    // th:nth-child(3), td:nth-child(3), /* Empresa */
+    // th:nth-child(10), td:nth-child(10) /* PEP */ {
+    //   display: none;
+    // }
+    // table { min-width: 900px; /* Reduzo o min-width da tabela se escondi colunas */ }
+  }
+}
+
+
+@media (max-width: 768px) { /* Seu breakpoint original, mantido para ajustes finos mobile */
+  .mainAnalise {
+    padding: 1rem; /* Já definido acima, mas posso ser mais específico aqui */
+    /* IMPORTANTE: Se a NavBar mobile (hambúrguer) for FIXA NO TOPO, preciso de padding-top */
+    padding-top: 70px; /* Ex: Altura do hambúrguer + respiro. AJUSTE CONFORME SUA NAVBAR MOBILE! */
+  }
+
+  .headerAnalise {
+    font-size: 0.85rem; /* Diminuo um pouco a fonte para caber melhor */
+    flex-direction: row; /* GARANTE que os itens fiquem em linha */
+    flex-wrap: wrap;     /* IMPORTANTE: Permite que os itens quebrem para a linha de baixo se não couberem todos */
+    align-items: center; /* Mantenho o alinhamento vertical */
+    gap: 0.4rem;         /* Posso diminuir um pouco o espaço entre os itens */
+    // margin-bottom: 1rem; // Posso ajustar o espaçamento inferior também
+  }
+
+
+  .tabela {
+    // table { font-size: 0.8rem; } // Seu ajuste original de fonte, já contemplado acima
+    th, td {
+      padding: 0.4rem 0.5rem; /* Padding ainda menor */
+      font-size: 0.7rem;    /* Fonte ainda menor */
+    }
+    th:nth-child(3), td:nth-child(3), /* Empresa */
+    th:nth-child(7), td:nth-child(7), /* Centro Custo */
+    th:nth-child(8), td:nth-child(8), /* Ord. Int. */
+    th:nth-child(9), td:nth-child(9), /* Div. */
+    th:nth-child(10), td:nth-child(10), /* PEP */
+    th:nth-child(11), td:nth-child(11), /* Moeda */
+    th:nth-child(12), td:nth-child(12), /* Dist. KM */
+    th:nth-child(13), td:nth-child(13)  /* Valor KM */ {
+      display: none; /* ESCONDO estas colunas no mobile */
+    }
+    table { 
+      min-width: auto; /* Como escondi colunas, não preciso mais de um min-width tão grande.
+                          Deixo 'auto' para ela se ajustar às colunas visíveis.
+                          Se ainda precisar de scroll, é porque as colunas restantes são largas. */
+    }
+  }
+}
+
+@media (max-width: 480px) { /* Para celulares bem pequenos */
+    .tabela {
+        th, td {
+            padding: 0.3rem 0.4rem;
+            font-size: 0.65rem;
+        }
+        /* Posso precisar esconder AINDA MAIS colunas aqui, se necessário. */
+        // th:nth-child(5), td:nth-child(5) /* Descrição, se for muito longa */ {
+        //   display: none;
+        // }
+    }
+}

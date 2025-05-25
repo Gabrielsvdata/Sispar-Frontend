@@ -1,111 +1,200 @@
-.containerImagem {
-    //border: solid;
+/* Meu arquivo de estilos para a tela de Login - Login.module.scss */
 
-    img {
-        height: 100%;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        //border: solid;
-    }
+.containerImagem {
+  /* Essa seção vai segurar a imagem de capa.
+     No desktop, quero que ela ocupe metade da tela.
+     No mobile, quero que ela possa sumir ou ficar menor. */
+  width: 50%; // No desktop, ela ocupa metade.
+
+  img {
+    height: 100%;
+    width: 100%;
+    /* Para a tag <img>, em vez de background-properties,
+       uso object-fit para controlar como a imagem se encaixa.
+       'cover' vai cobrir toda a área, cortando se necessário,
+       mantendo a proporção. */
+    object-fit: cover;
+  }
 }
 
 .mainLogin {
-    display: flex;
-    flex-direction: center;   
-   // background-color: pink;
-    height: 100vh;   
+  display: flex;
+  /* Por padrão, quero que a imagem e o formulário fiquem lado a lado (row).
+     Se eu quisesse um em cima do outro por padrão, usaria flex-direction: column. */
+  flex-direction: row; /* Garante que fiquem lado a lado no desktop */
+  height: 100vh; // Ocupa toda a altura da tela
+  // background-color: pink; // Tirei meu debug de cor de fundo
 }
 
 .containerForms {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  /* Esta é a seção do formulário.
+     No desktop, também ocupa metade da tela. */
+  width: 50%;
+  display: flex;
+  flex-direction: column; // Os itens dentro (logo, h1, p, form) ficam em coluna
+  align-items: center; // Centralizo eles horizontalmente
+  justify-content: center; // Centralizo eles verticalmente
+  padding: 2rem; // Adicionei um padding para não colar nas bordas em telas menores
 
-    img{//border: solid;
-    margin-bottom:1rem ;}
+  img { // Logo da Wilson Sons
+    margin-bottom: 1rem;
+    max-width: 200px; // Defini um tamanho máximo para o logo não ficar gigante
+    width: 100%;      // Mas ele pode diminuir se o container ficar menor
+    height: auto;     // Mantenho a proporção da imagem do logo
+  }
 
-    h1 {
-        //border: solid red;
-        width: 50%;
-        font-size: 2rem;
-        text-align: center;
-        margin-bottom: 8px;
-    }
+  h1 {
+    /* O título principal. */
+    // width: 50%; // Removi essa largura fixa, deixo ele se ajustar.
+                // Se precisar de uma largura máxima, posso usar max-width.
+    font-size: 2rem; // Tamanho da fonte. Posso ajustar com 'rem' para melhor acessibilidade.
+    text-align: center;
+    margin-bottom: 8px;
+    color: #333; // Uma cor mais padrão para o texto, se não definida globalmente
+  }
 
-    p {
-        margin-bottom: 2rem;
-        font-weight: bold;
-        color: #0844c4;
-    } 
-
+  p {
+    /* O parágrafo de subtítulo. */
+    margin-bottom: 2rem;
+    font-weight: bold;
+    color: #0844c4;
+    text-align: center; // Centralizei para ficar melhor no mobile
+  }
 }
 
 .formLogin {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between; // Removi, pois a altura não é mais fixa
+  align-items: center;
+  width: 100%; // O formulário ocupa toda a largura do containerForms
+  max-width: 400px; // Defini uma largura máxima para o formulário não ficar extenso demais em telas grandes
+  // height: 20vh; // Removi a altura fixa em vh. Deixo o conteúdo definir a altura.
+                // Isso é muito melhor para responsividade e evita que o conteúdo vaze.
+  
+  input {
+    width: 100%; // Inputs ocupam toda a largura do formulário
+    padding: 0.8rem; // Adicionei padding para ficarem maiores e mais fáceis de clicar
+    border-radius: 6px;
+    border: 1px solid #ccc; // Cor de borda mais suave
+    margin-bottom: 1rem; // Aumentei um pouco o espaçamento
+    font-size: 1rem; // Tamanho de fonte para o texto dentro do input
+  }
+
+  input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease-in-out;
+  }
+
+  input:hover::placeholder {
+    color: #0844c4; // Mudei a cor do placeholder no hover para algo mais visível
+  }
+
+  input:hover {
+    border-color: #0844c4; // Cor da borda no hover
+  }
+
+  input:focus {
+    border-color: #001A3D; // Cor da borda quando o input está focado
+    box-shadow: 0px 0px 5px 1px #cbd4E1;
+  }
+  
+  // Link "Esqueci minha senha"
+  a {
+    color: #0844c4;
+    text-decoration: none; // Tiro o sublinhado padrão
+    margin-bottom: 1.5rem; // Espaçamento antes dos botões
+    font-size: 0.9rem;
+    &:hover {
+      text-decoration: underline; // Adiciono sublinhado no hover
+    }
+  }
+
+  // Mensagem de erro
+  .mensagemErro { // Se eu tiver uma classe para mensagem de erro
+    color: red;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
+  }
+      
+  div { // Container dos botões Entrar e Criar conta
+    width: 100%; // Faço ocupar toda a largura do formLogin
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 70%;
-    height: 20vh;
+    flex-direction: column; // No mobile, quero os botões um embaixo do outro
+    align-items: center; // Centralizo os botões
+    gap: 1rem; // Espaço entre os botões
+    margin-top: 1rem; // Adicionei um margin-top que estava faltando no anterior (era nos botões)
     
-    input {
-        width: 80%;
-        border-radius: 6px;
-        border: 1px solid #f1f4f9;
-        margin-bottom: 0.5vh;
-    }
-    input::placeholder{
-    color: rgba(0, 0, 0, 0.5); // Cor padrão (preto com 50% de opacidade)
-    transition: color 0.3s ease-in-out; // Efeito suave na transição
-    }
-
-    input:hover::placeholder{
-        color: #fff; //QUando passar o mouse, ele apaga
-    }
-
-    input:hover {
-        border-color: #23282f; 
+    // Meus botões. Vou usar padding e font-size em 'rem' ou 'px' em vez de 'vw'/'vh'
+    // para que fiquem mais consistentes e acessíveis.
+    .buttonEntrar, .buttonCriar {
+      border: none; // Tirei a borda que estava com cor hexadecimal sem #
+      color: white;
+      font-weight: bold;
+      width: 100%; // Ocupam toda a largura disponível no seu container div
+      max-width: 200px; // Mas com um limite máximo para não ficarem gigantes
+      padding: 0.8rem 1rem; // Padding para definir o tamanho interno
+      font-size: 1rem;
+      border-radius: 6px;
+      // margin-top: 2rem; // Movi o espaçamento para o 'gap' do container pai (div)
+      cursor: pointer;
+      transition: background-color 0.3s ease; // Efeito suave no hover
     }
 
-    //primeiro e segundo px: profundade, terceito px: esmaecimento, o quanto px: profundidade
-    input:focus {
-        border-color: #fff;
-        box-shadow: 00px 0px 5px 1px #cbd4E1;
-        }
-        
-        div {
-            width: 50%;
-            display: flex;
-            justify-content: space-evenly;
-            
-
-            .buttonEntrar {
-                border: #001A3D;
-                background-color: #001A3D;
-                color: white;
-                font-weight: bold;
-                width: 6vw;
-                height: 5vh;
-                border-radius: 6px;
-                margin-top: 2rem;
-                cursor: pointer;
-                
-            }
-
-            .buttonCriar {
-                border: #00BEDD;
-                background-color: #00BEDD;
-                color: white;
-                font-weight: bold;
-                width: 6vw;
-                height: 5vh;
-                border-radius: 6px;
-                margin-top: 2rem;
-                cursor: pointer;
-                
-            }
-        }
+    .buttonEntrar {
+      background-color: #001A3D; // Cor de fundo
+      &:hover {
+        background-color: #003366; // Cor um pouco mais clara no hover
+      }
     }
+
+    .buttonCriar {
+      background-color: #00BEDD; // Cor de fundo
+      &:hover {
+        background-color: #00AACC; // Cor um pouco mais escura no hover
+      }
+    }
+  }
+}
+
+/* Media Query: Regras para telas menores (ex: mobile e tablets em modo retrato)
+   Eu escolhi 768px como ponto de quebra, mas posso ajustar conforme o design.
+*/
+@media (max-width: 768px) {
+  .mainLogin {
+    flex-direction: column; // Coloco a imagem em cima e o formulário embaixo
+    height: auto; // Altura se ajusta ao conteúdo no mobile
+    min-height: 100vh; // Garanto que ocupe pelo menos a tela toda
+  }
+
+  .containerImagem {
+    width: 100%; // Imagem ocupa toda a largura
+    height: 30vh; // Defino uma altura para a imagem no mobile, ou posso até esconder com display: none;
+    // display: none; // Descomentar esta linha se eu não quiser mostrar a imagem em telas pequenas
+  }
+
+  .containerForms {
+    width: 100%; // Formulário ocupa toda a largura
+    height: auto; // Altura se ajusta ao conteúdo
+    min-height: 70vh; // Ocupa o restante da tela se a imagem estiver visível
+    justify-content: flex-start; // Começo o conteúdo do topo no mobile
+    padding-top: 2rem; // Mais padding no topo
+  }
+
+  .containerForms h1 {
+    font-size: 1.8rem; // Diminuo um pouco o título no mobile
+    width: 80%;       // Ajusto a largura do título
+  }
+
+  .formLogin {
+    width: 90%; // O formulário interno fica um pouco menor que o containerForms
+    // height: auto; // Já removi a altura fixa antes, o que é bom
+  }
+
+.formLogin {
+    width: 90%; // O formulário interno fica um pouco menor que o containerForms
+    // height: auto; // Já removi a altura fixa antes, o que é bom
+}
+}

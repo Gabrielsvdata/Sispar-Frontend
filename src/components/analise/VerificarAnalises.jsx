@@ -59,7 +59,7 @@ export default function VerificarAnalise() {
 
       <main className={styles.mainAnalise}>
         <header className={styles.headerAnalise}>
-          <img src={Home} alt="home" onClick={() => navigate("/")} />
+          <img src={Home} alt="home" onClick={() => navigate("/reembolsos")} />
           <img src={Seta} alt="seta" />
           <p>Reembolsos</p>
           <img src={Seta} alt="seta" />
