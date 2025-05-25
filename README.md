@@ -1,6 +1,7 @@
 ## Desafio FINAL - Construção de Interface para o Projeto "SISPAR"
 PROFESSORES: SAMUEL SILVÉRIO E KARYNNE MOREIRA
 Data de início: 06/02/2025
+Data de conclusão: 14/05/2025
 
 
 ## Objetivo
