@@ -2,8 +2,10 @@ import styles from "./Solicitacao.module.scss";
 import {useState } from "react"; 
 import { useNavigate } from "react-router-dom";
 import Api from "../../Services/Api";
-
 import NavBar from "../navbar/NavBar";
+import BottomNav from "../navbar/BottomNav";
+ 
+//imagens abaixo
 import Home from "../../assets/Dashboard/home header.png";
 import Seta from "../../assets/Dashboard/Vector.png";
 import Deletar from "../../assets/solicitacao/deletar.png";
@@ -25,7 +27,7 @@ function Solicitacao() {
   const [motivo, setMotivo] = useState(""); // Estado para o campo motivo  //ESSE ESTADO É PARA QUEM TÁ FAZENDO AVANÇADO UTILIZANDO MODAL
   const [tipoReembolso, setTipoReembolso] = useState(""); // Estado para o campo tipo de reembolso
   const [centroCusto, setCentroCusto] = useState(""); // Estado para o campo centro de custo
-  const [ordemInterna, setorOrdemInterna] = useState(""); // Estado para o campo ordem interna
+  const [ordemInterna, setOrdemInterna] = useState(""); // Estado para o campo ordem interna
   const [divisao, setDivisao] = useState(""); //  pep
   const [moeda, setMoeda] = useState(""); // Estado para o caEstado para o campo divisão
   const [pep, setPep] = useState(""); // Estado para o campompo moeda
@@ -37,59 +39,60 @@ function Solicitacao() {
 
  //impar campos dos inputs 
   const limparCampos = () => {
-    setColaborador(""),
-    setEmpresa(""),
-    setDescricao(""),
-    setData(""),
-    setMotivo(""),
+    setColaborador("");
+    setEmpresa("");
+    setDescricao("")
+    setData("");
+    setMotivo("");
     setTipoReembolso(""),
-    setCentroCusto(""),
-    setorOrdemInterna(""),
-    setDivisao(""),
-    setPep(""),
-    setMoeda(""),
-    setDistanciaKm(""),
-    setValorKm(""),
-    setValorFaturado(""),
+    setCentroCusto("");
+    setOrdemInterna("");
+    setDivisao("");
+    setPep("");
+    setMoeda("");
+    setDistanciaKm("");
+    setValorKm("");
+    setValorFaturado("");
     setDespesa("");
   };
 
  
     // -> LÓGICA DO “+ Salvar” (gera no servidor o num_prestacao e adiciona na tabela)
-  const handleSubmit = async () => {
-    if (!colaborador || !empresa || !data) {
-      alert("Por favor, preencha os campos obrigatórios: Colaborador, Empresa e Data.");
-      return;
-    }
+const handleSubmit = async () => {
+  // 1) Validação mínima de campos obrigatórios
+  if (!colaborador || !empresa || !data) {
+    alert("Por favor, preencha os campos obrigatórios: Colaborador, Empresa e Data.");
+    return;
+  }
 
   try {
     const colaboradorId = Number(localStorage.getItem("usuarioId"));
-    const item = {
-    colaborador,
-    empresa,
-    descricao,
-    data,
-    tipo_reembolso: tipoReembolso,
-    centro_custo: centroCusto,
-    ordem_interna: ordemInterna,
-    divisao,
-    pep,
-    moeda,
-    distancia_km: distanciaKm,
-    valor_km: Number(valorKm),
-    valor_faturado: Number(valorFaturado),
-    despesa: Number(despesa) || 0,
-    id_colaborador: colaboradorId,
-  };
+    const payload = {
+      colaborador,
+      empresa,
+      descricao,
+      data,
+      tipo_reembolso: tipoReembolso,
+      centro_custo: centroCusto,
+      ordem_interna: ordemInterna,
+      divisao,
+      pep,
+      moeda,
+      distancia_km: distanciaKm,
+      valor_km: Number(valorKm),
+      valor_faturado: Number(valorFaturado),
+      despesa: Number(despesa) || 0,
+      id_colaborador: colaboradorId,
+    };
 
     // 1) crio no servidor e recebo o objeto completo
-  //  const { data: { reembolso } } = await Api.post("/reembolsos/new", payload);
+   const { data: { reembolso } } = await Api.post("/reembolsos/new", payload);
 
     // 2) atualizo o input de Nº Prestação com o gerado agora
     //setCreatedNumPrestacao(reembolso.num_prestacao);
 
     // 3) adiciono esse reembolso (com num_prestacao) na lista
-    setDadosReembolso(prev => [...prev, item]);
+    setDadosReembolso(prev => [...prev, reembolso]);
 
     limparCampos();
   } catch (error) {
@@ -158,6 +161,7 @@ const totalDespesa = dadosReembolso
     
     <div className={styles.layoutSolicitacao}>
       <NavBar />
+      <BottomNav />
 
      {/* 1) Motivo */}
       {motivo && (
@@ -255,7 +259,7 @@ const totalDespesa = dadosReembolso
 
               <div className={styles.ordem}>
                 <label htmlFor="">Ord. Int.</label>
-                <input type="number" name="" id="" value={ordemInterna} onChange={(e) => setorOrdemInterna(e.target.value)}/>
+                <input type="number" name="" id="" value={ordemInterna} onChange={(e) => setOrdemInterna(e.target.value)}/>
               </div>
 
               <div className={styles.divisoes}>

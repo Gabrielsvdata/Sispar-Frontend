@@ -1,0 +1,46 @@
+lançamento e consulta de adiantamento 
+upload de comprovantes 
+workflow de aprovaçãp com notificação por email 
+relatorio de despesas e recibos 
+
+processos: 
+
+Solicitação via SISPAR = campos obrigatorios: empresa, valor. descrição, cambio(verifica com time d cambio)
+aprovação do gestor
+
+pensar na integração de cartões ]
+
+source venv/Script/activate
+
+python run.py 
+
+
+# armazenar vaviaveis de ambiente
+#variáveis de ambiente deve ser declaradas com LETRAS MAIUSCULAS
+URL_DATABASE_DEV="mysql://root:0602@localhost:3306/sispar"
+
+# Mailtrap SMTP (sandbox)
+MAIL_SERVER="sandbox.smtp.mailtrap.io"
+MAIL_PORT=2525
+MAIL_USERNAME="d41e7ed886f93d"
+MAIL_PASSWORD="****438c"
+MAIL_DEFAULT_SENDER="no-reply@seu-dominio.com"
+MAIL_USE_TLS=true
+MAIL_USE_SSL=false
+
+
+tela de reembolso 
+
+organizar o back do reembolso (em produção)
+
+
+
+requisitos funcionais - deploy e api 
+passar o link - fazer o reembolso - registor enviado pra tabela de reembolso - testar tudo no final
+
+
+sispar - por tras das telas 
+
+usar no usestad
+
+SAP - ERP corporativo, com diversos models que centraliza as informações, ele manda pro sispar atraves de web services, o sistepar trabalha em cima dos valores envia direto pro sap

@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Api from "../../Services/Api";
 import styles from "./Reembolsos.module.scss"
 import NavBar from "../navbar/NavBar.jsx";
+import BottomNav from "../navbar/BottomNav.jsx";
 
 import Home from "../../assets/Dashboard/home header.png";
 import Seta from "../../assets/Dashboard/Vector.png";
@@ -50,9 +51,9 @@ function Reembolsos() {
   return (
     <div className={styles.container}>
       <NavBar />
-
-      <main className={styles.mainReembolsos}>
-
+      <BottomNav/>     
+      
+       <main className={styles.mainReembolsos}>
         <header className={styles.headerReembolso}>
           <img src={Home} alt="Home" />
           <img src={Seta} alt="Seta" />

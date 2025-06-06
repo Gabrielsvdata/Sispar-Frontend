@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Api from "../../Services/Api";
 import NavBar from "../navbar/NavBar";
+import BottonmNav from "../navbar/BottomNav";
 
 import Home from "../../assets/Dashboard/home header.png";
 import Seta from "../../assets/Dashboard/Vector.png";
@@ -57,6 +58,7 @@ export default function Historico() {
 
   return (
     <div className={styles.layoutHistorico}>
+      <BottonmNav/>
       <NavBar />
 
       <main className={styles.mainHistorico}>

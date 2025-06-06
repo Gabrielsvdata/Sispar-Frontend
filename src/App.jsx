@@ -11,7 +11,7 @@ import Historico from "./components/historico/Historico.jsx";
 import Graficos from "./components/graficos/Graficos.jsx";  // ← import do novo componente
 
 import "./global.scss";
-import BottomNav from "./components/navbar/BottomNav.jsx";
+// import BottomNav from "./components/navbar/BottomNav.jsx";
 
 function App() {
   return (
@@ -24,9 +24,8 @@ function App() {
         <Route path="/solicitacao" element={<Solicitacao/>} />
         <Route path="/analise" element={<VerificarAnalise />} />
         <Route path="/historico" element={<Historico />} />
-+       <Route path="/graficos" element={<Graficos />} />  {/* ← rota para o gráfico */}
+       <Route path="/graficos" element={<Graficos />} />  {/* ← rota para o gráfico */}
       </Routes>
-      <BottomNav/>
     </HashRouter>
   );
 }
