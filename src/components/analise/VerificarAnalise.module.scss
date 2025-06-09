@@ -1,19 +1,32 @@
-/* src/pages/VerificarAnalise.module.scss */
+/* src/pages/VerificarAnalise.module.scss - VERSÃO COMPLETA E FINAL */
 
 .layoutAnalise {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   width: 100%;
-  height: 100%;
-  background: #f5f6fa; // ou a cor de fundo padrão do seu app
+  min-height: 100vh;
+  background: #f5f6fa;
 }
 
 .mainAnalise {
   flex: 1;
   width: 90%;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
+
+  /* CORREÇÃO: Adiciona espaço no final da página para não sobrepor o BottomNav */
+  padding-bottom: 6rem;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .headerAnalise {
@@ -23,20 +36,12 @@
   font-size: 1rem;
   color: #333;
   margin-bottom: 1.5rem;
-
-  img {
-    cursor: pointer;
-  }
-
-  p {
-    margin: 0;
-    font-weight: 500;
-  }
+  img { cursor: pointer; }
+  p { margin: 0; font-weight: 500; }
 }
 
 .searchBar {
   margin-bottom: 1.5rem;
-
   input {
     width: 100%;
     max-width: 400px;
@@ -46,35 +51,26 @@
     font-size: 0.9rem;
     outline: none;
     transition: border-color 0.2s;
-
-    &:focus {
-      border-color: #007bff; // cor de foco
-    }
+    &:focus { border-color: #007bff; }
   }
 }
 
-.tabela {
+.tabelaContainer {
   width: 100%;
   overflow-x: auto;
-
-  /* centraliza a barra de rolagem e suaviza a experiência */
   -webkit-overflow-scrolling: touch;
   
   table {
     width: 100%;
-    max-width: 100%;      /* nunca ultrapassa 100% do container */
     border-collapse: collapse;
-    table-layout: fixed;
-    table-layout: auto;   /* ajusta colunas de acordo com o conteúdo */
   }
 
-  /* padding reduzido para diminuir a altura da linha */
   th, td {
-    padding: 0.4rem 0.8rem;
+    padding: 0.6rem 0.8rem;
     border: 1px solid #e1e4e8;
     text-align: left;
     font-size: 0.85rem;
-    white-space: nowrap;  /* evita quebra de linha dentro das células */
+    white-space: nowrap;
   }
 
   th {
@@ -83,154 +79,130 @@
     font-weight: 600;
   }
 
-  tbody tr:nth-child(even) td {
+  tbody tr:nth-child(even) {
     background: #f6f8fa;
   }
+}
 
-  tbody tr:hover td {
-    background: #eaecef;
+.actionsWrapper {
+  padding: 0 !important;
+}
+
+.actionButtonAprovar, .actionButtonRejeitar {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); 
   }
 
-  td img {
-    width: 16px;
-    height: 16px;
+  span {
+    display: none;
   }
 }
 
-.btnAprovar {
-  background-color: green !important;
+.actionButtonAprovar {
+  background-color: #28a745;
+  &:hover { background-color: #218838; }
 }
 
-.btnRejeitar {
-  background-color: red !important;
+.actionButtonRejeitar {
+  background-color: #dc3545;
+  &:hover { background-color: #c82333; }
 }
 
-/* se precisar de responsividade */
-@media (max-width: 768px) {
+/* ================================================= */
+/* === RESPONSIVIDADE MODERNA PARA A TABELA === */
+/* ================================================= */
+
+@media (max-width: 992px) {
   .mainAnalise {
+    width: 100%;
     padding: 1rem;
-  }
-
-  .headerAnalise {
-    font-size: 0.9rem;
-  }
-
-  .tabela table {
-    font-size: 0.8rem;
+    padding-bottom: 6rem; /* Garante o espaço no tablet também */
   }
 }
 
-.pagination {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
+@media (max-width: 768px) {
 
-  button {
-    margin: 0 0.25rem;
-    padding: 0.4rem 0.8rem;
-    border: 1px solid #e1e4e8;
-    background: #fff;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    transition: background 0.2s, color 0.2s;
-
-    &:hover {
-      background: #f6f8fa;
+  .tabelaContainer {
+    thead {
+      display: none;
     }
-
-    &.active {
-      background: #0366d6;
-      color: #fff;
-      border-color: #0366d6;
+    tr {
+      display: block;
+      background: #fff;
+      border: 1px solid #e1e4e8;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      padding: 0.5rem;
     }
-  }
-}
-
-/* === MINHAS ADIÇÕES PARA RESPONSIVIDADE === */
-
-@media (max-width: 992px) { /* Para tablets e telas médias */
-  .mainAnalise {
-    padding: 1rem; /* Menos padding nas laterais */
-    width: calc(100% - var(--navbar-width, 0px)); /* Garanto que a largura se ajuste à navbar */
-    margin-left: var(--navbar-width, 0px);
-  }
-
-  .headerAnalise {
-    font-size: 0.95rem; /* Um pouco menor */
-    gap: 0.4rem;
-  }
-
-  .searchBar input {
-    max-width: 100%; /* Barra de busca ocupa toda a largura disponível */
-  }
-
-  .tabela {
-    th, td {
-      padding: 0.5rem 0.7rem; /* Padding um pouco menor nas células */
-      font-size: 0.78rem; /* Fonte um pouco menor */
-    }
-    /* Se eu quiser esconder algumas colunas menos importantes no tablet: */
-    /* Exemplo: Escondendo 'Empresa' e 'PEP' */
-    // th:nth-child(3), td:nth-child(3), /* Empresa */
-    // th:nth-child(10), td:nth-child(10) /* PEP */ {
-    //   display: none;
-    // }
-    // table { min-width: 900px; /* Reduzo o min-width da tabela se escondi colunas */ }
-  }
-}
-
-
-@media (max-width: 768px) { /* Seu breakpoint original, mantido para ajustes finos mobile */
-  .mainAnalise {
-    padding: 1rem; /* Já definido acima, mas posso ser mais específico aqui */
-    /* IMPORTANTE: Se a NavBar mobile (hambúrguer) for FIXA NO TOPO, preciso de padding-top */
-    padding-top: 70px; /* Ex: Altura do hambúrguer + respiro. AJUSTE CONFORME SUA NAVBAR MOBILE! */
-  }
-
-  .headerAnalise {
-    font-size: 0.85rem; /* Diminuo um pouco a fonte para caber melhor */
-    flex-direction: row; /* GARANTE que os itens fiquem em linha */
-    flex-wrap: wrap;     /* IMPORTANTE: Permite que os itens quebrem para a linha de baixo se não couberem todos */
-    align-items: center; /* Mantenho o alinhamento vertical */
-    gap: 0.4rem;         /* Posso diminuir um pouco o espaço entre os itens */
-    // margin-bottom: 1rem; // Posso ajustar o espaçamento inferior também
-  }
-
-
-  .tabela {
-    // table { font-size: 0.8rem; } // Seu ajuste original de fonte, já contemplado acima
-    th, td {
-      padding: 0.4rem 0.5rem; /* Padding ainda menor */
-      font-size: 0.7rem;    /* Fonte ainda menor */
-    }
-    th:nth-child(3), td:nth-child(3), /* Empresa */
-    th:nth-child(7), td:nth-child(7), /* Centro Custo */
-    th:nth-child(8), td:nth-child(8), /* Ord. Int. */
-    th:nth-child(9), td:nth-child(9), /* Div. */
-    th:nth-child(10), td:nth-child(10), /* PEP */
-    th:nth-child(11), td:nth-child(11), /* Moeda */
-    th:nth-child(12), td:nth-child(12), /* Dist. KM */
-    th:nth-child(13), td:nth-child(13)  /* Valor KM */ {
-      display: none; /* ESCONDO estas colunas no mobile */
-    }
-    table { 
-      min-width: auto; /* Como escondi colunas, não preciso mais de um min-width tão grande.
-                          Deixo 'auto' para ela se ajustar às colunas visíveis.
-                          Se ainda precisar de scroll, é porque as colunas restantes são largas. */
+    td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0.5rem;
+      border: none;
+      border-bottom: 1px solid #f0f0f0;
+      text-align: right;
+      white-space: normal;
+      
+      &::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #333;
+        text-align: left;
+        padding-right: 1rem;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
-}
-
-@media (max-width: 480px) { /* Para celulares bem pequenos */
-    .tabela {
-        th, td {
-            padding: 0.3rem 0.4rem;
-            font-size: 0.65rem;
-        }
-        /* Posso precisar esconder AINDA MAIS colunas aqui, se necessário. */
-        // th:nth-child(5), td:nth-child(5) /* Descrição, se for muito longa */ {
-        //   display: none;
-        // }
+  
+  .actionButtonAprovar, .actionButtonRejeitar {
+    span {
+      display: inline;
     }
+  }
+
+  .actionsWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    padding: 0.75rem 0 !important;
+    margin-top: 0.5rem;
+    border-top: 1px solid #f0f0f0;
+
+    &::before {
+      display: none;
+    }
+    
+    button {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0;
+      border-radius: 6px;
+      padding: 0.75rem 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
 }

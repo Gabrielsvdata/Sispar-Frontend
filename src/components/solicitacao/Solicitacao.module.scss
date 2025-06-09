@@ -381,10 +381,12 @@ textarea {
 }
 
 /* ====================================================
-   === MOBILE (≤ 600px) – ajustes específicos ========
+   === CÓDIGO FINAL E OTIMIZADO PARA TODOS OS CELULARES ===
    ==================================================== */
+
+/* Regras para telas de até 600px de largura */
 @media (max-width: 600px) {
-  /* empurra tudo um pouco para a esquerda/direita */
+  /* Suas regras para o layout principal, formulário e tabela (que já estão boas) */
   .containerPrincipalSolicitacao {
     padding: 0 0.5rem !important;
   }
@@ -393,15 +395,11 @@ textarea {
     width: 100% !important;
     padding: 1rem 0.5rem !important;
   }
-
-  
-
-  /* formulário vira coluna única e sem barra vertical */
   .formSolicitacao {
     display: flex !important;
     flex-direction: column !important;
     gap: 1rem !important;
-    margin-bottom: 1.5rem !important; /* garante espaço antes da tabela */
+    margin-bottom: 1.5rem !important;
   }
   .formSolicitacao .barraVertical {
     display: none !important;
@@ -413,15 +411,13 @@ textarea {
   }
   .formSolicitacao .grupo1 > div,
   .formSolicitacao .grupo2 > div {
-    width: 100% !important;
-    flex-basis: 100% !important;
+    width: 100%;
+    flex-basis: 100% ;
   }
-
-  /* espaçamento antes da tabela */
   .containerTable {
-    clear: both !important;
-    margin: 1.5rem 0 !important;
-    position: relative !important;
+    clear: both;
+    margin: 1.5rem 0;
+    position: relative;
     z-index: 1 !important;
   }
   .containerTable table {
@@ -432,49 +428,104 @@ textarea {
     padding: 0.3rem !important;
     font-size: 0.68rem !important;
   }
-
-  /* FOOTER: totais + botões lado a lado */
-  .containerFooter {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-    padding: 0.5rem 0 !important;
-    margin-top: 0 !important;
-  }
-
-  /* Campos de total — ocupam cerca de 45% cada */
-  .containerFooter .inputFooterFaturado,
-  .containerFooter .inputFooterDespesa {
-    flex: 0 0 auto !important;
-    max-width: 45% !important;
-  }
-
-  /* Botões “Enviar” e “Cancelar” — ocupam 48% cada e aparecem lado a lado */
-  .containerFooter .buttonCheck,
-  .containerFooter .buttonX {
-    flex: 1 1 48% !important;
-    max-width: 48% !important;
-    padding: 0.4rem 0.6rem !important;   /* menores que o desktop */
-    font-size: 0.85rem !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 0.3rem !important;
-  }
-
-  /* Se você usa .botoes dentro do form, garanta o mesmo comportamento ali */
   .botoes {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    gap: 0.5rem !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
   }
 
-  /* paginação mais compacta */
-  .pagination button {
-    padding: 0.4rem 0.6rem !important;
-    font-size: 0.8rem !important;
+  /* --- LAYOUT DO RODAPÉ (Layout base para mobile: 2 colunas) --- */
+  .containerFooter {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Grade de 2 colunas */
+    row-gap: 0.5rem;   /* Espaço vertical pequeno entre as linhas */
+    column-gap: 0.8rem;/* Espaço horizontal entre os itens */
+    padding: 1rem;
+    height: auto;      /* A altura se ajusta ao conteúdo, sem cortar nada */
+  }
+
+  .inputFooterFaturado,
+  .inputsFooterDespesa {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+  }
+
+  .buttonCheck,
+  .buttonX {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 0.8rem 0.5rem;
+  }
+}
+
+/* ================================================================
+   === AJUSTE FINO para Celulares MUITO Estreitos (abaixo de 480px) ===
+   ================================================================ */
+/* Celulares (< 480px) */
+@media (max-width: 480px) {
+  .containerFooter {
+    grid-template-columns: 1fr 1fr; /* 2 colunas iguais */
+    grid-template-areas:
+      "faturado despesa"  /* Inputs na primeira linha */
+      "check cancelar";   /* Botões na segunda linha */
+    gap: 0.8rem;
+    padding: 1rem;
+    margin-bottom: 3rem; /* Espaço para o BottomNav */
+    align-items: center;
+
+    /* Inputs de totais (horizontal) */
+    .inputFooterFaturado {
+      grid-area: faturado;
+    }
+    .inputFooterDespesa {
+      grid-area: despesa;
+    }
+
+    /* Botões (lado a lado) */
+    div:has(> .buttonCheck) {
+      grid-area: check;
+    }
+    div:has(> .buttonX) {
+      grid-area: cancelar;
+    }
+
+    /* Estilo dos inputs */
+    .inputFooterFaturado,
+    .inputFooterDespesa {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 0.6rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      
+      label {
+        font-size: 0.7rem;
+        margin-bottom: 0;
+      }
+      input {
+        font-size: 0.9rem;
+        text-align: right;
+      }
+    }
+
+    /* Ajuste dos botões */
+    .buttonCheck,
+    .buttonX {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      img {
+        width: 14px;
+        height: 14px;
+      }
+    }
   }
 }

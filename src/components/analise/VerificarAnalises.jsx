@@ -1,19 +1,41 @@
+// src/components/analise/VerificarAnalises.jsx
+// VERSÃO COMPLETA E FINAL
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Api from "../../Services/Api";
 import NavBar from "../navbar/NavBar";
+import BottomNav from "../navbar/BottomNav";
+import ModalConfirmacao from "../modal/ModalConfirmacao";
 
-import Home      from "../../assets/Dashboard/home header.png";
-import Seta      from "../../assets/Dashboard/Vector.png";
+import Home from "../../assets/Dashboard/home header.png";
+import Seta from "../../assets/Dashboard/Vector.png";
 import CheckIcon from "../../assets/solicitacao/check.png";
-import XIcon     from "../../assets/solicitacao/x.png";
+import XIcon from "../../assets/solicitacao/x.png";
 
 import styles from "./VerificarAnalise.module.scss";
 
+const currencyFormatter = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+});
+
 export default function VerificarAnalise() {
-  const [pendentes, setPendentes]   = useState([]);
+  const [pendentes, setPendentes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    onConfirm: () => {},
+    confirmText: "Confirmar",
+    confirmButtonType: "danger",
+    showCancelButton: true,
+  });
+
+  const closeModal = () => setModalState({ isOpen: false });
 
   useEffect(() => {
     carregarPendentes();
@@ -21,9 +43,8 @@ export default function VerificarAnalise() {
 
   async function carregarPendentes() {
     try {
-      // busca todas, depois filtra apenas as que estão "Em análise"
       const { data } = await Api.get("/reembolsos");
-      const somenteAnalise = data.filter(r => r.status === "Em análise");
+      const somenteAnalise = data.filter((r) => r.status === "Em análise");
       setPendentes(somenteAnalise);
     } catch (err) {
       console.error(err);
@@ -31,31 +52,72 @@ export default function VerificarAnalise() {
     }
   }
 
-  async function aprovar(num) {
+  async function aprovar(num_prestacao) {
     try {
-      await Api.patch(`/reembolsos/${num}/aprovar`);
+      await Api.patch(`/reembolsos/${num_prestacao}/aprovar`);
       await carregarPendentes();
     } catch {
       alert("Erro ao aprovar.");
+    } finally {
+      closeModal();
     }
   }
-
-  async function rejeitar(num) {
+  
+  async function rejeitar(num_prestacao) {
     try {
-      await Api.patch(`/reembolsos/${num}/rejeitar`);
+      await Api.patch(`/reembolsos/${num_prestacao}/rejeitar`);
       await carregarPendentes();
     } catch {
       alert("Erro ao rejeitar.");
+    } finally {
+      closeModal();
     }
   }
 
-  const mostrados = pendentes.filter(r =>
+  const handleAprovarClick = (reembolso) => {
+    setModalState({
+      isOpen: true,
+      title: "Aprovar Reembolso",
+      message: `Tem certeza que deseja APROVAR o reembolso Nº ${reembolso.num_prestacao} do colaborador ${reembolso.colaborador}?`,
+      onConfirm: () => aprovar(reembolso.num_prestacao),
+      confirmText: "Aprovar",
+      confirmButtonType: "primary",
+      showCancelButton: true,
+    });
+  };
+
+  const handleRejeitarClick = (reembolso) => {
+    setModalState({
+      isOpen: true,
+      title: "Rejeitar Reembolso",
+      message: `Tem certeza que deseja REJEITAR o reembolso Nº ${reembolso.num_prestacao} do colaborador ${reembolso.colaborador}?`,
+      onConfirm: () => rejeitar(reembolso.num_prestacao),
+      confirmText: "Rejeitar",
+      confirmButtonType: "danger",
+      showCancelButton: true,
+    });
+  };
+
+  const mostrados = pendentes.filter((r) =>
     r.colaborador.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className={styles.layoutAnalise}>
+      <ModalConfirmacao
+        isOpen={modalState.isOpen}
+        title={modalState.title}
+        onConfirm={modalState.onConfirm}
+        onClose={closeModal}
+        confirmText={modalState.confirmText}
+        showCancelButton={modalState.showCancelButton}
+        confirmButtonType={modalState.confirmButtonType}
+      >
+        {modalState.message}
+      </ModalConfirmacao>
+
       <NavBar />
+      <BottomNav />
 
       <main className={styles.mainAnalise}>
         <header className={styles.headerAnalise}>
@@ -67,72 +129,68 @@ export default function VerificarAnalise() {
         </header>
 
         <section className={styles.searchBar}>
+          <label htmlFor="search-colaborador" className={styles.visuallyHidden}>
+            Pesquisar por colaborador
+          </label>
           <input
+            id="search-colaborador"
             type="text"
             placeholder="Pesquisar colaborador…"
             value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </section>
 
-        <section className={styles.tabela}>
+        <div className={styles.tabelaContainer}>
           <table>
             <thead>
               <tr>
-                <th>Nº Prest</th><th>Colaborador</th><th>Empresa</th>
-                <th>Data</th><th>Descrição</th><th>Tipo Despesa</th>
-                <th>Centro Custo</th><th>Ord. Int.</th><th>Div.</th>
-                <th>PEP</th><th>Moeda</th><th>Dist. KM</th>
-                <th>Valor KM</th><th>Val. Faturado</th><th>Despesa</th>
-                <th>Aprovar</th><th>Rejeitar</th>
+                <th>Nº Prest</th>
+                <th>Colaborador</th>
+                <th>Empresa</th>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Tipo Despesa</th>
+                <th>Val. Faturado</th>
+                <th>Despesa</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
-              {mostrados.map(r => (
+              {mostrados.map((r) => (
                 <tr key={r.num_prestacao}>
-                  <td>{r.num_prestacao}</td>
-                  <td>{r.colaborador}</td>
-                  <td>{r.empresa}</td>
-                  <td>{new Date(r.data).toLocaleDateString("pt-BR")}</td>
-                  <td>{r.descricao}</td>
-                  <td>{r.tipo_reembolso}</td>
-                  <td>{r.centro_custo}</td>
-                  <td>{r.ordem_interna}</td>
-                  <td>{r.divisao}</td>
-                  <td>{r.pep}</td>
-                  <td>{r.moeda}</td>
-                  <td>{r.distancia_km}</td>
-                  <td>{r.valor_km}</td>
-                  <td>R$ {Number(r.valor_faturado).toFixed(2)}</td>
-                  <td>R$ {Number(r.despesa || 0).toFixed(2)}</td>
-                  <td className={styles.btnAprovar}>
-                    <img
-                      src={CheckIcon}
-                      alt="aprovar"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => aprovar(r.num_prestacao)}
-                    />
-                  </td>
-                  <td className={styles.btnRejeitar}>
-                    <img
-                      src={XIcon}
-                      alt="rejeitar"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => rejeitar(r.num_prestacao)}
-                    />
+                  <td data-label="Nº Prest">{r.num_prestacao}</td>
+                  <td data-label="Colaborador">{r.colaborador}</td>
+                  <td data-label="Empresa">{r.empresa}</td>
+                  <td data-label="Data">{new Date(r.data).toLocaleDateString("pt-BR")}</td>
+                  <td data-label="Descrição">{r.descricao}</td>
+                  <td data-label="Tipo Despesa">{r.tipo_reembolso}</td>
+                  <td data-label="Val. Faturado">{currencyFormatter.format(r.valor_faturado)}</td>
+                  <td data-label="Despesa">{currencyFormatter.format(r.despesa || 0)}</td>
+                  
+                  {/* Célula de ações com data-label e botões com texto */}
+                  <td className={styles.actionsWrapper} data-label="Ações">
+                    <button className={styles.actionButtonAprovar} onClick={() => handleAprovarClick(r)} aria-label={`Aprovar reembolso ${r.num_prestacao}`}>
+                      <img src={CheckIcon} alt="" />
+                      <span>Aprovar</span>
+                    </button>
+                    <button className={styles.actionButtonRejeitar} onClick={() => handleRejeitarClick(r)} aria-label={`Rejeitar reembolso ${r.num_prestacao}`}>
+                      <img src={XIcon} alt="" />
+                      <span>Rejeitar</span>
+                    </button>
                   </td>
                 </tr>
               ))}
               {mostrados.length === 0 && (
                 <tr>
-                  <td colSpan={17} style={{ textAlign: "center" }}>
+                  <td colSpan="9" style={{ textAlign: "center" }}>
                     Nenhuma solicitação encontrada.
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
-        </section>
+        </div>
       </main>
     </div>
   );

@@ -43,4 +43,5 @@ sispar - por tras das telas
 
 usar no usestad
 
-SAP - ERP corporativo, com diversos models que centraliza as informações, ele manda pro sispar atraves de web services, o sistepar trabalha em cima dos valores envia direto pro sap
+SAP - ERP corporativo, com diversos models que centraliza as informações, ele manda pro sispar atraves de web services, 
+o sistepar trabalha em cima dos valores envia direto pro sap
