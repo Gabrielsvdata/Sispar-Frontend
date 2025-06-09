@@ -1,87 +1,77 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Api from "../../Services/Api"; // Sua instância de axios/fetch
-import styles from "./RecuperarSenha.module.scss"; // Mantenha seus estilos
+import Api from "../../Services/Api";
+import styles from "./RecuperarSenha.module.scss";
 
-// Vou renomear a função do componente para algo mais genérico internamente,
-// ou manter 'RecuperarSenha' se o nome do arquivo não mudar.
-// Para este exemplo, manterei 'RecuperarSenha' para consistência com seu arquivo.
 function RecuperarSenha() {
   const navigate = useNavigate();
 
-  // Novos estados que vou precisar:
-  const [email, setEmail] = useState("");         // Email para verificação
-  const [cracha, setCracha] = useState("");       // Crachá (ID do colaborador) para verificação e URL
-  const [novaSenha, setNovaSenha] = useState(""); // Nova senha
-  const [confirmarNovaSenha, setConfirmarNovaSenha] = useState(""); // Confirmação da nova senha
-  const [feedback, setFeedback] = useState("");   // Para mensagens de sucesso/erro
-  const [carregando, setCarregando] = useState(false); // Para feedback visual no botão
+  const [email, setEmail] = useState("");
+  const [cracha, setCracha] = useState("");
+  const [novaSenha, setNovaSenha] = useState("");
+  const [confirmarNovaSenha, setConfirmarNovaSenha] = useState("");
+  const [feedback, setFeedback] = useState({ message: "", type: "" });
+  const [carregando, setCarregando] = useState(false);
 
-  // Minha nova função de validação dos campos
   const validarCampos = () => {
     if (!email || !cracha || !novaSenha || !confirmarNovaSenha) {
-      setFeedback("Preencha todos os campos, por favor.");
+      setFeedback({ message: "Preencha todos os campos, por favor.", type: "error" });
       return false;
     }
     if (!email.includes("@") || !email.includes(".")) {
-      setFeedback("Formato de e-mail inválido.");
+      setFeedback({ message: "Formato de e-mail inválido.", type: "error" });
       return false;
     }
-    if (novaSenha.length < 6) { // Mantendo sua validação de tamanho de senha
-      setFeedback("A nova senha deve ter pelo menos 6 caracteres.");
+    if (novaSenha.length < 6) {
+      setFeedback({ message: "A nova senha deve ter pelo menos 6 caracteres.", type: "error" });
       return false;
     }
     if (novaSenha !== confirmarNovaSenha) {
-      setFeedback("As senhas digitadas não coincidem.");
+      setFeedback({ message: "As senhas digitadas não coincidem.", type: "error" });
       return false;
     }
-    // Validação simples para o crachá (se é um número)
     if (isNaN(parseInt(cracha, 10))) {
-        setFeedback("Número do crachá deve ser um valor numérico.");
-        return false;
+      setFeedback({ message: "Número do crachá deve ser um valor numérico.", type: "error" });
+      return false;
     }
     return true;
   };
 
-  // Minha função para lidar com o envio do formulário (agora para alterar a senha)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFeedback(""); // Limpo o feedback anterior
+    setFeedback({ message: "", type: "" });
     
     if (!validarCampos()) {
-      return; // Se a validação falhar, não continuo
+      return;
     }
 
-    setCarregando(true); // Mostro que está carregando
+    setCarregando(true);
 
     try {
-      // Chamo meu endpoint Flask de ATUALIZAR, passando o crachá na URL
-      // e o email (para verificação) e a nova senha no corpo.
       const resposta = await Api.put(`/colaborador/atualizar/${cracha}`, { 
-        email: email,         // Email para o backend verificar se bate com o do crachá
-        senha: novaSenha      // A nova senha a ser definida
+        email: email,
+        senha: novaSenha
       });
 
-      setFeedback(resposta.data.mensagem || "Senha alterada com sucesso! Você será redirecionado para o login.");
-      // Dou um tempo para o usuário ler a mensagem e depois o levo para o login
+      setFeedback({ message: resposta.data.mensagem || "Senha alterada com sucesso! Redirecionando...", type: "success" });
+      
       setTimeout(() => {
         navigate("/"); 
-      }, 3000); // Redireciona após 3 segundos
+      }, 3000);
 
     } catch (error) {
       console.error("Erro ao alterar senha:", error);
-      // Se o backend mandar uma mensagem específica, uso ela, senão uma genérica.
-      setFeedback(error.response?.data?.mensagem || "Ocorreu um erro ao tentar alterar a senha. Tente novamente.");
+      setFeedback({ message: error.response?.data?.mensagem || "Erro ao alterar a senha. Verifique os dados e tente novamente.", type: "error" });
     } finally {
-      setCarregando(false); // Paro de mostrar que está carregando
+      setCarregando(false);
     }
   };
 
   return (
-    <main className={styles.mainRecuperar}> {/* Você pode querer renomear o estilo se mudar o propósito */}
+    <main className={styles.mainRecuperar}>
       <section className={styles.containerForms}>
-        <h1>Alterar Senha</h1> {/* Mudei o título */}
-        <p>Para alterar sua senha, por favor, confirme seu e-mail e número do crachá, e defina sua nova senha.</p> {/* Mudei a instrução */}
+        <h1>Alterar Senha</h1>
+        <p>Confirme seu e-mail, número do crachá, e defina sua nova senha.</p>
 
         <form onSubmit={handleSubmit} className={styles.formRecuperar}>
           <input
@@ -92,8 +82,7 @@ function RecuperarSenha() {
             required
           />
           <input
-            type="text" // Crachá pode ter letras/números, mas o backend espera <int:id_colaborador>
-                      // A validação isNaN(parseInt(cracha)) já ajuda.
+            type="text"
             placeholder="Digite seu número de crachá (ID)"
             value={cracha}
             onChange={(e) => setCracha(e.target.value)}
@@ -118,20 +107,16 @@ function RecuperarSenha() {
           </button>
         </form>
 
-        {feedback && (
-          <p 
-            className={styles.feedbackMessage}
-            // Adiciono um estilo inline para diferenciar sucesso de erro, se quiser
-            // style={{ color: feedback.includes("sucesso") ? "green" : "red" }}
-          >
-            {feedback}
+        {feedback.message && (
+          <p className={`${styles.feedbackMessage} ${styles[feedback.type]}`}>
+            {feedback.message}
           </p>
         )}
 
         <button 
           onClick={() => navigate("/")} 
           className={styles.buttonVoltar}
-          disabled={carregando} // Desabilito enquanto carrega
+          disabled={carregando}
         >
           Voltar ao login
         </button>

@@ -1,4 +1,3 @@
-
 .layoutSolicitacao {
   display: flex; 
   width: 100%;
@@ -16,13 +15,13 @@
 .headerSolicitacao {
   margin-top: -1.5rem;
   width: 100%;
-  padding: 1rem; /* Padding em vez de altura fixa (era height: 5%) */
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 0.8rem;
-  border-bottom: 1px solid #e0e0e0; /* Linha separadora */
-  flex-shrink: 0; /* Para o header não encolher */
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
 
   img { cursor: pointer; height: 1em; width: auto; }
 }
@@ -30,21 +29,21 @@
 .mainSolicitacao {
   margin-left: 4%;
   display: flex;
-  flex-direction: column; /* Form, tabela e footer um embaixo do outro */
+  flex-direction: column;
   width: 96%;
-  flex-grow: 1; /* Para ocupar o espaço vertical restante */
-  padding: 1rem; /* Padding interno para o conteúdo do main */
-  overflow-y: auto; /* Scroll AQUI se o conteúdo do main for maior que o espaço */
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .formSolicitacao {
   width: 100%;
   display: flex;
-  justify-content: space-between; /* Mantém grupo1, barra e grupo2 lado a lado no desktop */
-  gap: 1.5rem; /* Espaço entre grupo1, barra e grupo2 */ /* Espaço abaixo do formulário, antes da tabela */
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
-label { /* Estilo global para labels dentro deste componente */
+label {
   font-weight: 600;
   font-size: 0.85rem;
   color: #374151;
@@ -56,12 +55,12 @@ input,
 select,
 textarea {
   border-radius: 6px;
-  border: 1px solid #cbd4e1; /* Era 'solid #cbd4e1 0.8px' */
-  height: auto; /* TIRO o height: 5vh, deixo o padding definir */
-  padding: 0.6rem 0.8rem; /* Padding para dar altura e conforto */
+  border: 1px solid #cbd4e1;
+  height: auto;
+  padding: 0.6rem 0.8rem;
   width: 100%;
   font-size: 0.9rem;
-  background-color: #fff; /* Garanto um fundo branco */
+  background-color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s;
 
   &:hover {
@@ -83,7 +82,7 @@ textarea {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
-  height: 50vh; /* Tiro o height: 20vh */
+  height: 50vh;
   align-content: flex-start;
 }
 
@@ -91,10 +90,9 @@ textarea {
   width: 35%;
 }
 .grupo2 {
-  width: calc(65% - 1.5rem - 1px); /* Ocupa o resto (considerando o gap e a barraVertical de 1px) */
+  width: calc(65% - 1.5rem - 1px);
 }
 
-/* Inputs individuais dentro do grupo1 - larguras precisam somar perto de 100% com os gaps */
 .inputNome       { width: calc(50% - 0.5rem); }
 .inputEmpresa    { width: calc(50% - 0.5rem); }
 .inputPrestacao  { width: 100%; }
@@ -106,7 +104,6 @@ textarea {
   align-self: stretch;
 }
 
-/* Inputs individuais dentro do grupo2 */
 .inputData,
 .tipoDeDespesa,
 .centroDeCusto,
@@ -123,14 +120,13 @@ textarea {
   flex-grow: 1;
   min-width: 120px;
 }
-/* Sugestões de tamanho base para desktop, ajuste conforme o conteúdo */
+
 .inputData     { flex-basis: 20%; }
 .tipoDeDespesa { flex-basis: 30%; }
 .centroDeCusto { flex-basis: 40%; }
 .ordem, .divisoes, .pep { flex-basis: calc(33.33% - 0.7rem); }
 .moeda, .distancia, .valorKM, .valorFaturado, .despesa { flex-basis: calc(25% - 0.75rem); }
 
-/* Ícones nos inputs de select/data */
 .inputData,
 .tipoDeDespesa,
 .centroDeCusto {
@@ -141,26 +137,24 @@ textarea {
 .imgDespesa,
 .imgCustos {
   position: absolute;
-  right: 0rem;            /* alinha ao padding-right do input */
-  top: 68%;                 /* centraliza verticalmente */
+  right: 0rem;
+  top: 68%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;            /* mesmo valor da altura do input */
-  height: 2.5rem;           /* idem */
-  background-color: #001a3d;  /* mantenha sua cor de fundo */
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #001a3d;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   pointer-events: none;
 
-    /* Reduz somente a própria imagem dentro do container */
   img {
     width: 1.2rem;
     height: 1.2rem;
   }
 }
-
 
 .botoes {
   width: 100%;
@@ -168,7 +162,6 @@ textarea {
   justify-content: flex-end;
   gap: 1rem;
   
-
   .botaoSalvar,
   .customerDelete {
     padding: 0.6rem 1rem;
@@ -315,13 +308,12 @@ textarea {
   }
 }
 
-/* === MINHAS ADIÇÕES PARA RESPONSIVIDADE (SOBRE A BASE AJUSTADA ACIMA) === */
-
-@media (max-width: 992px) { /* Tablets e telas médias */
+/* O código de responsividade antigo e conflituoso */
+@media (max-width: 992px) {
   .containerPrincipalSolicitacao {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    overflow: hidden; /* Evito scroll duplo */
+    overflow: hidden;
   }
   .mainSolicitacao { padding: 1rem; }
 
@@ -377,16 +369,9 @@ textarea {
     table { min-width: 600px !important; }
     th, td { font-size: 0.75rem !important; padding: 0.4rem 0.5rem !important; }
   }
-
 }
 
-/* ====================================================
-   === CÓDIGO FINAL E OTIMIZADO PARA TODOS OS CELULARES ===
-   ==================================================== */
-
-/* Regras para telas de até 600px de largura */
 @media (max-width: 600px) {
-  /* Suas regras para o layout principal, formulário e tabela (que já estão boas) */
   .containerPrincipalSolicitacao {
     padding: 0 0.5rem !important;
   }
@@ -434,15 +419,14 @@ textarea {
     justify-content: space-between;
     gap: 0.5rem;
   }
-
-  /* --- LAYOUT DO RODAPÉ (Layout base para mobile: 2 colunas) --- */
+  
   .containerFooter {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Grade de 2 colunas */
-    row-gap: 0.5rem;   /* Espaço vertical pequeno entre as linhas */
-    column-gap: 0.8rem;/* Espaço horizontal entre os itens */
+    grid-template-columns: 1fr 1fr;
+    row-gap: 0.5rem;
+    column-gap: 0.8rem;
     padding: 1rem;
-    height: auto;      /* A altura se ajusta ao conteúdo, sem cortar nada */
+    height: auto;
   }
 
   .inputFooterFaturado,
@@ -464,22 +448,17 @@ textarea {
   }
 }
 
-/* ================================================================
-   === AJUSTE FINO para Celulares MUITO Estreitos (abaixo de 480px) ===
-   ================================================================ */
-/* Celulares (< 480px) */
 @media (max-width: 480px) {
   .containerFooter {
-    grid-template-columns: 1fr 1fr; /* 2 colunas iguais */
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "faturado despesa"  /* Inputs na primeira linha */
-      "check cancelar";   /* Botões na segunda linha */
+      "faturado despesa"
+      "check cancelar";
     gap: 0.8rem;
     padding: 1rem;
-    margin-bottom: 3rem; /* Espaço para o BottomNav */
+    margin-bottom: 3rem;
     align-items: center;
 
-    /* Inputs de totais (horizontal) */
     .inputFooterFaturado {
       grid-area: faturado;
     }
@@ -487,7 +466,6 @@ textarea {
       grid-area: despesa;
     }
 
-    /* Botões (lado a lado) */
     div:has(> .buttonCheck) {
       grid-area: check;
     }
@@ -495,7 +473,6 @@ textarea {
       grid-area: cancelar;
     }
 
-    /* Estilo dos inputs */
     .inputFooterFaturado,
     .inputFooterDespesa {
       display: flex;
@@ -515,7 +492,6 @@ textarea {
       }
     }
 
-    /* Ajuste dos botões */
     .buttonCheck,
     .buttonX {
       width: 100%;
@@ -529,3 +505,32 @@ textarea {
     }
   }
 }
+
+/* ==============================================================
+   === CORREÇÃO CIRÚRGICA ADICIONADA AO FINAL PARA O RODAPÉ ===
+   ============================================================== */
+@media (max-width: 600px) {
+    /* Adiciona espaço no final para o BottomNav não sobrepor o rodapé */
+    .containerPrincipalSolicitacao {
+      padding-bottom: 15rem; 
+    }
+  
+    /* Organiza o rodapé em uma coluna vertical */
+    .containerFooter {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.6rem; /* <<< ALTURA DO CONTAINER DIMINUÍDA */
+    }
+  
+    /* Faz os itens do rodapé ocuparem a largura total e diminui a altura dos botões */
+    .containerFooter .inputFooterFaturado,
+    .containerFooter .inputFooterDespesa,
+    .containerFooter .buttonCheck,
+    .containerFooter .buttonX {
+      width: 100%;
+      min-width: auto; 
+      padding-top: 0.7rem; /* <<< ALTURA DO BOTÃO DIMINUÍDA */
+      padding-bottom: 0.7rem; /* <<< ALTURA DO BOTÃO DIMINUÍDA */
+    }
+  }
