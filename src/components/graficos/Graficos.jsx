@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../navbar/NavBar.jsx";
+import BottomNav from "../navbar/BottomNav.jsx";
 import {
   PieChart,
   Pie,
@@ -50,6 +51,7 @@ export default function Graficos() {
   return (
     <div className={styles.container}> {/* Seu container geral da página */}
       <NavBar />
+      <BottomNav />
 
       <main className={styles.mainGrafico}>
         {/* AQUI ESTÁ O HEADER MODIFICADO PARA SEGUIR O PADRÃO DE BREADCRUMB */}
