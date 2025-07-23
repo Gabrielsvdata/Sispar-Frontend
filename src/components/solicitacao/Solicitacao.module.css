@@ -1,0 +1,612 @@
+@charset "UTF-8";
+.layoutSolicitacao {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+.containerPrincipalSolicitacao {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: visible;
+}
+
+.headerSolicitacao {
+  margin-top: -1.5rem;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.8rem;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+.headerSolicitacao img {
+  cursor: pointer;
+  height: 1em;
+  width: auto;
+}
+
+.mainSolicitacao {
+  margin-left: 4%;
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.formSolicitacao {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #374151;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+input,
+select,
+textarea {
+  border-radius: 6px;
+  border: 1px solid #cbd4e1;
+  height: auto;
+  padding: 0.6rem 0.8rem;
+  width: 100%;
+  font-size: 0.9rem;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: #a0aec0;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0844c4;
+  box-shadow: 0 0 0 3px rgba(8, 68, 196, 0.15);
+  outline: none;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.grupo1, .grupo2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: 50vh;
+  align-content: flex-start;
+}
+
+.grupo1 {
+  width: 35%;
+}
+
+.grupo2 {
+  width: calc(65% - 1.5rem - 1px);
+}
+
+.inputNome {
+  width: calc(50% - 0.5rem);
+}
+
+.inputEmpresa {
+  width: calc(50% - 0.5rem);
+}
+
+.inputPrestacao {
+  width: 100%;
+}
+
+.inputMotivo {
+  width: 100%;
+}
+
+.barraVertical {
+  background-color: #cbd4e1;
+  width: 1px;
+  align-self: stretch;
+}
+
+.inputData,
+.tipoDeDespesa,
+.centroDeCusto,
+.ordem,
+.divisoes,
+.pep,
+.moeda,
+.distancia,
+.valorKM,
+.valorFaturado,
+.despesa {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 120px;
+}
+
+.inputData {
+  flex-basis: 20%;
+}
+
+.tipoDeDespesa {
+  flex-basis: 30%;
+}
+
+.centroDeCusto {
+  flex-basis: 40%;
+}
+
+.ordem, .divisoes, .pep {
+  flex-basis: calc(33.33% - 0.7rem);
+}
+
+.moeda, .distancia, .valorKM, .valorFaturado, .despesa {
+  flex-basis: calc(25% - 0.75rem);
+}
+
+.inputData,
+.tipoDeDespesa,
+.centroDeCusto {
+  position: relative;
+}
+
+.imgData,
+.imgDespesa,
+.imgCustos {
+  position: absolute;
+  right: 0rem;
+  top: 68%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #001a3d;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  pointer-events: none;
+}
+.imgData img,
+.imgDespesa img,
+.imgCustos img {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.botoes {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.botoes .botaoSalvar,
+.botoes .customerDelete {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  width: auto;
+  min-width: 100px;
+}
+.botoes .botaoSalvar img,
+.botoes .customerDelete img {
+  height: 1em;
+  vertical-align: middle;
+  margin-right: 0.3em;
+  filter: brightness(0) invert(1);
+}
+.botoes .botaoSalvar {
+  background-color: #001a3d;
+}
+.botoes .customerDelete {
+  background-color: #00BEDD;
+}
+
+.containerTable {
+  height: auto;
+  flex-grow: 1;
+  min-height: 150px;
+  overflow: auto;
+  border: 1px solid #cbd4e1;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.containerTable table {
+  width: 100%;
+  min-width: 1000px;
+  font-size: 0.85rem;
+  border-collapse: collapse;
+}
+.containerTable th {
+  background-color: #F1F4F9;
+  font-weight: 600;
+  color: #23282f;
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.containerTable td {
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.containerTable th, .containerTable td {
+  border: none;
+  border-bottom: 1px solid #cbd4e1;
+}
+.containerTable tr:last-child td {
+  border-bottom: none;
+}
+.containerTable tbody tr:hover {
+  background-color: #e9ecef;
+  cursor: default;
+}
+
+.statusAprovado, .statusRejeitado {
+  color: white;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.statusAprovado {
+  background-color: #28a745;
+}
+
+.statusRejeitado {
+  background-color: #dc3545;
+}
+
+.containerFooter {
+  width: 100%;
+  height: auto;
+  padding: 1rem 0;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-shrink: 0;
+}
+.containerFooter .inputFooterFaturado, .containerFooter .inputFooterDespesa {
+  width: 150px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.containerFooter .inputFooterFaturado label, .containerFooter .inputFooterDespesa label {
+  font-size: 0.75rem;
+  margin-bottom: 0.2rem;
+}
+.containerFooter .inputFooterFaturado input, .containerFooter .inputFooterDespesa input {
+  padding: 0.4rem;
+  font-size: 0.85rem;
+  text-align: right;
+}
+.containerFooter div:has(> .buttonCheck), .containerFooter div:has(> .buttonX) {
+  display: flex;
+  gap: 1rem;
+}
+.containerFooter .buttonCheck, .containerFooter .buttonX {
+  padding: 0.6rem 1rem;
+  height: auto;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+  min-width: 180px;
+}
+.containerFooter .buttonCheck img, .containerFooter .buttonX img {
+  height: 1em;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+.containerFooter .buttonCheck {
+  background-color: #001a3d;
+}
+.containerFooter .buttonX {
+  background-color: #a60b2f;
+}
+.containerFooter .buttonX p {
+  margin: 0;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1051;
+  width: 100%;
+  max-width: 450px;
+}
+.modalContent h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+.modalContent p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.modalContent button {
+  padding: 0.6rem 1.2rem;
+  background-color: #001a3d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+}
+.modalContent button:hover {
+  background-color: #003366;
+}
+
+/* O código de responsividade antigo e conflituoso */
+@media (max-width: 992px) {
+  .containerPrincipalSolicitacao {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    overflow: hidden;
+  }
+  .mainSolicitacao {
+    padding: 1rem;
+  }
+  .formSolicitacao {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .formSolicitacao .barraVertical {
+    display: none;
+  }
+  .formSolicitacao .grupo1, .formSolicitacao .grupo2 {
+    width: 100% !important;
+    max-width: none;
+  }
+  .grupo1 > div, .grupo2 > div {
+    width: 100% !important;
+    flex-basis: 100% !important;
+    min-width: 0 !important;
+  }
+  .botoes {
+    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .botoes .botaoSalvar, .botoes .customerDelete {
+    width: 100%;
+    max-width: 300px;
+    align-self: center;
+  }
+  .containerFooter {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem !important;
+    padding: 1rem !important;
+  }
+  .containerFooter .inputFooterFaturado, .containerFooter .inputFooterDespesa {
+    width: 220px !important;
+  }
+  .containerFooter div:has(> .buttonCheck), .containerFooter div:has(> .buttonX) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 300px;
+  }
+  .containerFooter .buttonCheck, .containerFooter .buttonX {
+    width: 100%;
+    min-width: 0;
+    font-size: 0.9rem !important;
+  }
+  .tabela table {
+    min-width: 600px !important;
+  }
+  .tabela th, .tabela td {
+    font-size: 0.75rem !important;
+    padding: 0.4rem 0.5rem !important;
+  }
+}
+@media (max-width: 600px) {
+  .containerPrincipalSolicitacao {
+    padding: 0 0.5rem !important;
+  }
+  .mainSolicitacao {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 1rem 0.5rem !important;
+  }
+  .formSolicitacao {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .formSolicitacao .barraVertical {
+    display: none !important;
+  }
+  .formSolicitacao .grupo1,
+  .formSolicitacao .grupo2 {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .formSolicitacao .grupo1 > div,
+  .formSolicitacao .grupo2 > div {
+    width: 100%;
+    flex-basis: 100%;
+  }
+  .containerTable {
+    clear: both;
+    margin: 1.5rem 0;
+    position: relative;
+    z-index: 1 !important;
+  }
+  .containerTable table {
+    min-width: auto !important;
+  }
+  .containerTable th,
+  .containerTable td {
+    padding: 0.3rem !important;
+    font-size: 0.68rem !important;
+  }
+  .botoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .containerFooter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 0.5rem;
+    -moz-column-gap: 0.8rem;
+         column-gap: 0.8rem;
+    padding: 1rem;
+    height: auto;
+  }
+  .inputFooterFaturado,
+  .inputsFooterDespesa {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+  }
+  .buttonCheck,
+  .buttonX {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 0.8rem 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .containerFooter {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "faturado despesa" "check cancelar";
+    gap: 0.8rem;
+    padding: 1rem;
+    margin-bottom: 3rem;
+    align-items: center;
+  }
+  .containerFooter .inputFooterFaturado {
+    grid-area: faturado;
+  }
+  .containerFooter .inputFooterDespesa {
+    grid-area: despesa;
+  }
+  .containerFooter div:has(> .buttonCheck) {
+    grid-area: check;
+  }
+  .containerFooter div:has(> .buttonX) {
+    grid-area: cancelar;
+  }
+  .containerFooter .inputFooterFaturado,
+  .containerFooter .inputFooterDespesa {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.6rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+  .containerFooter .inputFooterFaturado label,
+  .containerFooter .inputFooterDespesa label {
+    font-size: 0.7rem;
+    margin-bottom: 0;
+  }
+  .containerFooter .inputFooterFaturado input,
+  .containerFooter .inputFooterDespesa input {
+    font-size: 0.9rem;
+    text-align: right;
+  }
+  .containerFooter .buttonCheck,
+  .containerFooter .buttonX {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  .containerFooter .buttonCheck img,
+  .containerFooter .buttonX img {
+    width: 14px;
+    height: 14px;
+  }
+}
+/* ==============================================================
+   === CORREÇÃO CIRÚRGICA ADICIONADA AO FINAL PARA O RODAPÉ ===
+   ============================================================== */
+@media (max-width: 600px) {
+  /* Adiciona espaço no final para o BottomNav não sobrepor o rodapé */
+  .containerPrincipalSolicitacao {
+    padding-bottom: 15rem;
+  }
+  /* Organiza o rodapé em uma coluna vertical */
+  .containerFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem; /* <<< ALTURA DO CONTAINER DIMINUÍDA */
+  }
+  /* Faz os itens do rodapé ocuparem a largura total e diminui a altura dos botões */
+  .containerFooter .inputFooterFaturado,
+  .containerFooter .inputFooterDespesa,
+  .containerFooter .buttonCheck,
+  .containerFooter .buttonX {
+    width: 100%;
+    min-width: auto;
+    padding-top: 0.7rem; /* <<< ALTURA DO BOTÃO DIMINUÍDA */
+    padding-bottom: 0.7rem; /* <<< ALTURA DO BOTÃO DIMINUÍDA */
+  }
+}/*# sourceMappingURL=Solicitacao.module.css.map */

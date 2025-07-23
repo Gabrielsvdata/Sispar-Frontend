@@ -1,0 +1,175 @@
+@charset "UTF-8";
+/* Meu arquivo de estilos para a tela de Login - Login.module.scss */
+.containerImagem {
+  /* Essa seção vai segurar a imagem de capa.
+     No desktop, quero que ela ocupe metade da tela.
+     No mobile, quero que ela possa sumir ou ficar menor. */
+  width: 50%;
+}
+.containerImagem img {
+  height: 100%;
+  width: 100%;
+  /* Para a tag <img>, em vez de background-properties,
+     uso object-fit para controlar como a imagem se encaixa.
+     'cover' vai cobrir toda a área, cortando se necessário,
+     mantendo a proporção. */
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.mainLogin {
+  display: flex;
+  /* Por padrão, quero que a imagem e o formulário fiquem lado a lado (row).
+     Se eu quisesse um em cima do outro por padrão, usaria flex-direction: column. */
+  flex-direction: row; /* Garante que fiquem lado a lado no desktop */
+  height: 100vh;
+}
+
+.containerForms {
+  /* Esta é a seção do formulário.
+     No desktop, também ocupa metade da tela. */
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.containerForms img {
+  margin-bottom: 1rem;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+.containerForms h1 {
+  /* O título principal. */
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 8px;
+  color: #333;
+}
+.containerForms p {
+  /* O parágrafo de subtítulo. */
+  margin-bottom: 2rem;
+  font-weight: bold;
+  color: #0844c4;
+  text-align: center;
+}
+
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+.formLogin input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.formLogin input::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  -moz-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+}
+.formLogin input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease-in-out;
+}
+.formLogin input:hover::-moz-placeholder {
+  color: #0844c4;
+}
+.formLogin input:hover::placeholder {
+  color: #0844c4;
+}
+.formLogin input:hover {
+  border-color: #0844c4;
+}
+.formLogin input:focus {
+  border-color: #001A3D;
+  box-shadow: 0px 0px 5px 1px #cbd4E1;
+}
+.formLogin a {
+  color: #0844c4;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+.formLogin a:hover {
+  text-decoration: underline;
+}
+.formLogin .mensagemErro {
+  color: red;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+}
+.formLogin div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.formLogin div .buttonEntrar, .formLogin div .buttonCriar {
+  border: none;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  max-width: 200px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.formLogin div .buttonEntrar {
+  background-color: #001A3D;
+}
+.formLogin div .buttonEntrar:hover {
+  background-color: #003366;
+}
+.formLogin div .buttonCriar {
+  background-color: #00BEDD;
+}
+.formLogin div .buttonCriar:hover {
+  background-color: #00AACC;
+}
+
+/* Media Query: Regras para telas menores (ex: mobile e tablets em modo retrato)
+   Eu escolhi 768px como ponto de quebra, mas posso ajustar conforme o design.
+*/
+@media (max-width: 768px) {
+  .mainLogin {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  .containerImagem {
+    width: 100%;
+    height: 30vh;
+  }
+  .containerForms {
+    width: 100%;
+    height: auto;
+    min-height: 70vh;
+    justify-content: flex-start;
+    padding-top: 2rem;
+  }
+  .containerForms h1 {
+    font-size: 1.8rem;
+    width: 80%;
+  }
+  .formLogin {
+    width: 90%;
+  }
+  .formLogin {
+    width: 90%;
+  }
+}/*# sourceMappingURL=Login.module.css.map */

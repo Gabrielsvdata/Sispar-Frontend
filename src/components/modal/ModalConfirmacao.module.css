@@ -1,0 +1,117 @@
+@charset "UTF-8";
+/* --- Base do Modal (Reutilizando seu padrão) --- */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1051;
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Cabeçalho do Modal --- */
+.modalHeader {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.modalHeader h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #23282f;
+  text-align: center;
+}
+
+/* --- Corpo do Modal --- */
+.modalBody {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.modalBody p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #374151;
+  text-align: center;
+}
+
+/* --- Rodapé com os botões de ação --- */
+.modalFooter {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* Alinha botões à direita por padrão */
+  gap: 1rem;
+  /* Estilo base para os botões do modal */
+}
+.modalFooter button {
+  padding: 0.6rem 1.2rem;
+  height: auto;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 100px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.modalFooter button:hover {
+  transform: translateY(-2px);
+}
+
+/* Botão de Cancelar/Neutra */
+.buttonCancel {
+  background-color: #F1F4F9;
+  color: #374151;
+  border: 1px solid #cbd4e1;
+}
+.buttonCancel:hover {
+  background-color: #e2e8f0;
+}
+
+/* Botão de Confirmação (perigoso/destrutivo) */
+.buttonConfirm {
+  color: white;
+  background-color: #a60b2f;
+}
+.buttonConfirm:hover {
+  background-color: #c51a46;
+}
+
+/* 👇 CLASSE ADICIONADA PARA O BOTÃO PRIMÁRIO (AZUL) */
+.buttonPrimary {
+  color: white;
+  background-color: #001a3d;
+}
+.buttonPrimary:hover {
+  background-color: #003366;
+}
+
+/* --- Ajustes para telas menores (mantendo seu padrão) --- */
+@media (max-width: 600px) {
+  .modalContent {
+    padding: 1.5rem 1rem;
+  }
+  .modalFooter {
+    flex-direction: column-reverse; /* Empilha os botões, com o principal em cima */
+    align-items: stretch; /* Faz os botões ocuparem a largura total */
+  }
+  .modalFooter button {
+    width: 100%;
+  }
+}/*# sourceMappingURL=ModalConfirmacao.module.css.map */

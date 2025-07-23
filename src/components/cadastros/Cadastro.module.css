@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/* Meu arquivo de estilos para a Tela de Cadastro - Cadastro.module.scss */
+.mainCadastro {
+  display: flex;
+  /* No desktop, quero a imagem e o formulário lado a lado. */
+  flex-direction: row;
+  height: 100vh; /* Ocupa a tela toda na altura. */
+}
+
+.containerImagem {
+  width: 50%; /* Metade da tela para a imagem no desktop. */
+}
+.containerImagem img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover; /* Para a imagem se ajustar bem, cobrindo o espaço. */
+}
+
+.containerForms {
+  width: 50%; /* A outra metade para a seção do formulário no desktop. */
+  display: flex;
+  flex-direction: column; /* Itens internos (logo, título, form) em coluna. */
+  align-items: center; /* Centralizo horizontalmente. */
+  justify-content: center; /* Centralizo verticalmente. */
+  padding: 2rem; /* Um respiro para o conteúdo não colar nas bordas. */
+  overflow-y: auto; /* Se o conteúdo ficar maior que a tela (especialmente no mobile), permite rolar. */
+}
+.containerForms img { /* Meu logo */
+  margin-bottom: 1rem;
+  max-width: 180px; /* Um tamanho máximo pro logo não ficar gigante. */
+  width: 100%;
+  height: auto; /* Mantém a proporção. */
+}
+.containerForms h1 {
+  font-size: 1.8rem; /* Ajustei um pouco o tamanho do título. */
+  text-align: center;
+  margin-bottom: 0.5rem; /* Menos espaço abaixo do H1. */
+  color: #333;
+}
+.containerForms p { /* Texto de instrução abaixo do H1. */
+  margin-bottom: 1.5rem; /* Menos espaço abaixo do P. */
+  font-weight: bold;
+  color: #0844c4;
+  text-align: center;
+  font-size: 0.9rem; /* Um pouco menor. */
+}
+
+.formCadastro {
+  display: flex;
+  flex-direction: column; /* Os inputs e o div dos botões ficarão em coluna. */
+  align-items: center; /* Tudo centralizado no formulário. */
+  width: 100%; /* O formulário usa toda a largura disponível em .containerForms. */
+  max-width: 400px; /* Limito a largura máxima do formulário para telas grandes. */
+  gap: 0.8rem; /* Espaço vertical entre cada input. */
+  /* Div que agrupa os botões de Cadastrar e Voltar */
+}
+.formCadastro input {
+  width: 100%; /* Cada input ocupa toda a largura do .formCadastro. */
+  border-radius: 6px;
+  border: 1px solid #ccc; /* Borda um pouco mais suave. */
+  padding: 0.75rem; /* Padding interno para conforto na digitação. */
+  font-size: 0.95rem; /* Tamanho da fonte dentro do input. */
+}
+.formCadastro input::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  -moz-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+}
+.formCadastro input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease-in-out;
+}
+.formCadastro input:hover::-moz-placeholder {
+  /* color: #fff; // Se o fundo do input for claro, placeholder branco some. */
+  color: rgba(0, 0, 0, 0.4); /* Deixei um pouco mais claro no hover. */
+}
+.formCadastro input:hover::placeholder {
+  /* color: #fff; // Se o fundo do input for claro, placeholder branco some. */
+  color: rgba(0, 0, 0, 0.4); /* Deixei um pouco mais claro no hover. */
+}
+.formCadastro input:hover {
+  border-color: #0844c4; /* Cor da borda no hover, usando uma cor do tema. */
+}
+.formCadastro input:focus {
+  border-color: #001A3D; /* Cor da borda no foco, outra cor do tema. */
+  box-shadow: 0px 0px 5px 1px #cbd4e1; /* Sombra suave no foco. */
+}
+.formCadastro div {
+  width: 100%; /* O container dos botões usa toda a largura do formulário. */
+  display: flex;
+  flex-direction: column; /* Por padrão, botões um sobre o outro, bom para mobile. */
+  align-items: center; /* Centraliza os botões se tiverem max-width. */
+  gap: 0.8rem; /* Espaço entre os botões (Cadastrar e Voltar). */
+  margin-top: 1rem; /* Um espaço acima do primeiro botão. */
+  /* Estilos comuns para os botões */
+  /* Abandonei vw/vh para os botões, usando padding e font-size para consistência. */
+}
+.formCadastro div .buttonCadastrar, .formCadastro div .buttonVoltar {
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1rem; /* Padding para definir o tamanho interno. */
+  font-size: 0.95rem; /* Tamanho da fonte nos botões. */
+  border-radius: 6px;
+  border: none; /* Tiro a borda padrão. */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Botões ocupam toda a largura do seu container (o div). */
+  max-width: 220px; /* Mas com um limite pra não ficarem gigantes em telas largas. */
+}
+.formCadastro div .buttonCadastrar {
+  background-color: #001a3d; /* Cor de fundo do botão Cadastrar. */
+}
+.formCadastro div .buttonCadastrar:hover {
+  background-color: #003366; /* Efeito hover. */
+}
+.formCadastro div .buttonVoltar {
+  background-color: #777;
+}
+.formCadastro div .buttonVoltar:hover {
+  background-color: #555; /* Efeito hover. */
+}
+
+/* Media Queries: Minhas regras para telas menores! */
+@media (max-width: 768px) { /* Para tablets em modo retrato e celulares */
+  .mainCadastro {
+    flex-direction: column; /* Imagem em cima, formulário embaixo. */
+    height: auto; /* Altura se ajusta ao conteúdo. */
+    min-height: 100vh; /* Mas garante que ocupe pelo menos a tela toda. */
+  }
+  .containerImagem {
+    width: 100%; /* Imagem ocupa toda a largura. */
+    height: 30vh; /* Uma altura fixa para a imagem no mobile. */
+    /* Se eu não quisesse a imagem no mobile, poderia usar: display: none; */
+  }
+  .containerForms {
+    width: 100%; /* Seção do formulário ocupa toda a largura. */
+    height: auto; /* Altura se ajusta ao conteúdo. */
+    min-height: 70vh; /* Se a imagem estiver visível, ocupa o resto. */
+    justify-content: flex-start; /* Alinho o conteúdo (logo, etc.) ao topo. */
+    padding: 1.5rem; /* Padding um pouco menor para telas pequenas. */
+  }
+  .containerForms h1 {
+    font-size: 1.6rem; /* Título um pouco menor no mobile. */
+  }
+  .containerForms p {
+    font-size: 0.85rem; /* Texto de instrução um pouco menor. */
+    margin-bottom: 1.2rem;
+  }
+  .formCadastro {
+    width: 90%; /* O formulário em si fica com 90% da largura do .containerForms. */
+    gap: 0.7rem; /* Espaço entre os inputs um pouco menor. */
+  }
+  .formCadastro input {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+}/*# sourceMappingURL=Cadastro.module.css.map */

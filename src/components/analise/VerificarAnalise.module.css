@@ -1,0 +1,199 @@
+@charset "UTF-8";
+/* src/pages/VerificarAnalise.module.scss - VERSÃO COMPLETA E FINAL */
+.layoutAnalise {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+.mainAnalise {
+  flex: 1;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  /* CORREÇÃO: Adiciona espaço no final da página para não sobrepor o BottomNav */
+  padding-bottom: 6rem;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.headerAnalise {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+.headerAnalise img {
+  cursor: pointer;
+}
+.headerAnalise p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.searchBar {
+  margin-bottom: 1.5rem;
+}
+.searchBar input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.searchBar input:focus {
+  border-color: #007bff;
+}
+
+.tabelaContainer {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.tabelaContainer table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tabelaContainer th, .tabelaContainer td {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #e1e4e8;
+  text-align: left;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.tabelaContainer th {
+  background: #fafbfc;
+  color: #24292e;
+  font-weight: 600;
+}
+.tabelaContainer tbody tr:nth-child(even) {
+  background: #f6f8fa;
+}
+
+.actionsWrapper {
+  padding: 0 !important;
+}
+
+.actionButtonAprovar, .actionButtonRejeitar {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+.actionButtonAprovar img, .actionButtonRejeitar img {
+  display: block;
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+.actionButtonAprovar span, .actionButtonRejeitar span {
+  display: none;
+}
+
+.actionButtonAprovar {
+  background-color: #28a745;
+}
+.actionButtonAprovar:hover {
+  background-color: #218838;
+}
+
+.actionButtonRejeitar {
+  background-color: #dc3545;
+}
+.actionButtonRejeitar:hover {
+  background-color: #c82333;
+}
+
+/* ================================================= */
+/* === RESPONSIVIDADE MODERNA PARA A TABELA === */
+/* ================================================= */
+@media (max-width: 992px) {
+  .mainAnalise {
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 6rem; /* Garante o espaço no tablet também */
+  }
+}
+@media (max-width: 768px) {
+  .tabelaContainer thead {
+    display: none;
+  }
+  .tabelaContainer tr {
+    display: block;
+    background: #fff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+  }
+  .tabelaContainer td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0.5rem;
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: right;
+    white-space: normal;
+  }
+  .tabelaContainer td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+    padding-right: 1rem;
+  }
+  .tabelaContainer td:last-child {
+    border-bottom: none;
+  }
+  .actionButtonAprovar span, .actionButtonRejeitar span {
+    display: inline;
+  }
+  .actionsWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    padding: 0.75rem 0 !important;
+    margin-top: 0.5rem;
+    border-top: 1px solid #f0f0f0;
+  }
+  .actionsWrapper::before {
+    display: none;
+  }
+  .actionsWrapper button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    border-radius: 6px;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .actionsWrapper button img {
+    width: 16px;
+    height: 16px;
+  }
+}/*# sourceMappingURL=VerificarAnalise.module.css.map */
