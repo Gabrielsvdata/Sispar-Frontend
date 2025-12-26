@@ -89,6 +89,8 @@ export default function BottomNav() {
           localStorage.removeItem("usuarioNome");
           localStorage.removeItem("usuarioCargo");
           localStorage.removeItem("usuarioId");
+          localStorage.removeItem("usuarioTipo"); // Remove o tipo de usuário
+          localStorage.removeItem("authToken"); // Remove o token
           // não removemos o avatar do localStorage para persistir entre logins, mas poderia se desejar
           window.dispatchEvent(new Event("userChanged"));
           navigate("/");

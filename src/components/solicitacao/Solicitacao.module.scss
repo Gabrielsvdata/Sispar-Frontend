@@ -127,6 +127,94 @@ textarea {
 .ordem, .divisoes, .pep { flex-basis: calc(33.33% - 0.7rem); }
 .moeda, .distancia, .valorKM, .valorFaturado, .despesa { flex-basis: calc(25% - 0.75rem); }
 
+// Estilo para campo de comprovante
+.comprovante {
+  display: flex;
+  flex-direction: column;
+  flex-basis: calc(50% - 0.5rem); // Volta a ocupar metade da linha
+  width: auto;
+
+  input[type="file"] {
+    padding: 0.6rem 0.8rem; // Mesmo padding dos outros inputs
+    cursor: pointer;
+    font-size: 0.9rem;
+    height: 5.5vh;
+    border-radius: 6px;
+    border: 1px solid #cbd4e1;
+    background-color: #fff;
+    
+    &::file-selector-button {
+      padding: 0.3rem 1.5rem;
+      background-color: #001a3d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 5px;
+      margin-right: 1rem;
+      font-size: 0.6rem;
+      
+      &:hover {
+        background-color: #003366;
+      }
+    }
+
+    &:hover {
+      border-color: #a0aec0;
+    }
+
+    &:focus {
+      border-color: #0844c4;
+      box-shadow: 0 0 0 3px rgba(8, 68, 196, 0.15);
+      outline: none;
+    }
+  }
+
+  .nomeArquivo {
+    margin-top: 0.5rem;
+    font-size: 0.5rem;
+    color: #059669;
+    font-weight: 50;
+  }
+}
+
+.botoes {
+  display: flex;
+  flex-basis: calc(100% - 0.5rem); // Volta a ocupar a outra metade da linha
+  width: 100%;
+  align-items: flex-end; // Alinha os botões na parte inferior
+  justify-content: end; // Alinha à direita
+  gap: 1rem;
+  padding-bottom: 0.3rem; // Pequeno ajuste para alinhar com o input
+  
+  .botaoSalvar,
+  .customerDelete {
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    width: auto;
+    min-width: 100px;
+    height: fit-content;
+    
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+    
+    img {
+      height: 1em;
+      vertical-align: middle;
+      margin-right: 0.3em;
+      filter: brightness(0) invert(1);
+    }
+  }
+  .botaoSalvar    { background-color: #001a3d; }
+  .customerDelete { background-color: #00BEDD; }
+}
+
 .inputData,
 .tipoDeDespesa,
 .centroDeCusto {
@@ -154,33 +242,6 @@ textarea {
     width: 1.2rem;
     height: 1.2rem;
   }
-}
-
-.botoes {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  
-  .botaoSalvar,
-  .customerDelete {
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
-    border: none;
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    width: auto;
-    min-width: 100px;
-    img {
-      height: 1em;
-      vertical-align: middle;
-      margin-right: 0.3em;
-      filter: brightness(0) invert(1);
-    }
-  }
-  .botaoSalvar    { background-color: #001a3d; }
-  .customerDelete { background-color: #00BEDD; }
 }
 
 .containerTable {

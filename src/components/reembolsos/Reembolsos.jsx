@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Api from "../../Services/Api";
+import { isAdmin } from "../../utils/auth";
 import styles from "./Reembolsos.module.scss"
 import NavBar from "../navbar/NavBar.jsx";
 import BottomNav from "../navbar/BottomNav.jsx";
@@ -36,15 +37,35 @@ function Reembolsos() {
 
   async function carregarContadores() {
     try {
-      const { data } = await Api.get("/reembolsos");
+      const usuarioId = localStorage.getItem("usuarioId");
+      const endpoint = isAdmin() 
+        ? "/reembolsos/" 
+        : `/reembolsos/?colaborador_id=${usuarioId}`;
+      
+      console.log("📊 Carregando contadores - Endpoint:", endpoint);
+      console.log("👤 Usuário ID:", usuarioId);
+      console.log("🔑 É Admin?", isAdmin());
+      
+      const { data } = await Api.get(endpoint);
+      
+      console.log("✅ Dados recebidos:", data);
+      
       const solicitados = data.length;
       const emAnalise   = data.filter(r => r.status === "Em análise").length;
       const aprovados   = data.filter(r => r.status === "Aprovado").length;
       const rejeitados  = data.filter(r => r.status === "Rejeitado").length;
       setCounts({ solicitados, emAnalise, aprovados, rejeitados });
     } catch (err) {
-      console.error(err);
-      alert("Erro ao carregar contadores de reembolso.");
+      console.error("❌ Erro ao carregar contadores:", err);
+      console.error("Status:", err.response?.status);
+      console.error("Data:", err.response?.data);
+      console.error("Headers:", err.response?.headers);
+      
+      if (err.response?.status === 308) {
+        alert("Erro 308: O servidor está redirecionando a requisição. Verifique a configuração do backend.");
+      } else {
+        alert("Erro ao carregar contadores de reembolso.");
+      }
     }
   }
 
@@ -73,7 +94,7 @@ function Reembolsos() {
 
           <article className={styles.card} onClick={() => navigate("/analise")}>
             <img src={Análise} alt="Verificar Análises" />
-            <p>Verificar Análises</p>
+            <p>{isAdmin() ? "Verificar Análises" : "Minhas Análises"}</p>
           </article>
 
           <article className={styles.card} onClick={() => navigate("/historico")}>

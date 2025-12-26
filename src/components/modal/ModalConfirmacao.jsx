@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 import styles from "./ModalConfirmacao.module.scss";
 
 function ModalConfirmacao({
@@ -11,6 +13,26 @@ function ModalConfirmacao({
   showCancelButton = true,
   confirmButtonType = "danger", // 'danger' para vermelho, 'primary' para azul
 }) {
+  // Fecha modal com tecla ESC
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && onClose) {
+        onClose();
+      }
+    };
+
+    // Previne scroll do body quando modal está aberto
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = "unset";
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) {
     return null;
   }
@@ -25,10 +47,26 @@ function ModalConfirmacao({
   const handleContentClick = (e) => e.stopPropagation();
 
   return (
-    <div className={styles.modalOverlay} onClick={onClose}>
+    <div 
+      className={styles.modalOverlay} 
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
       <div className={styles.modalContent} onClick={handleContentClick}>
         <header className={styles.modalHeader}>
-          <h3>{title}</h3>
+          <h3 id="modal-title">{title}</h3>
+          {onClose && (
+            <button 
+              className={styles.closeButton}
+              onClick={onClose}
+              aria-label="Fechar modal"
+              type="button"
+            >
+              ✕
+            </button>
+          )}
         </header>
 
         <main className={styles.modalBody}>
@@ -52,5 +90,16 @@ function ModalConfirmacao({
     </div>
   );
 }
+
+ModalConfirmacao.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  confirmText: PropTypes.string,
+  showCancelButton: PropTypes.bool,
+  confirmButtonType: PropTypes.oneOf(["danger", "primary"]),
+};
 
 export default ModalConfirmacao;

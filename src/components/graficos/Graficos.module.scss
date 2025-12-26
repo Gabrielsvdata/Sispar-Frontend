@@ -1,19 +1,16 @@
 /* Graficos.module.scss */
 
 .container {
-  display: flex; /* Se NavBar e mainGrafico são filhos diretos e você quer que mainGrafico cresça */
-  width: 100%; /* Era 100vw */
+  display: flex;
+  width: 100%;
   height: 100vh;
-  /* background: #f5f6fa; // Sua cor de fundo */
 }
 
 .mainGrafico {       
   flex-grow: 1; 
-  padding: 2rem; 
+  padding: 0.5rem 1rem; 
   overflow-y: auto; 
   margin-left: var(--navbar-width, 5%); 
-  
-  /* A largura do conteúdo será 100% MENOS a largura que a NavBar está ocupando. */
   width: calc(100% - var(--navbar-width, 5%));
   transition: margin-left 0.5s ease-in-out, width 0.5s ease-in-out; 
 }
@@ -24,7 +21,7 @@
   align-items: center;   
   gap: 1rem;           
   font-size: 1rem;               
-  margin-bottom: 1rem; 
+  margin-bottom: 1.5rem; 
   padding-bottom: 0.8rem;
   border-bottom: 1px solid #e0e0e0; 
   width: 100%;           
@@ -35,28 +32,235 @@
     width: auto;
     opacity: 0.7; 
   }
-;
+
+  p {
+    cursor: pointer;
+    margin: 0;
+    
+    &:last-child {
+      font-weight: 600;
+      color: #001a3d;
+    }
+  }
 }
 
-.pageTitleContainer { /* Seu container para o título principal H2 */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+
+  .dateFilters {
+    display: flex;
+    gap: 1rem;
+    
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      
+      input[type="date"] {
+        padding: 0.5rem;
+        border: 1px solid #cbd4e1;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        height: 38px;
+        
+        &:focus {
+          border-color: #0844c4;
+          outline: none;
+        }
+      }
+    }
+  }
+
+  select {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #cbd4e1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    min-width: 180px;
+    
+    &:focus {
+      border-color: #0844c4;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(8, 68, 196, 0.1);
+    }
+  }
+}
+
+.btnLimparFiltros {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  height: 38px;
+  min-width: 160px;
+  margin-left: auto;
+
+  span {
+    font-size: 1rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    transform: translateY(-1px);
+
+    span {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  }
+}
+
+.statsCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: #718096;
+    font-weight: 500;
+  }
+  
+  .statValue {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #001a3d;
+  }
+  
+  span {
+    font-size: 0.85rem;
+    color: #a0aec0;
+  }
+}
+
+.chartTypeSelector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background: #f7fafc;
+  border-radius: 12px;
+  
+  button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.8rem 0.5rem;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #4a5568;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    min-height: 80px;
+    overflow: hidden;
+    
+    .icon {
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .label {
+      font-weight: 500;
+      transition: color 0.3s ease;
+      text-align: center;
+      line-height: 1.2;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+    
+    &:hover:not(.active) {
+      border-color: #cbd5e0;
+      background: #f7fafc;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      .icon {
+        transform: scale(1.1);
+      }
+    }
+    
+    &.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: #667eea;
+      color: white;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      transform: translateY(-2px);
+
+      .icon {
+        transform: scale(1.15);
+        filter: brightness(1.2);
+      }
+
+      .label {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.pageTitleContainer {
   width: 100%;
-  text-align: left; 
+  text-align: center; 
   margin-bottom: 2rem; 
   
   h2 { 
     margin: 0;
-    font-size: 1.6rem; 
+    font-size: 1.4rem; 
     color: #001a3d;   
     font-weight: 600;  
   }
 }
 
-
-/* EXEMPLO DE MEDIA QUERY PARA MOBILE (se o drawer mobile empurrar o conteúdo) */
 @media (max-width: 768px) {
   .mainGrafico {
-
-    
     padding: 1rem; 
     padding-top: 70px; 
   }
@@ -64,10 +268,50 @@
   .header {
     font-size: 0.9rem;
     gap: 0.3rem;
-    flex-wrap: wrap; /* Para o breadcrumb quebrar linha se não couber */
+    flex-wrap: wrap;
   }
 
   .pageTitleContainer h2 {
-    font-size: 1.4rem; /* Título principal menor no mobile */
+    font-size: 1.2rem;
+  }
+  
+  .statsCards {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .chartTypeSelector {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    
+    button {
+      padding: 0.75rem 1rem;
+      min-height: 70px;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      
+      .icon {
+        font-size: 1.5rem;
+      }
+
+      .label {
+        font-size: 0.9rem;
+        text-align: left;
+      }
+    }
+  }
+  
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .dateFilters {
+      flex-direction: column;
+    }
+
+    .btnLimparFiltros {
+      justify-content: center;
+    }
   }
 }

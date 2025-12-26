@@ -5,6 +5,7 @@ import Api from "../../Services/Api";
 import NavBar from "../navbar/NavBar";
 import BottomNav from "../navbar/BottomNav";
 import ModalConfirmacao from "../modal/ModalConfirmacao";
+import { Loading } from "../ui/Loading";
 
 // Imagens
 import Home from "../../assets/Dashboard/home header.png";
@@ -34,9 +35,13 @@ function Solicitacao() {
   const [valorKm, setValorKm] = useState("");
   const [valorFaturado, setValorFaturado] = useState("");
   const [despesa, setDespesa] = useState("");
+  const [comprovante, setComprovante] = useState(null); // Arquivo do comprovante
 
   // Estado da lista de reembolsos (o "carrinho")
   const [dadosReembolso, setDadosReembolso] = useState([]);
+  
+  // Estado de loading
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Estado unificado para TODOS os modais
   const [modalState, setModalState] = useState({
@@ -67,6 +72,7 @@ function Solicitacao() {
     setValorKm("");
     setValorFaturado("");
     setDespesa("");
+    setComprovante(null); // Limpa o comprovante
   };
 
   /**
@@ -75,11 +81,11 @@ function Solicitacao() {
    * Apenas adiciona um item à lista `dadosReembolso`.
    */
   const handleSubmit = () => {
-    if (!colaborador || !empresa || !data) {
+    if (!colaborador || !empresa || !data || !comprovante) {
       setModalState({
         isOpen: true,
         title: "Campos Obrigatórios",
-        message: "Por favor, preencha os campos: Nome Completo, Empresa e Data.",
+        message: "Por favor, preencha os campos: Nome Completo, Empresa, Data e Comprovante.",
         onConfirm: closeModal,
         confirmText: "OK",
         showCancelButton: false,
@@ -104,6 +110,7 @@ function Solicitacao() {
       despesa: Number(despesa) || 0,
       id_colaborador: Number(localStorage.getItem("usuarioId")),
       num_prestacao: "—", // Placeholder, pois o número real virá da API no envio final
+      comprovante: comprovante, // Adiciona o arquivo do comprovante
     };
 
     setDadosReembolso((prev) => [...prev, novoReembolso]);
@@ -112,43 +119,115 @@ function Solicitacao() {
 
   /**
    * CORREÇÃO 2: `handleConfirmEnvio` para o botão "Enviar Para Análise".
-   * Esta função pega a lista local e CRIA os registros na API,
-   * já com o status correto.
+   * FLUXO EM 2 ETAPAS:
+   * 1. Criar reembolso com JSON (POST /reembolsos/new)
+   * 2. Upload do comprovante com FormData (POST /ocr/)
    */
   const handleConfirmEnvio = async () => {
+    setIsSubmitting(true);
     try {
-      const requests = dadosReembolso.map((item) =>
-        Api.post("/reembolsos/new", {
-          ...item,
-          status: "Em análise", // Adiciona o status no momento do envio
-        })
-      );
+      // Processa cada reembolso sequencialmente
+      for (const item of dadosReembolso) {
+        // VALIDAÇÕES ANTES DE ENVIAR
+        if (!item.colaborador || !item.empresa || !item.tipo_reembolso || 
+            !item.centro_custo || !item.valor_faturado || !item.id_colaborador) {
+          throw new Error("Campos obrigatórios faltando: colaborador, empresa, tipo_reembolso, centro_custo, valor_faturado");
+        }
 
-      await Promise.all(requests);
-      setDadosReembolso([]); // Limpa a lista da tela após o sucesso
+        if (!item.comprovante) {
+          throw new Error("Comprovante é obrigatório");
+        }
 
+        // Validação do arquivo
+        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        
+        if (!allowedTypes.includes(item.comprovante.type)) {
+          throw new Error("Formato de arquivo inválido. Aceito apenas: PDF, JPG, JPEG, PNG");
+        }
+        
+        if (item.comprovante.size > maxSize) {
+          throw new Error("Arquivo muito grande. Tamanho máximo: 10MB");
+        }
+
+        // PASSO 1: Criar reembolso com JSON
+        const reembolsoResponse = await Api.post(
+          "/reembolsos/new",
+          {
+            colaborador: item.colaborador,
+            empresa: item.empresa,
+            descricao: item.descricao,
+            tipo_reembolso: item.tipo_reembolso,
+            centro_custo: item.centro_custo,
+            ordem_interna: item.ordem_interna,
+            divisao: item.divisao,
+            pep: item.pep,
+            moeda: item.moeda,
+            distancia_km: item.distancia_km,
+            valor_km: Number(item.valor_km) || 0,
+            valor_faturado: Number(item.valor_faturado) || 0,
+            despesa: Number(item.despesa) || 0,
+            id_colaborador: item.id_colaborador
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+
+        // Extrai o número da prestação criado
+        const numPrestacao = reembolsoResponse.data.reembolso.num_prestacao;
+
+        // PASSO 2: Upload do comprovante com OCR
+        const formData = new FormData();
+        formData.append('file', item.comprovante);
+        formData.append('reembolso_id', numPrestacao);
+
+        await Api.post("/ocr/", formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+      }
+
+      // Sucesso: limpa a lista e exibe mensagem
+      setDadosReembolso([]);
+      
       setModalState({
         isOpen: true,
         title: "Sucesso!",
         message: "Sua solicitação foi enviada para análise.",
         onConfirm: () => {
-            closeModal();
-            navigate("/reembolsos");
+          closeModal();
+          navigate("/reembolsos");
         },
         confirmText: "OK",
         showCancelButton: false,
       });
 
     } catch (err) {
-      const msg = err.response?.data?.erro || err.message;
+      // Tratamento de erros específicos
+      let errorMessage = "Ocorreu um erro desconhecido";
+      
+      if (err.message) {
+        errorMessage = err.message;
+      } else if (err.response?.data?.erro) {
+        errorMessage = err.response.data.erro;
+      } else if (err.response?.status === 415) {
+        errorMessage = "Erro ao criar reembolso: Tipo de conteúdo não suportado";
+      }
+
       setModalState({
         isOpen: true,
         title: "Erro no Envio",
-        message: `Ocorreu um erro: ${msg}`,
+        message: errorMessage,
         onConfirm: closeModal,
         confirmText: "OK",
         showCancelButton: false,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -232,6 +311,8 @@ function Solicitacao() {
 
   return (
     <div className={styles.layoutSolicitacao}>
+      {isSubmitting && <Loading fullScreen message="Enviando reembolsos... Por favor, aguarde." />}
+      
       <ModalConfirmacao
         isOpen={modalState.isOpen}
         title={modalState.title}
@@ -349,6 +430,22 @@ function Solicitacao() {
                 <label htmlFor="Despesas">Despesa</label>
                 <input type="number" value={despesa} onChange={(e) => setDespesa(e.target.value)} />
               </div>
+
+              {/* Campo para upload de comprovante (OCR) */}
+              <div className={styles.comprovante}>
+                <label htmlFor="comprovante">Comprovante *</label>
+                <input 
+                  type="file" 
+                  id="comprovante"
+                  accept="image/*,.pdf"
+                  onChange={(e) => setComprovante(e.target.files[0])}
+                />
+                {comprovante && (
+                  <span className={styles.nomeArquivo}>
+                    📎 {comprovante.name}
+                  </span>
+                )}
+              </div>
               
               <div className={styles.botoes}>
                 <button className={styles.botaoSalvar} onClick={handleSubmit}>+ Salvar</button>
@@ -421,13 +518,21 @@ function Solicitacao() {
             <input id="totalDespesa" type="text" value={totalDespesa.toFixed(2).replace('.', ',')} readOnly />
           </div>
           <div>
-            <button className={styles.buttonCheck} onClick={enviarParaAnalise}>
+            <button 
+              className={styles.buttonCheck} 
+              onClick={enviarParaAnalise}
+              disabled={isSubmitting || dadosReembolso.length === 0}
+            >
               <img src={Check} alt="" />
-              Enviar Para Analise
+              {isSubmitting ? 'Enviando...' : 'Enviar Para Analise'}
             </button>
           </div>
           <div>
-            <button className={styles.buttonX} onClick={cancelarSolicitacao}>
+            <button 
+              className={styles.buttonX} 
+              onClick={cancelarSolicitacao}
+              disabled={isSubmitting}
+            >
               <img src={IconeX} alt="" />
               <p>Cancelar Solicitação</p>
             </button>

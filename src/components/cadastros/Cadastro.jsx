@@ -16,6 +16,7 @@ function Cadastro() {
   const [senha, setSenha] = useState("");
   const [cargo, setCargo] = useState("");
   const [salario, setSalario] = useState("");
+  const [tipo, setTipo] = useState("usuario"); // Novo estado para tipo de usuário
 
   // Função para validar os campos antes de enviar para o backend
   const validarCampos = () => {
@@ -58,6 +59,7 @@ function Cadastro() {
         senha,
         cargo,
         salario: parseFloat(String(salario).replace(",", ".")),
+        tipo, // Envia o tipo de usuário
       });
 
       // Se a API respondeu com sucesso (não caiu no catch)...
@@ -117,6 +119,16 @@ function Cadastro() {
             value={salario}
             onChange={(e) => setSalario(e.target.value)}
           />
+
+          {/* Campo para selecionar tipo de usuário */}
+          <select
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+            className={styles.selectTipo}
+          >
+            <option value="usuario">Usuário Comum</option>
+            <option value="admin">Administrador</option>
+          </select>
 
           <div>
             {/* CORREÇÃO PRINCIPAL AQUI:

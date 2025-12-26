@@ -29,13 +29,48 @@
 .modalHeader {
   width: 100%;
   margin-bottom: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   h3 {
     margin: 0;
     font-size: 1.3rem;
     font-weight: 600;
-    color: #23282f; // Cor dos seus 'th' da tabela
+    color: #23282f;
     text-align: center;
+    flex: 1;
+  }
+}
+
+/* Botão de fechar (X) no canto superior direito */
+.closeButton {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  padding: 0;
+
+  &:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+    transform: rotate(90deg);
+  }
+
+  &:active {
+    transform: rotate(90deg) scale(0.95);
   }
 }
 

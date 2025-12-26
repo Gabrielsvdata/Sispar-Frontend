@@ -1,23 +1,31 @@
 import{useState} from "react"
 import{useNavigate} from "react-router-dom"
 import api from "../../Services/Api.jsx"
+import { useAuth } from "../../hooks/useAuth.js"
 import Capa from "../../assets/Tela Login/imagem tela de login.png"
 import Logo from "../../assets/Tela Login/logo-ws.png"
+import ModalConfirmacao from "../modal/ModalConfirmacao.jsx"
 import styles from "./Login.module.scss"
 function Login() {
+  // Hook de autenticação
+  const { login } = useAuth();
+  
   // Declaração dos estados necessários para o componente
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(null);
   const [carregando, setCarregando] = useState(false);
+  
+  // Estado para controlar o modal de feedback
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "success", // 'success' ou 'error'
+  });
 
   // Hook para navegação
   const navigate = useNavigate();
-
-  // Função para redirecionar após o login bem-sucedido
-  const irParaReembolsos = () => {
-    navigate("/reembolsos"); // Ajuste o caminho da rota conforme necessário
-  };
 
   // Função assíncrona para lidar com o processo de login
   const fazerLogin = async (e) => {
@@ -40,41 +48,64 @@ function Login() {
       // Desestrutura os dados esperados da resposta do backend
       const { usuario, token } = resposta.data;
 
-      // Armazena os dados do usuário e o token no localStorage
-      localStorage.setItem("usuarioId", String(usuario.id));
-      localStorage.setItem("usuarioNome", usuario.nome);
-      localStorage.setItem("usuarioCargo", usuario.cargo);
-      if (token) {
-        localStorage.setItem("authToken", token); // Armazena o token JWT, se existir
-      }
+      // Usa o contexto de autenticação para fazer login
+      console.log("🔐 Chamando login com dados:", {
+        id: String(usuario.id),
+        nome: usuario.nome,
+        cargo: usuario.cargo,
+        tipo: usuario.tipo || "usuario"
+      });
+      
+      await login({
+        id: String(usuario.id),
+        nome: usuario.nome,
+        cargo: usuario.cargo,
+        tipo: usuario.tipo || "usuario",
+        token: token || null,
+      });
 
-      // Feedback ao usuário
-      alert("Login realizado com sucesso!"); // Considere usar um componente de notificação/toast
-
-      // Dispara um evento global, se outros componentes precisarem reagir à mudança de usuário
-      window.dispatchEvent(new Event("userChanged"));
-
-      // Redireciona o usuário
-      irParaReembolsos();
+      console.log("✅ Login executado e aguardado, tentando navegar para /reembolsos");
+      
+      // Pequeno delay para garantir que o estado foi atualizado
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Redireciona imediatamente para a tela de reembolsos
+      navigate("/reembolsos", { replace: true });
+      
+      console.log("🚀 Navigate chamado");
 
     } catch (error) {
       // Log do erro para depuração
       console.error("Erro ao fazer login:", error);
 
-      // Trata diferentes tipos de erro e define a mensagem para o usuário
+      // Trata diferentes tipos de erro e exibe no modal
+      let mensagemErro = "";
       if (error.response && error.response.data && error.response.data.mensagem) {
-        setErro(error.response.data.mensagem);
+        mensagemErro = error.response.data.mensagem;
       } else if (error.request) {
-        setErro("Não foi possível conectar ao servidor. Verifique sua conexão ou as configurações.");
+        mensagemErro = "Não foi possível conectar ao servidor. Verifique sua conexão ou as configurações.";
       } else {
-        setErro("Ocorreu um erro inesperado ao tentar fazer login. Tente novamente.");
+        mensagemErro = "Ocorreu um erro inesperado ao tentar fazer login. Tente novamente.";
       }
+      
+      setErro(mensagemErro);
+      setModalState({
+        isOpen: true,
+        title: "Erro ao fazer login",
+        message: mensagemErro,
+        type: "error",
+      });
     } finally {
       // Independentemente do resultado, desativa o indicador de carregamento
       setCarregando(false);
     }
   };
-  // ... O restante do seu componente JSX viria aqui ...
+
+  // Função para fechar o modal
+  const handleCloseModal = () => {
+    setModalState({ ...modalState, isOpen: false });
+  };
+
   return (
     <main className={styles.mainLogin}>
       <section className={styles.containerImagem}>
@@ -127,8 +158,8 @@ function Login() {
             </button>
             {/* Botão para navegação para a página de cadastro */}
             <button
-              type="button" // Define como tipo 'button' para não submeter o formulário
-              onClick={() => !carregando && navigate("/cadastro")} // Impede clique durante o carregamento
+              type="button"
+              onClick={() => !carregando && navigate("/cadastro")}
               className={styles.buttonCriar}
               disabled={carregando}
             >
@@ -137,6 +168,19 @@ function Login() {
           </div>
         </form>
       </section>
+
+      {/* Modal de feedback */}
+      <ModalConfirmacao
+        isOpen={modalState.isOpen}
+        title={modalState.title}
+        onConfirm={handleCloseModal}
+        onClose={handleCloseModal}
+        confirmText="OK"
+        showCancelButton={false}
+        confirmButtonType={modalState.type === "success" ? "primary" : "danger"}
+      >
+        {modalState.message}
+      </ModalConfirmacao>
     </main>
   );
 }

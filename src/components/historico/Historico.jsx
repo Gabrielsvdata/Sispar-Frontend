@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Api from "../../Services/Api";
+import { isAdmin, getUsuarioId } from "../../utils/auth";
 import NavBar from "../navbar/NavBar";
 import BottomNav from "../navbar/BottomNav";
 
@@ -29,7 +30,11 @@ export default function Historico() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await Api.get(`/reembolsos`);
+        // Se não for admin, filtra apenas os reembolsos do próprio usuário
+        const usuarioId = getUsuarioId();
+      const endpoint = isAdmin()
+          ? `/reembolsos/` 
+          : `/reembolsos/?colaborador_id=${usuarioId}`;        const { data } = await Api.get(endpoint);
         setReembolsos(data);
         setCurrentPage(1);
       } catch (err) {

@@ -71,6 +71,8 @@ function NavBar() {
     localStorage.removeItem("usuarioNome");
     localStorage.removeItem("usuarioCargo");
     localStorage.removeItem("usuarioId");
+    localStorage.removeItem("usuarioTipo"); // Remove o tipo de usuário
+    localStorage.removeItem("authToken"); // Remove o token
     window.dispatchEvent(new Event("userChanged"));
     setNome("");
     setCargo("");

@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build
+RUN npm run build     //scripts do package.json
 
 # Etapa 2: produção com nginx
 FROM nginx:stable-alpine

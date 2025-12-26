@@ -12,7 +12,7 @@
   flex: 1;
   width: 90%;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 0.5rem 1rem;
 
   /* CORREÇÃO: Adiciona espaço no final da página para não sobrepor o BottomNav */
   padding-bottom: 6rem;
@@ -41,17 +41,77 @@
 }
 
 .searchBar {
+  display: flex;
+  gap: 1rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+
   input {
-    width: 100%;
+    flex: 1;
+    min-width: 250px;
     max-width: 400px;
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
     font-size: 0.9rem;
     outline: none;
-    transition: border-color 0.2s;
-    &:focus { border-color: #007bff; }
+    transition: all 0.2s;
+    
+    &:focus { 
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+  }
+
+  select {
+    padding: 0.6rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+  }
+}
+
+.btnAtualizar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.61rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  }
+
+  &:disabled {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
   }
 }
 
@@ -88,7 +148,9 @@
   padding: 0 !important;
 }
 
-.actionButtonAprovar, .actionButtonRejeitar {
+.actionButtonIA,
+.actionButtonAprovar, 
+.actionButtonRejeitar {
   width: 100%;
   height: 100%;
   padding: 0.5rem;
@@ -107,6 +169,19 @@
 
   span {
     display: none;
+  }
+}
+
+.actionButtonIA {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  span:first-child {
+    display: block;
+    font-size: 1.2rem;
+  }
+
+  &:hover { 
+    background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
   }
 }
 
@@ -204,5 +279,26 @@
         height: 16px;
       }
     }
+  }
+}
+
+/* Estilo para mensagem "Aguardando aprovação" (usuários comuns) */
+.aguardandoAprovacao {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #FFF3CD;
+  color: #856404;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .aguardandoAprovacao {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
   }
 }
