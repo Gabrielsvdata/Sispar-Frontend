@@ -36,7 +36,7 @@ const Chatbot = ({ userId }) => {
   // ==================== CONSTANTES ====================
   const MAX_MESSAGE_LENGTH = 2000;
   const MAX_HISTORY_LENGTH = 10;
-  const API_BASE_URL = 'http://localhost:5000';
+  const API_BASE_URL = 'https://sispar-backend-npp2.onrender.com';
   const WELCOME_MESSAGE = 'Olá! Sou o assistente SISPAR. Como posso ajudar você hoje?';
 
   // ==================== EFFECTS ====================
