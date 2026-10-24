@@ -198,3 +198,59 @@
     // height: auto; // Já removi a altura fixa antes, o que é bom
 }
 }
+// Acesso de demonstração (recrutadores e visitantes)
+.demo {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px dashed #0844c4;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+
+  span {
+    font-weight: bold;
+    color: #001a3d;
+  }
+
+  div {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  button {
+    flex: 1 1 170px;
+    height: auto;
+    min-height: 44px;
+    line-height: 1.2;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.7rem;
+    border-radius: 6px;
+    border: 1px solid #0844c4;
+    background: #fff;
+    color: #0844c4;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover:not(:disabled) {
+      background: #0844c4;
+      color: #fff;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+  }
+
+  small {
+    color: #666;
+  }
+}

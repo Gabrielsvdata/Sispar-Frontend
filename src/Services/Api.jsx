@@ -1,90 +1,54 @@
-import axios from "axios"; //importar a biblioteca axios, que é usada para fazer requisições, HTTP.
+import axios from "axios"; // biblioteca usada para fazer requisições HTTP
 
+// Endereço da API: definido em VITE_API_URL (arquivo .env ou painel do Cloudflare Pages).
+// Sem a variável, usa a API local.
+export const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/$/, "");
 
-// PORTA PRA TESTE DO SERVIDOR LOCAL
-//const api = axios.create({
-     //baseURL: "http://localhost:5000" // define a url para todas as requisições com essa instancia 
-//});
-
-
-// PORTA DO SERVIDOR EM PRODUÇÃO
 const api = axios.create({
-      baseURL: "https://sispar-backend-npp2.onrender.com" // define a url para todas as requisições com essa instancia 
+  baseURL: API_URL,
 });
 
-// Interceptor para adicionar token em todas as requisições
+// Interceptor para adicionar o token de login em todas as requisições
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
-    console.log("🚀 Requisição:", {
-      method: config.method?.toUpperCase(),
-      url: config.baseURL + config.url,
-      headers: config.headers,
-    });
-    
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Interceptor para tratamento global de erros
 api.interceptors.response.use(
-  (response) => {
-    console.log("✅ Resposta:", {
-      status: response.status,
-      url: response.config.url,
-      data: response.data,
-    });
-    return response;
-  },
+  (response) => response,
   (error) => {
-    console.error("❌ Erro na requisição:", {
-      status: error.response?.status,
-      url: error.config?.url,
-      message: error.message,
-      data: error.response?.data,
-    });
-    
-    // Erro 308 - Permanent Redirect
-    if (error.response?.status === 308) {
-      console.error("⚠️ Erro 308: Backend está redirecionando permanentemente");
-      console.error("Location header:", error.response?.headers?.location);
-    }
-    
-    // Token expirado ou inválido
-    if (error.response?.status === 401) {
-      // Limpa dados de autenticação
+    const status = error.response?.status;
+
+    // Token expirado ou inválido: limpa a sessão e volta para o login
+    if (status === 401) {
       localStorage.removeItem('usuarioId');
       localStorage.removeItem('usuarioNome');
       localStorage.removeItem('usuarioCargo');
       localStorage.removeItem('usuarioTipo');
       localStorage.removeItem('authToken');
-      
+
       // Dispara evento para atualizar UI
       window.dispatchEvent(new Event('userChanged'));
-      
-      // Redireciona para login apenas se não estiver na página de login
-      if (!window.location.hash.includes('#/')) {
-        window.location.href = '/#/';
+
+      // Redireciona para o login, exceto se já estiver nas telas públicas
+      const telasPublicas = ['', '#/', '#/cadastro', '#/recuperar-senha'];
+      if (!telasPublicas.includes(window.location.hash)) {
+        window.location.hash = '#/';
       }
     }
-    
+
     // Acesso negado (usuário sem permissão)
-    if (error.response?.status === 403) {
+    if (status === 403) {
       console.error('Acesso negado: você não tem permissão para esta ação');
     }
-    
-    // Erro do servidor
-    if (error.response?.status >= 500) {
-      console.error('Erro no servidor. Tente novamente mais tarde.');
-    }
-    
+
     return Promise.reject(error);
   }
 );

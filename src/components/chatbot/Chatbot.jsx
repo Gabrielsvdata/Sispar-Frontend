@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Chatbot.module.scss';
+import { API_URL } from '../../Services/Api.jsx';
 
 /**
  * Sugestões padrão do chatbot
@@ -36,7 +37,6 @@ const Chatbot = ({ userId }) => {
   // ==================== CONSTANTES ====================
   const MAX_MESSAGE_LENGTH = 2000;
   const MAX_HISTORY_LENGTH = 10;
-  const API_BASE_URL = 'https://sispar-backend-npp2.onrender.com';
   const WELCOME_MESSAGE = 'Olá! Sou o assistente SISPAR. Como posso ajudar você hoje?';
 
   // ==================== EFFECTS ====================
@@ -140,14 +140,15 @@ const Chatbot = ({ userId }) => {
     abortControllerRef.current = new AbortController();
 
     try {
-      const response = await fetch(`${API_BASE_URL}/chatbot/message`, {
+      const response = await fetch(`${API_URL}/chatbot/message`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
+          // O backend identifica o usuário pelo token de login
+          Authorization: `Bearer ${localStorage.getItem('authToken') || ''}`,
         },
         body: JSON.stringify({
           message: userMessage,
-          colaborador_id: userId,
           history: formatHistoryForAPI(history),
         }),
         signal: abortControllerRef.current.signal,
@@ -178,7 +179,7 @@ const Chatbot = ({ userId }) => {
       setIsLoading(false);
       abortControllerRef.current = null;
     }
-  }, [userId, history, formatHistoryForAPI, addMessageToHistory, clearError, handleAPIError, handleNetworkError]);
+  }, [history, formatHistoryForAPI, addMessageToHistory, clearError, handleAPIError, handleNetworkError]);
 
   /**
    * Submete formulário (Enter)

@@ -27,74 +27,64 @@ function Login() {
   // Hook para navegação
   const navigate = useNavigate();
 
+  // Salva o usuário e o token retornados pela API e vai para a tela de reembolsos
+  const concluirLogin = async ({ usuario, token }) => {
+    await login({
+      id: String(usuario.id),
+      nome: usuario.nome,
+      cargo: usuario.cargo,
+      tipo: usuario.tipo || "usuario",
+      token,
+    });
+    // Pequeno intervalo para o estado de autenticação propagar antes da rota protegida
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    navigate("/reembolsos", { replace: true });
+  };
+
+  const mostrarErro = (error) => {
+    let mensagemErro = "";
+    if (error.response && error.response.data && error.response.data.mensagem) {
+      mensagemErro = error.response.data.mensagem;
+    } else if (error.request) {
+      mensagemErro = "Não foi possível conectar ao servidor. Verifique sua conexão ou as configurações.";
+    } else {
+      mensagemErro = "Ocorreu um erro inesperado ao tentar fazer login. Tente novamente.";
+    }
+    setErro(mensagemErro);
+    setModalState({
+      isOpen: true,
+      title: "Erro ao fazer login",
+      message: mensagemErro,
+      type: "error",
+    });
+  };
+
+  // Entra numa conta de demonstração (colaborador ou gestor), sem senha
+  const entrarDemo = async (perfil) => {
+    setErro(null);
+    setCarregando(true);
+    try {
+      const resposta = await api.post("/colaborador/login-demo", { perfil });
+      await concluirLogin(resposta.data);
+    } catch (error) {
+      mostrarErro(error);
+    } finally {
+      setCarregando(false);
+    }
+  };
+
   // Função assíncrona para lidar com o processo de login
   const fazerLogin = async (e) => {
     e.preventDefault(); // Previne o comportamento padrão de submissão do formulário
     setErro(null); // Limpa erros anteriores
     setCarregando(true); // Ativa o indicador de carregamento
 
-    // --- ADIÇÃO SUGERIDA PARA DEBUG ---
-    // Para ter 100% de certeza do que está sendo enviado:
-    console.log("Dados enviados para o login:", { email, senha });
-    // --- FIM DA ADIÇÃO ---
-
     try {
       // Faz a requisição POST para o endpoint de login no backend
       const resposta = await api.post("/colaborador/login", { email, senha });
-
-      // Log da resposta para depuração (opcional em produção)
-      console.log("Resposta do login:", resposta.data);
-
-      // Desestrutura os dados esperados da resposta do backend
-      const { usuario, token } = resposta.data;
-
-      // Usa o contexto de autenticação para fazer login
-      console.log("🔐 Chamando login com dados:", {
-        id: String(usuario.id),
-        nome: usuario.nome,
-        cargo: usuario.cargo,
-        tipo: usuario.tipo || "usuario"
-      });
-      
-      await login({
-        id: String(usuario.id),
-        nome: usuario.nome,
-        cargo: usuario.cargo,
-        tipo: usuario.tipo || "usuario",
-        token: token || null,
-      });
-
-      console.log("✅ Login executado e aguardado, tentando navegar para /reembolsos");
-      
-      // Pequeno delay para garantir que o estado foi atualizado
-      await new Promise(resolve => setTimeout(resolve, 100));
-      
-      // Redireciona imediatamente para a tela de reembolsos
-      navigate("/reembolsos", { replace: true });
-      
-      console.log("🚀 Navigate chamado");
-
+      await concluirLogin(resposta.data);
     } catch (error) {
-      // Log do erro para depuração
-      console.error("Erro ao fazer login:", error);
-
-      // Trata diferentes tipos de erro e exibe no modal
-      let mensagemErro = "";
-      if (error.response && error.response.data && error.response.data.mensagem) {
-        mensagemErro = error.response.data.mensagem;
-      } else if (error.request) {
-        mensagemErro = "Não foi possível conectar ao servidor. Verifique sua conexão ou as configurações.";
-      } else {
-        mensagemErro = "Ocorreu um erro inesperado ao tentar fazer login. Tente novamente.";
-      }
-      
-      setErro(mensagemErro);
-      setModalState({
-        isOpen: true,
-        title: "Erro ao fazer login",
-        message: mensagemErro,
-        type: "error",
-      });
+      mostrarErro(error);
     } finally {
       // Independentemente do resultado, desativa o indicador de carregamento
       setCarregando(false);
@@ -167,6 +157,20 @@ function Login() {
             </button>
           </div>
         </form>
+
+        {/* Acesso rápido para recrutadores e visitantes */}
+        <div className={styles.demo}>
+          <span>Quer testar sem criar conta?</span>
+          <div>
+            <button type="button" onClick={() => entrarDemo("colaborador")} disabled={carregando}>
+              Entrar como colaborador
+            </button>
+            <button type="button" onClick={() => entrarDemo("gestor")} disabled={carregando}>
+              Entrar como gestor
+            </button>
+          </div>
+          <small>Contas de demonstração com dados fictícios.</small>
+        </div>
       </section>
 
       {/* Modal de feedback */}
