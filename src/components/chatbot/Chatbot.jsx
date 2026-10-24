@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import styles from './Chatbot.module.scss';
 import { API_URL } from '../../Services/Api.jsx';
 
@@ -19,9 +18,8 @@ const DEFAULT_SUGGESTIONS = [
  * para auxiliar colaboradores e administradores com dúvidas
  * sobre reembolsos, processos e sistema.
  * 
- * @param {number} userId - ID do colaborador logado
  */
-const Chatbot = ({ userId }) => {
+const Chatbot = () => {
   // ==================== ESTADO ====================
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
@@ -404,8 +402,5 @@ const Chatbot = ({ userId }) => {
 
 // ==================== PROP TYPES ====================
 
-Chatbot.propTypes = {
-  userId: PropTypes.number.isRequired,
-};
 
 export default Chatbot;
