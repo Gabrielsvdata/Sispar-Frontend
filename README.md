@@ -73,7 +73,7 @@ O SISPAR agora conta com recursos avançados de **Inteligência Artificial** par
 ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=flat&logo=sqlite&logoColor=white)
 ![Flask CORS](https://img.shields.io/badge/Flask_CORS-4D7A9C?style=flat&logo=flask&logoColor=white)
 ![Flasgger](https://img.shields.io/badge/Flasgger-236192?style=flat&logo=swagger&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)
+![Cloudflare](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=flat&logo=cloudflare&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-2EC866?style=flat&logo=render&logoColor=white)
 ![Grok AI](https://img.shields.io/badge/Grok_AI-000000?style=flat&logo=x&logoColor=white)
 ![OCR](https://img.shields.io/badge/OCR-FF6B6B?style=flat&logo=opencv&logoColor=white)
@@ -146,8 +146,16 @@ src/components/
 
 ## Deploy
 
-- **Front-end (Vercel):** [Projeto SISPAR no Vercel](https://vercel.com/gabriels-projects-07a8013f/projeto-sispar)  
-- **Back-end (Render):** [API SISPAR no Render](https://sispar-backend-npp2.onrender.com)
+- **Front-end:** Cloudflare Pages (build `npm run build`, saída `dist`, Node 22)
+- **Back-end:** Google Cloud Run (veja o repositório Sispar-Backend)
+
+O endereço da API vem da variável `VITE_API_URL` (veja `.env.example`).
+No Cloudflare Pages, ela é cadastrada em **Settings → Variables and Secrets**.
+
+### Testar sem criar conta
+
+Na tela de login, os botões **Entrar como colaborador** e **Entrar como gestor** abrem
+contas de demonstração com dados fictícios.
 
 ---
 

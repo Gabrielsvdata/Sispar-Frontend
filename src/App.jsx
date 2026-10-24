@@ -67,7 +67,7 @@ function App() {
     </Routes>
     
     {/* Chatbot global - aparece em todas as páginas quando logado */}
-    {userId && <Chatbot userId={userId} />}
+    {userId && <Chatbot />}
     </>
   );
 }
