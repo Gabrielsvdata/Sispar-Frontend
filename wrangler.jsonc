@@ -1,0 +1,10 @@
+// Deploy como site estático no Cloudflare (Workers + Static Assets).
+// O build do Vite gera ./dist; rotas desconhecidas caem no index.html (SPA).
+{
+  "name": "sispar",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
