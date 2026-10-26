@@ -511,7 +511,7 @@ const AnaliseIA = () => {
         {/* Dados Extraídos OCR */}
         {analise.dados_extraidos_ocr && (
           <div className={styles.ocrCard}>
-            <h3>📸 Dados Extraídos do Comprovante (OCR)</h3>
+            <h3>📸 Dados Extraídos do Comprovante ({analise.versao_modelo === 'ocr-tesseract' ? 'OCR' : 'IA'})</h3>
             <div className={styles.ocrGrid}>
               <div className={styles.ocrItem}>
                 <label>Valor Total:</label>
